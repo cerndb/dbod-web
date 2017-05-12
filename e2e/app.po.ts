@@ -1,9 +1,11 @@
-export class DbodWebPage {
+import { browser, by, element } from 'protractor';
+
+export class DbodPage {
   navigateTo() {
     return browser.get('/');
   }
 
   getParagraphText() {
-    return element(by.css('dbod-web-app h1')).getText();
+    return element(by.css('app-root h1')).getText();
   }
 }
