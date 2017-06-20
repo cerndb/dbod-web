@@ -44,7 +44,7 @@ export class BaThemeConfig {
     //   warningDark: colorHelper.shade(colorScheme.warning, 15),
     //   dangerDark: colorHelper.shade(colorScheme.danger, 15),
     //
-    //   dashboard: {
+    //   home: {
     //     blueStone: '#005562',
     //     surfieGreen: '#0e8174',
     //     silverTree: '#6eba8c',
@@ -53,8 +53,8 @@ export class BaThemeConfig {
     //   },
     //
     //   custom: {
-    //     dashboardPieChart: colorHelper.hexToRgbA('#aaaaaa', 0.8),
-    //     dashboardLineChart: '#6eba8c',
+    //     homePieChart: colorHelper.hexToRgbA('#aaaaaa', 0.8),
+    //     homeLineChart: '#6eba8c',
     //   },
     // });
   }

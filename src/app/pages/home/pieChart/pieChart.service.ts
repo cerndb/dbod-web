@@ -8,26 +8,26 @@ export class PieChartService {
   }
 
   getData() {
-    let pieColor = this._baConfig.get().colors.custom.dashboardPieChart;
+    let pieColor = this._baConfig.get().colors.custom.homePieChart;
     return [
       {
         color: pieColor,
-        description: 'dashboard.new_visits',
+        description: 'home.new_visits',
         stats: '57,820',
         icon: 'person',
       }, {
         color: pieColor,
-        description: 'dashboard.purchases',
+        description: 'home.purchases',
         stats: '$ 89,745',
         icon: 'money',
       }, {
         color: pieColor,
-        description: 'dashboard.active_users',
+        description: 'home.active_users',
         stats: '178,391',
         icon: 'face',
       }, {
         color: pieColor,
-        description: 'dashboard.returned',
+        description: 'home.returned',
         stats: '32,592',
         icon: 'refresh',
       }

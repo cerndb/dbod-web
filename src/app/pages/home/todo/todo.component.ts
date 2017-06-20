@@ -10,7 +10,7 @@ import {TodoService} from './todo.service';
 })
 export class Todo {
 
-  public dashboardColors = this._baConfig.get().colors.dashboard;
+  public homeColors = this._baConfig.get().colors.home;
 
   public todoList:Array<any>;
   public newTodoText:string = '';
@@ -42,7 +42,7 @@ export class Todo {
   }
 
   private _getRandomColor() {
-    let colors = Object.keys(this.dashboardColors).map(key => this.dashboardColors[key]);
+    let colors = Object.keys(this.homeColors).map(key => this.homeColors[key]);
 
     var i = Math.floor(Math.random() * (colors.length - 1));
     return colors[i];

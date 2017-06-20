@@ -9,7 +9,7 @@ export class CalendarService {
 
   getData() {
 
-    let dashboardColors = this._baConfig.get().colors.dashboard;
+    let homeColors = this._baConfig.get().colors.home;
     return {
       header: {
         left: 'prev,next today',
@@ -25,23 +25,23 @@ export class CalendarService {
         {
           title: 'All Day Event',
           start: '2016-03-01',
-          color: dashboardColors.silverTree
+          color: homeColors.silverTree
         },
         {
           title: 'Long Event',
           start: '2016-03-07',
           end: '2016-03-10',
-          color: dashboardColors.blueStone
+          color: homeColors.blueStone
         },
         {
           title: 'Dinner',
           start: '2016-03-14T20:00:00',
-          color: dashboardColors.surfieGreen
+          color: homeColors.surfieGreen
         },
         {
           title: 'Birthday Party',
           start: '2016-04-01T07:00:00',
-          color: dashboardColors.gossip
+          color: homeColors.gossip
         }
       ]
     };
