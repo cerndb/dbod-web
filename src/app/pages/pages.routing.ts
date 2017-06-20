@@ -20,7 +20,6 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', loadChildren: './home/home.module#HomeModule' },
-      { path: 'ui', loadChildren: './ui/ui.module#UiModule' },
       { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
       { path: 'maps', loadChildren: './maps/maps.module#MapsModule' }
     ]
