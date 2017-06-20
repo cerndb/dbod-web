@@ -77,36 +77,6 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: 'forms',
-        data: {
-          menu: {
-            title: 'general.menu.form_elements',
-            icon: 'ion-compose',
-            selected: false,
-            expanded: false,
-            order: 400,
-          }
-        },
-        children: [
-          {
-            path: 'inputs',
-            data: {
-              menu: {
-                title: 'general.menu.form_inputs',
-              }
-            }
-          },
-          {
-            path: 'layouts',
-            data: {
-              menu: {
-                title: 'general.menu.form_layouts',
-              }
-            }
-          }
-        ]
-      },
-      {
         path: 'tables',
         data: {
           menu: {
