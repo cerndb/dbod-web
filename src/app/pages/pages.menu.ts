@@ -15,52 +15,6 @@ export const PAGES_MENU = [
         }
       },
       {
-        path: 'maps',
-        data: {
-          menu: {
-            title: 'general.menu.maps',
-            icon: 'ion-ios-location-outline',
-            selected: false,
-            expanded: false,
-            order: 600,
-          }
-        },
-        children: [
-          {
-            path: 'googlemaps',
-            data: {
-              menu: {
-                title: 'general.menu.google_maps',
-              }
-            }
-          },
-          {
-            path: 'leafletmaps',
-            data: {
-              menu: {
-                title: 'general.menu.leaflet_maps',
-              }
-            }
-          },
-          {
-            path: 'bubblemaps',
-            data: {
-              menu: {
-                title: 'general.menu.bubble_maps',
-              }
-            }
-          },
-          {
-            path: 'linemaps',
-            data: {
-              menu: {
-                title: 'general.menu.line_maps',
-              }
-            }
-          }
-        ]
-      },
-      {
         path: '',
         data: {
           menu: {
