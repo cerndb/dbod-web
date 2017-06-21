@@ -7,6 +7,8 @@ import { PAGES_MENU } from './pages.menu';
 @Component({
   selector: 'pages',
   template: `
+    <cern-toolbar></cern-toolbar>
+    <ba-page-top></ba-page-top>
     <ba-sidebar></ba-sidebar>
     <div class="al-main">
       <div class="al-content">
