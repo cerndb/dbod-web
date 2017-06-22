@@ -1,0 +1,96 @@
+[                                                                                                                          
+  {                                            
+    "username": "user1",
+    "version": "5.7.15",
+    "db_type": "MYSQL",
+    "basedir": "/usr/local/mysql/mysql-5.7.15",
+    "state": "RUNNING",   
+    "class": "REF",
+    "port": "5500",
+    "datadir": "/ORA/dbs03/PINOCHO/mysql",
+    "db_name": "pinocho",                 
+    "hosts": [  
+      "host1"
+    ],                   
+    "logdir": "/ORA/dbs02/PINOCHO/mysql",
+    "volumes": [               
+      {                    
+        "group": "mysql",                                                                         
+        "file_mode": "0755",
+        "server": "nasserver1",                
+        "instance_id": 20,
+        "mount_options": "rw,bg,hard,nointr,tcp,vers=3,noatime,timeo=600,rsize=65536,wsize=65536",
+        "owner": "mysql",
+        "mounting_path": "/ORA/dbs02/PINOCHO",
+        "id": 189           
+      },                       
+      {                    
+        "group": "mysql",                                                                         
+        "file_mode": "0755",
+        "server": "nasserver2",                
+        "instance_id": 20,
+        "mount_options": "rw,bg,hard,nointr,tcp,vers=3,noatime,timeo=600,rsize=65536,wsize=65536",
+        "owner": "mysql",
+        "mounting_path": "/ORA/dbs03/PINOCHO",
+        "id": 190
+      }
+    ],
+    "active": true,
+    "attributes": {
+      "notifications": "false",
+      "eos_archive": "true",
+      "port": "5500",
+      "eos_backup": "true",
+      "buffer_pool_size": "1G"
+    },
+    "id": 20,
+    "bindir": "/usr/local/mysql/mysql-5.7.15/bin",
+    "socket": "/var/lib/mysql/mysql.sock.pinocho.5500"
+  },
+  {
+    "username": "user2",
+    "version": "5.7.15",
+    "db_type": "MYSQL",
+    "basedir": "/usr/local/mysql/mysql-5.7.15",
+    "state": "RUNNING",
+    "class": "TEST",
+    "port": "5505",
+    "datadir": "/ORA/dbs03/GEPETO/mysql",
+    "db_name": "gepeto",
+    "hosts": [
+      "host2"
+    ],
+    "logdir": "/ORA/dbs02/GEPETO/mysql",
+    "volumes": [
+      {
+        "group": "mysql",
+        "file_mode": "0755",
+        "server": "nasserver2",
+        "instance_id": 256,
+        "mount_options": "rw,bg,hard,nointr,tcp,vers=3,noatime,timeo=600,rsize=65536,wsize=65536",
+        "owner": "mysql",
+        "mounting_path": "/ORA/dbs02/GEPETO",
+        "id": 602
+      },
+      {
+        "group": "mysql",
+        "file_mode": "0755",
+        "server": "nasserver3",
+        "instance_id": 256,
+        "mount_options": "rw,bg,hard,nointr,tcp,vers=3,noatime,timeo=600,rsize=65536,wsize=65536",
+        "owner": "mysql",
+        "mounting_path": "/ORA/dbs03/GEPETO",
+        "id": 603
+      }
+    ],
+    "active": false,
+    "attributes": {
+      "notifications": "false",
+      "buffer_pool_size": "1G",
+      "port": "5505"
+    },
+    "id": 256,
+    "bindir": "/usr/local/mysql/mysql-5.7.15/bin",
+    "socket": "/var/lib/mysql/mysql.sock.gepeto.5505"
+  }
+]
