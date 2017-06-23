@@ -14,7 +14,6 @@ import { PAGES_MENU } from './pages.menu';
     <div class="al-main">
       <div class="al-content" style="margin-top:80px">
         <router-outlet></router-outlet>
-        <div *ngIf="instances">{{instances[0].basedir}}</div>
       </div>
     </div>
     <footer class="al-footer clearfix">
@@ -24,12 +23,7 @@ import { PAGES_MENU } from './pages.menu';
 })
 export class Pages {
 
-  instances;
-
-  constructor(private _menuService: BaMenuService, private _instanceService: InstanceService) {
-    _instanceService.getInstances().subscribe((res) => {
-      this.instances = res;
-    });
+  constructor(private _menuService: BaMenuService) {
   }
 
   ngOnInit() {

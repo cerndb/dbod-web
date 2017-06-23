@@ -1,2 +1,20 @@
 
 <h1>Home</h1>
+<div *ngIf="instances">
+     <table class="table table-bordered table-inverse">
+        <thead>
+            <th>Username</th>
+            <th>Version</th>
+            <th>DB Type</th>
+            <th>DB Name</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let instance of instances">
+                <td>{{instance.username}}</td>
+                <td>{{instance.version}}</td>
+                <td>{{instance.db_type}}</td>
+                <td>{{instance.db_name}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { InstanceService } from '../../theme/services/instance-service';
 
 @Component({
   selector: 'home',
@@ -7,7 +8,12 @@ import {Component} from '@angular/core';
 })
 export class Home {
 
-  constructor() {
+  instances;
+
+  constructor(private _instanceService: InstanceService) {
+    _instanceService.getInstances().subscribe((res) => {
+      this.instances = res;
+    });
   }
 
 }

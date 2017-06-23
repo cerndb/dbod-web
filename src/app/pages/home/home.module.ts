@@ -21,7 +21,6 @@ import { } from './';
     Home
   ],
   providers: [
-
   ]
 })
 export class HomeModule {}
