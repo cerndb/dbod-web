@@ -18,7 +18,7 @@
       "option1": "Option 1"
     },
     "menu": {
-      "dashboard": "Dashboard",
+      "home": "Home",
       "editors": "Editors",
       "ck_editor": "CKEditor",
       "components": "Components",
@@ -49,11 +49,13 @@
       "menu_level_1_1": "Menu Level 1.1",
       "menu_level_1_2": "Menu Level 1.2",
       "menu_level_1_2_1": "Menu Level 1.2.1",
-      "external_link": "External Link"
+      "submit_a_request": "Submit a Request",
+      "report_an_incident": "Report an Incident",
+      "external_link": "External Links"
     },
     "created_with": "Created with"
   },
-  "dashboard": {
+  "home": {
     "acquisition_channels": "Acquisition Channels",
     "users_by_country": "Users by Country",
     "revenue": "Revenue",

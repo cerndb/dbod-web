@@ -8,7 +8,7 @@ export class BaThemeConfigProvider {
 
   private basic: any;
   private colorScheme: any;
-  private dashboardColors: any;
+  private homeColors: any;
   private conf: any;
 
   constructor() {
@@ -28,8 +28,8 @@ export class BaThemeConfigProvider {
       danger: '#f95372',
     };
 
-    // dashboard colors for charts
-    this.dashboardColors = {
+    // home colors for charts
+    this.homeColors = {
       blueStone: '#40daf1',
       surfieGreen: '#00abff',
       silverTree: '#1b70ef',
@@ -65,17 +65,17 @@ export class BaThemeConfigProvider {
         warningDark: colorHelper.shade(this.colorScheme.warning, 15),
         dangerDark: colorHelper.shade(this.colorScheme.danger, 15),
 
-        dashboard: {
-          blueStone: this.dashboardColors.blueStone,
-          surfieGreen: this.dashboardColors.surfieGreen,
-          silverTree: this.dashboardColors.silverTree,
-          gossip: this.dashboardColors.gossip,
-          white: this.dashboardColors.white,
+        home: {
+          blueStone: this.homeColors.blueStone,
+          surfieGreen: this.homeColors.surfieGreen,
+          silverTree: this.homeColors.silverTree,
+          gossip: this.homeColors.gossip,
+          white: this.homeColors.white,
         },
 
         custom: {
-          dashboardPieChart: colorHelper.hexToRgbA(this.basic.defaultText, 0.8),
-          dashboardLineChart: this.basic.defaultText,
+          homePieChart: colorHelper.hexToRgbA(this.basic.defaultText, 0.8),
+          homeLineChart: this.basic.defaultText,
         }
       }
     };

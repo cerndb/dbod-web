@@ -49,13 +49,15 @@ import {
   BaImageLoaderService,
   BaMenuService,
   BaThemePreloader,
-  BaThemeSpinner
+  BaThemeSpinner,
+  InstanceService
 } from './services';
 
 import {
   EmailValidator,
   EqualPasswordsValidator
 } from './validators';
+import { CernToolbarComponent } from './components/cern-toolbar/cern-toolbar.component';
 
 const NGA_COMPONENTS = [
   BaAmChart,
@@ -72,7 +74,8 @@ const NGA_COMPONENTS = [
   BaPageTop,
   BaPictureUploader,
   BaSidebar,
-  BaFileUploader
+  BaFileUploader,
+  CernToolbarComponent
 ];
 
 const NGA_DIRECTIVES = [
@@ -92,7 +95,8 @@ const NGA_SERVICES = [
   BaImageLoaderService,
   BaThemePreloader,
   BaThemeSpinner,
-  BaMenuService
+  BaMenuService,
+  InstanceService
 ];
 
 const NGA_VALIDATORS = [
@@ -104,7 +108,8 @@ const NGA_VALIDATORS = [
   declarations: [
     ...NGA_PIPES,
     ...NGA_DIRECTIVES,
-    ...NGA_COMPONENTS
+    ...NGA_COMPONENTS,
+    CernToolbarComponent
   ],
   imports: [
     CommonModule,
