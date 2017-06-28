@@ -31,7 +31,7 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: 'general.menu.report_an_incident',
-                url: '#'
+                url: 'https://cern.service-now.com/service-portal/report-ticket.do?name=incident&se=database-on-demand'
               }
             }
           },
@@ -40,7 +40,7 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: 'general.menu.submit_a_request',
-                url: '#'
+                url: 'https://cern.service-now.com/service-portal/report-ticket.do?name=request&se=database-on-demand'
               }
             }
           }
