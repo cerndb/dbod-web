@@ -49,6 +49,7 @@ export class Home {
       delete: false,
     },
     hideSubHeader: true,
+    noDataMessage: 'No instance found.'
 
   };
 
