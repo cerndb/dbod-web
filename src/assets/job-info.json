@@ -1,0 +1,96 @@
+[
+  {
+    "instance_id": 256,
+    "execution_id": 9000,
+    "command_name": "BACKUP",
+    "creation_date": "2017-03-30 16:00:00.1000",
+    "completion_date": "2017-03-30 16:05:00.1000",
+    "state": "FINISHED_OK",
+    "log": "Thu Mar 30 18:21:05 CEST 2017 : Main: Starting
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime.RunStr running hostname
+            Thu Mar 30 18:21:05 CEST 2017 : GeneralMysql.GetGeneralVars: host <host01>
+            Thu Mar 30 18:21:05 CEST 2017 : GeneralMysql.GetGeneralVars: port <5500>
+            Thu Mar 30 18:21:05 CEST 2017 : GeneralMysql.GetGeneralVars: socket </var/lib/mysql/mysql.sock.pinocho.5500>
+            Thu Mar 30 18:21:05 CEST 2017 : GeneralMysql.GetGeneralVars: Base directory </usr/local/mysql/mysql-5.7.15>
+            Thu Mar 30 18:21:05 CEST 2017 : GeneralMysql.GetGeneralVars: Binaries directory </usr/local/mysql/mysql-5.7.15/bin>
+            Thu Mar 30 18:21:05 CEST 2017 : GeneralMysql.GetGeneralVars: Data directory </ORA/dbs03/PINOCHO/mysql>
+            Thu Mar 30 18:21:05 CEST 2017 : GeneralMysql.GetGeneralVars: Binary logs directory </ORA/dbs02/PINOCHO/mysql>
+            Thu Mar 30 18:21:05 CEST 2017 : Main: my.cnf </ORA/dbs03/PINOCHO/mysql/my.cnf>
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime.RunStr running cat /etc/mtab
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime.GetMountPointNASRegex : match in line <nasserver2:/ORA/dbs03/PINOCHO /ORA/dbs03/PINOCHO nfs rw,noatime,vers=3,rsize=65536,wsize=65536,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=127.0.0.0,mountvers=3,mountport=635,mountproto=tcp,local_lock=none,addr=127.0.0.0 0 0> 
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime.GetMountPointNASRegex : got controller <nasserver2> mountpath controller: </ORA/dbs03/PINOCHO> file system: </ORA/dbs03/PINOCHO>
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime.GetMountPointNASRegex : result: $VAR1 = {
+                      'nasserver2' => [
+                                        '/ORA/dbs03/PINOCHO'
+                                      ]
+                    };
+
+            Thu Mar 30 18:21:05 CEST 2017 : Main: working with controller <nasserver2> and mountpoint: </ORA/dbs03/PINOCHO>
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime.GetIPFromCName: try to get ip from <nasserver1>
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime.RunStr running ping -c 1 nasserver2
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime.GetIPFromCName: IP <127.0.0.0> for <nasserver2>
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime.GetIPFromCName: try to get ip from <nasserver2>
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime.RunStr running ping -c 1 nasserver2
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime.GetIPFromCName: IP <127.0.0.0> for <nasserver2>
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime_Zapi::GetUserPassFromMountPoint: we are working with a C-mode volume </ORA/dbs03/PINOCHO>
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime_Zapi::GetUserPassFromMountPoint: controller match: <nasserver2>
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime_Zapi::GetUserPassFromMountPoint: returning: vsadmin, XXXXXX, 17, 127.0.0.0
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime_Zapi::IsCmodeMount: begin </ORA/dbs03/PINOCHO>
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime_Zapi::IsCmodeMount: we are working with a C-mode volume </ORA/dbs03/PINOCHO>
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime_Zapi::GetServerAndVolname: we are working with a C-mode volume < /ORA/dbs03/PINOCHO>
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime_Zapi.GetVolInfoCmode : working with volume: </ORA/dbs03/PINOCHO>
+            Thu Mar 30 18:21:05 CEST 2017 : RunTime_Zapi.GetVolInfoCmode: query looks like: 
+             <volume-get-iter>
+                <max-records>10</max-records>
+                <query>
+                    <volume-attributes>
+                        <volume-id-attributes>
+                            <junction-path>/ORA/dbs03/PINOCHO</junction-path>
+                        </volume-id-attributes>
+                    </volume-attributes>
+                </query>
+                <desired-attributes>
+                    <volume-autosize-attributes></volume-autosize-attributes>
+                    <volume-id-attributes></volume-id-attributes>
+                    <volume-space-attributes></volume-space-attributes>
+                    <volume-state-attributes></volume-state-attributes>
+                </desired-attributes>
+            </volume-get-iter>
+
+            Thu Mar 30 18:21:23 CEST 2017 : RunTime.GetVolInfoBackuptoDisk : final result $VAR1 = {
+                      'size_total' => '2576982016',
+                      'aggr_size_used' => 0,
+                      'vserver' => 'vserver1',
+                      'autosize_enabled' => 'true',
+                      'name' => 'dodpinocho03',
+                      'max_autosize' => '53687091200',
+                      'node' => undef,
+                      'state' => 'online',
+                      'autosize_increment' => undef,
+                      'aggr_name' => 'aggserver1',
+                      'size_used' => '145858560',
+                      'aggr_size_free' => 0
+                    };
+
+            Thu Mar 30 18:21:23 CEST 2017 : RunTime_Zapi::GetServerAndVolname: working with C-mode volume: <dodpinocho03>
+            Thu Mar 30 18:21:23 CEST 2017 : RunTime.RunStr running ps -elf | grep -i datadir=/ORA/dbs03/PINOCHO/mysql | grep -v grep
+            Thu Mar 30 18:21:24 CEST 2017 : RunTime.RunStr running /usr/local/mysql/mysql-5.7.15/bin/mysql --socket=/var/lib/mysql/mysql.sock.pinocho.5500 < /ORA/dbs01/syscontrol/projects/dod/bin/actual_binarylog.sql
+            Thu Mar 30 18:21:24 CEST 2017 : Main: <binlog>.<000086> actual binary log sequence
+            Thu Mar 30 18:21:24 CEST 2017 : RunTime_Zapi::SnapPrepare: getting snapshots for <dodpinocho03>
+            Thu Mar 30 18:21:24 CEST 2017 : RunTime_Zapi::SnapPrepare: There are <17> in this volume: <dodpinocho03>!
+            Thu Mar 30 18:21:24 CEST 2017 : Main: Success preparing volume: <dodpinocho03> for snapshot.
+            Thu Mar 30 18:21:24 CEST 2017 : RunTime.RunStr running /usr/local/mysql/mysql-5.7.15/bin/mysql --socket=/var/lib/mysql/mysql.sock.pinocho.5500 < /ORA/dbs01/syscontrol/projects/dod/bin/presnap.sql
+            Thu Mar 30 18:21:24 CEST 2017 : Main: presnap actions completed successfully.
+            Thu Mar 30 18:21:24 CEST 2017 : Main: Master status:
+             File	Position	Binlog_Do_DB	Binlog_Ignore_DB	Executed_Gtid_Set
+             binlog.000087	150			
+
+            Thu Mar 30 18:21:24 CEST 2017 : RunTime::GetVersionDB: version <5715>.
+            Thu Mar 30 18:21:29 CEST 2017 : RunTime_Zapi::SnapCreate: Created!!
+            Thu Mar 30 18:21:29 CEST 2017 : Main: Success creating snapshot: <snapscript_30032017_182124_87_5715> on volume: <dodpinocho03>.!
+            Thu Mar 30 18:21:29 CEST 2017 : RunTime.RunStr running /usr/local/mysql/mysql-5.7.15/bin/mysql --socket=/var/lib/mysql/mysql.sock.pinocho.5500 < /ORA/dbs01/syscontrol/projects/dod/bin/postsnap.sql
+            Thu Mar 30 18:21:29 CEST 2017 : Main: postnap actions completed successfully.
+            Thu Mar 30 18:21:29 CEST 2017 : Main: mysql_snapshot is over.
+            Thu Mar 30 18:21:29 CEST 2017 : mysql_snapshot.Main: State: [0]"
+  }
+]
