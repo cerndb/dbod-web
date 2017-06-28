@@ -1,20 +1,7 @@
 
 <h1>Home</h1>
-<div *ngIf="instances">
-     <table class="table table-bordered table-inverse">
-        <thead>
-            <th>Username</th>
-            <th>Version</th>
-            <th>DB Type</th>
-            <th>DB Name</th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let instance of instances">
-                <td>{{instance.username}}</td>
-                <td>{{instance.version}}</td>
-                <td>{{instance.db_type}}</td>
-                <td>{{instance.db_name}}</td>
-            </tr>
-        </tbody>
-    </table>
+<div style="padding-top: 30px">
+    <ba-card title="Instances Overview" baCardClass="with-scroll" class="smart-table-container">
+        <ng2-smart-table *ngIf="instances" [settings]="settings" [source]="instances"></ng2-smart-table>
+    </ba-card>
 </div>

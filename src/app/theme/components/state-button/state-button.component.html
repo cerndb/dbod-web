@@ -1,0 +1,6 @@
+<span class="badge" 
+      [class.badge-primary]='states.MAINTENANCE'
+      [class.badge-warning]='states.BUSY'
+      [class.badge-danger]='states.STOPPED'
+      [class.badge-success]='states.RUNNING'
+      [class.badge-info]='states.AWAITING'>{{ renderValue }}</span>

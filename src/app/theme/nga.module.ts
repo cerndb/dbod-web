@@ -58,6 +58,7 @@ import {
   EqualPasswordsValidator
 } from './validators';
 import { CernToolbarComponent } from './components/cern-toolbar/cern-toolbar.component';
+import { StateButtonComponent } from './components/state-button/state-button.component';
 
 const NGA_COMPONENTS = [
   BaAmChart,
@@ -75,7 +76,8 @@ const NGA_COMPONENTS = [
   BaPictureUploader,
   BaSidebar,
   BaFileUploader,
-  CernToolbarComponent
+  CernToolbarComponent,
+  StateButtonComponent
 ];
 
 const NGA_DIRECTIVES = [
@@ -109,7 +111,8 @@ const NGA_VALIDATORS = [
     ...NGA_PIPES,
     ...NGA_DIRECTIVES,
     ...NGA_COMPONENTS,
-    CernToolbarComponent
+    CernToolbarComponent,
+    StateButtonComponent
   ],
   imports: [
     CommonModule,

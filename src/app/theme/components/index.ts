@@ -14,3 +14,4 @@ export * from './baCheckbox';
 export * from './baMultiCheckbox';
 export * from './baFileUploader';
 export * from './cern-toolbar';
+export * from './state-button';
