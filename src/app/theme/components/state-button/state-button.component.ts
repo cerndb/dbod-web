@@ -18,6 +18,8 @@ export class StateButtonComponent implements ViewCell, OnInit {
     BUSY: false,
     STOPPED: false,
     MAINTENANCE: false,
+    FINISHED_FAIL: false,
+    FINISHED_OK: false
   };
 
   ngOnInit() {

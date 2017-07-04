@@ -9,6 +9,8 @@ import { routing } from './home.routing';
 import { StateButtonComponent } from '../../theme/components/state-button';
 
 import { } from './';
+import { InstancesViewComponent } from './instances-view/instances-view.component';
+import { JobsViewComponent } from './jobs-view/jobs-view.component';
 
 @NgModule({
   imports: [
@@ -20,7 +22,9 @@ import { } from './';
     routing
   ],
   declarations: [
-    Home
+    Home,
+    InstancesViewComponent,
+    JobsViewComponent
   ],
   providers: [
   ],
