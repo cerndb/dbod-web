@@ -15,3 +15,4 @@ export * from './baMultiCheckbox';
 export * from './baFileUploader';
 export * from './cern-toolbar';
 export * from './state-button';
+export * from './db-name';

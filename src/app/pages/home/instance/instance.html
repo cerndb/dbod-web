@@ -1,0 +1,14 @@
+<h1>Information for instance {{ route.snapshot.params['id'] }}</h1>
+<div *ngIf="data">
+    <p>{{ data.datadir }}</p>
+    <p>{{ data.username }}</p>
+    <p>{{ data.version }}</p>
+    <p>{{ data.db_type }}</p>
+    <p>{{ data.basedir }}</p>
+    <p>{{ data.state }}</p>
+    <p>{{ data.class }}</p>
+    <p>{{ data.db_name }}</p>
+    <p>{{ data.port }}</p>
+</div>
+<span class="glyphicon glyphicon-menu-left"></span>
+<a routerLink="/home"><button class="btn btn-success">Show Instances</button></a>

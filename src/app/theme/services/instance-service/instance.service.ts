@@ -16,5 +16,6 @@ export class InstanceService {
          return this.http.get('assets/instance-info.json')
                          .map((res:any) => res.json());
 
-     }
+    }
+
 }
