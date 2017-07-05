@@ -10,17 +10,17 @@ import { InstanceService } from '../../../theme/services/instance-service';
 })
 export class InstanceComponent {
 
-    instanceId: Number;
+    db_name: String;
     data: Object;
 
     constructor( private route: ActivatedRoute, private router: Router, private instanceService: InstanceService ) {
 
       this.route.params.subscribe(params => {
-          this.instanceId = params['id'];
+          this.db_name = params['id'];
       });
 
       this.instanceService.getInstances().subscribe((res) => {
-        this.data = res.find(x => x.id == this.instanceId);
+        this.data = res.find(x => x.db_name == this.db_name);
       });
 
       this.router.events.subscribe(event => {
