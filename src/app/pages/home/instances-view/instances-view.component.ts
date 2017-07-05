@@ -20,15 +20,11 @@ export class InstancesViewComponent {
   settings = {
     selectMode: 'multi',
     columns: {
-      id: {
-        title: '',
-        filter: false,
-        type: 'custom',
-        renderComponent: DbNameComponent,
-      },
       db_name: {
         title: 'DB Name',
         filter: false,
+        type: 'custom',
+        renderComponent: DbNameComponent,
       },
       hosts: {
         title: 'Host',
