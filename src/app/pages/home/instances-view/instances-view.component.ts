@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { InstanceService } from '../../../theme/services/instance-service';
 import { StateButtonComponent } from '../../../theme/components/state-button';
-import { LocalDataSource } from 'ng2-smart-table';
+import { DbNameComponent } from '../../../theme/components/db-name';
+import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'home-instances-view',
@@ -11,44 +12,54 @@ import { LocalDataSource } from 'ng2-smart-table';
 export class InstancesViewComponent {
 
   source: LocalDataSource;
+  showTable: Boolean = true;
+
+  // Edit butonunu dene
+  // HTML content dene settings icinde
 
   settings = {
     selectMode: 'multi',
     columns: {
+      id: {
+        title: '',
+        filter: false,
+        type: 'custom',
+        renderComponent: DbNameComponent,
+      },
       db_name: {
         title: 'DB Name',
-        filter: false
+        filter: false,
       },
       hosts: {
         title: 'Host',
-        filter: false
+        filter: false,
       },
       username: {
         title: 'Username',
-        filter: false
+        filter: false,
       },
       class: {
         title: 'Category',
-        filter: false
+        filter: false,
       },
       db_type: {
         title: 'DB Type',
-        filter: false
+        filter: false,
       },
       state: {
         title: 'State',
         type: 'custom',
         renderComponent: StateButtonComponent,
-        filter: false
+        filter: false,
       },
     },
     actions: {
       add: false,
-      edit: false,
       delete: false,
+      edit: false,
     },
     hideSubHeader: true,
-    noDataMessage: 'No instance found.'
+    noDataMessage: 'No instance found.',
 
   };
 
@@ -58,7 +69,7 @@ export class InstancesViewComponent {
     });
   }
 
-  onSearch(query: string = '') {
+   onSearch(query: string = '') {
 
     this.source.setFilter([
       // fields we want to include in the search

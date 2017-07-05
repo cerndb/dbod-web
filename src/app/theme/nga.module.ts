@@ -60,6 +60,7 @@ import {
 } from './validators';
 import { CernToolbarComponent } from './components/cern-toolbar/cern-toolbar.component';
 import { StateButtonComponent } from './components/state-button/state-button.component';
+import { DbNameComponent } from './components/db-name/db-name.component';
 
 const NGA_COMPONENTS = [
   BaAmChart,
@@ -78,7 +79,8 @@ const NGA_COMPONENTS = [
   BaSidebar,
   BaFileUploader,
   CernToolbarComponent,
-  StateButtonComponent
+  StateButtonComponent,
+  DbNameComponent
 ];
 
 const NGA_DIRECTIVES = [
@@ -114,7 +116,8 @@ const NGA_VALIDATORS = [
     ...NGA_DIRECTIVES,
     ...NGA_COMPONENTS,
     CernToolbarComponent,
-    StateButtonComponent
+    StateButtonComponent,
+    DbNameComponent
   ],
   imports: [
     CommonModule,

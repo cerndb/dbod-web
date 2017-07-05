@@ -4,6 +4,10 @@ $default-text: #e9ebec;
   .smart-table-container {
     width: 100%;
   }
+
+  .notShowTable {
+    display: none;
+  }
 }
 
 :host /deep/ {

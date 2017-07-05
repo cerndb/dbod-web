@@ -7,6 +7,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { Home } from './home.component';
 import { routing } from './home.routing';
 import { StateButtonComponent } from '../../theme/components/state-button';
+import { DbNameComponent } from '../../theme/components/db-name';
+import { InstanceComponent } from './instance';
 
 import { } from './';
 import { InstancesViewComponent } from './instances-view/instances-view.component';
@@ -19,15 +21,16 @@ import { JobsViewComponent } from './jobs-view/jobs-view.component';
     AppTranslationModule,
     NgaModule,
     Ng2SmartTableModule,
-    routing
+    routing,
   ],
   declarations: [
     Home,
     InstancesViewComponent,
-    JobsViewComponent
+    JobsViewComponent,
+    InstanceComponent,
   ],
   providers: [
   ],
-  entryComponents: [StateButtonComponent]
+  entryComponents: [StateButtonComponent, DbNameComponent]
 })
 export class HomeModule {}
