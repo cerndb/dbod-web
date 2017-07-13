@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 import { Router, ActivatedRoute } from '@angular/router';
-import { InstanceService } from '../../../theme/services/instance-service';
+import { InstanceService } from '../../theme/services/instance-service';
 
 @Component({
   selector: 'instance',
@@ -20,13 +19,7 @@ export class InstanceComponent {
       });
 
       this.instanceService.getInstances().subscribe((res) => {
-        this.data = res.find(x => x.db_name == this.db_name);
-      });
-
-      this.router.events.subscribe(event => {
-        if(event.constructor.name === "NavigationStart") {
-            document.getElementById('instance-list-view').style.display = 'block';
-        }
+        this.data = res.find(x => x.db_name === this.db_name);
       });
     }
   
