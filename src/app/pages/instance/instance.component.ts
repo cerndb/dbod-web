@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { InstanceService } from '../../theme/services/instance-service';
+import { InstanceService } from '../../services/instance';
 
 @Component({
   selector: 'instance',

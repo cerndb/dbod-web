@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgaModule } from '../../theme/nga.module';
 import { InstanceComponent } from './instance.component';
-import { InstanceService } from '../../theme/services/instance-service';
+import { InstanceService } from '../../services/instance';
 import { AppTranslationModule } from '../../app.translation.module';
 import { RouterModule } from '@angular/router';
 import { routing } from './instance.routing';

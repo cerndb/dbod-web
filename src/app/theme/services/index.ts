@@ -2,5 +2,4 @@ export * from './baImageLoader';
 export * from './baMenu';
 export * from './baThemePreloader';
 export * from './baThemeSpinner';
-export * from './instance-service';
 export * from './job-service';

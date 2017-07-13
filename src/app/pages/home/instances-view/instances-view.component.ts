@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { InstanceService } from '../../../theme/services/instance-service';
+import { InstanceService } from '../../../services/';
 import { StateButtonComponent } from '../../../theme/components/state-button';
 import { DbNameComponent } from '../../../theme/components/db-name';
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';

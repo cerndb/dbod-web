@@ -50,9 +50,12 @@ import {
   BaMenuService,
   BaThemePreloader,
   BaThemeSpinner,
-  InstanceService,
   JobService
 } from './services';
+
+import {
+  InstanceService,
+} from '../services';
 
 import {
   EmailValidator,
