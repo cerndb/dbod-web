@@ -14,9 +14,6 @@ export class InstancesViewComponent {
   source: LocalDataSource;
   showTable: Boolean = true;
 
-  // Edit butonunu dene
-  // HTML content dene settings icinde
-
   settings = {
     selectMode: 'multi',
     columns: {

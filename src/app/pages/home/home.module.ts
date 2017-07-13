@@ -8,8 +8,7 @@ import { Home } from './home.component';
 import { routing } from './home.routing';
 import { StateButtonComponent } from '../../theme/components/state-button';
 import { DbNameComponent } from '../../theme/components/db-name';
-import { InstanceComponent } from './instance';
-
+import { RouterModule } from '@angular/router';
 import { } from './';
 import { InstancesViewComponent } from './instances-view/instances-view.component';
 import { JobsViewComponent } from './jobs-view/jobs-view.component';
@@ -17,6 +16,7 @@ import { JobsViewComponent } from './jobs-view/jobs-view.component';
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     FormsModule,
     AppTranslationModule,
     NgaModule,
@@ -27,7 +27,6 @@ import { JobsViewComponent } from './jobs-view/jobs-view.component';
     Home,
     InstancesViewComponent,
     JobsViewComponent,
-    InstanceComponent,
   ],
   providers: [
   ],

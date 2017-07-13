@@ -26,7 +26,7 @@
     "build:prod:aot": "npm run build:prod -- --aot",
     "build:ci": "npm run build:prod && npm run build:prod:aot",
     "build:demo": "npm run build:prod:aot -- --base-href \"http://akveo.com/ng2-admin/\"",
-    "test": "ng test -sr",
+    "test": "tsc && (karma start karma.conf.js; npm run report)",
     "test:coverage": "npm run clean:coverage && ng test -sr -cc",
     "lint": "ng lint",
     "lint:styles": "stylelint ./src/app/**/*.scss",

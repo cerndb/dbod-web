@@ -11,15 +11,10 @@ export class DbNameComponent implements ViewCell, OnInit {
   renderValue = '';
   @Input() value: string | number;
 
-  @Output() change = new EventEmitter();
-
   constructor() { }
 
   ngOnInit() {
     this.renderValue = this.value.toString().toUpperCase();    
   }
 
-  onClick() {
-      document.getElementById('instance-list-view').style.display = 'none';
-  }
 }
