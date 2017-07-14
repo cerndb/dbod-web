@@ -50,11 +50,11 @@ import {
   BaMenuService,
   BaThemePreloader,
   BaThemeSpinner,
-  JobService
 } from './services';
 
 import {
   InstanceService,
+  JobService
 } from '../services';
 
 import {

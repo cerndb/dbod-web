@@ -62,7 +62,7 @@ export class InstancesViewComponent {
     });
   }
 
-   onSearch(query: string = '') {
+  onSearch(query: string = '') {
 
     this.source.setFilter([
       // fields we want to include in the search

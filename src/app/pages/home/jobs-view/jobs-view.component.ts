@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JobService } from '../../../theme/services/job-service';
+import { JobService } from '../../../services/job';
 import { StateButtonComponent } from '../../../theme/components/state-button';
 import { LocalDataSource } from 'ng2-smart-table';
 
