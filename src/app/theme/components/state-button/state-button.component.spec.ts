@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StateButtonComponent } from './state-button.component';
 
-describe('StateButtonComponent', () => {
+xdescribe('StateButtonComponent', () => {
   let component: StateButtonComponent;
   let fixture: ComponentFixture<StateButtonComponent>;
 

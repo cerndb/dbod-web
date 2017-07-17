@@ -4,11 +4,11 @@ import { StateButtonComponent } from '../../../theme/components/state-button';
 import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
-  selector: 'home-jobs-view',
-  templateUrl: './jobs-view.component.html',
-  styleUrls: ['./jobs-view.component.scss']
+  selector: 'home-jobs',
+  templateUrl: './jobs.component.html',
+  styleUrls: ['./jobs.component.scss']
 })
-export class JobsViewComponent {
+export class JobsComponent {
 
   source: LocalDataSource;
 

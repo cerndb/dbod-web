@@ -10,8 +10,8 @@ import { StateButtonComponent } from '../../theme/components/state-button';
 import { DbNameComponent } from '../../theme/components/db-name';
 import { RouterModule } from '@angular/router';
 import { } from './';
-import { InstancesViewComponent } from './instances-view/instances-view.component';
-import { JobsViewComponent } from './jobs-view/jobs-view.component';
+import { InstancesComponent } from './instances/instances.component';
+import { JobsComponent } from './jobs/jobs.component';
 
 @NgModule({
   imports: [
@@ -25,8 +25,8 @@ import { JobsViewComponent } from './jobs-view/jobs-view.component';
   ],
   declarations: [
     Home,
-    InstancesViewComponent,
-    JobsViewComponent,
+    InstancesComponent,
+    JobsComponent,
   ],
   providers: [
   ],
