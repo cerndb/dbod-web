@@ -1,5 +1,5 @@
 /* CERN Toolbar CSS - 17/01/13 */
-@import '../../sass/conf/conf';
+@import '../../theme/sass/conf/conf';
 
 #cern-toolbar {
   background-color: #222;
@@ -76,7 +76,7 @@
 }
 #cern-toolbar .cern-multifactor {
   padding-left: 32px;
-  background-image: url("../../../../assets/img/toolbarsprite.png");
+  background-image: url("../../../assets/img/toolbarsprite.png");
   background-repeat: no-repeat;
   background-position: 0 -120px;
 }
@@ -110,7 +110,7 @@
   }
 
   #cern-toolbar li a {
-    background-image: url("../../../../assets/img/toolbarsprite.png");
+    background-image: url("../../../assets/img/toolbarsprite.png");
     background-repeat: no-repeat;
     height: 40px;
     width: 40px;

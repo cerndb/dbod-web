@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { JobService } from '../../../services/job';
-import { StateButtonComponent } from '../../../theme/components/state-button';
+import { StateButtonComponent } from '../../../components/state-button/state-button.component';
 import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
-  selector: 'home-jobs',
+  selector: 'jobs',
   templateUrl: './jobs.component.html',
   styleUrls: ['./jobs.component.scss']
 })
