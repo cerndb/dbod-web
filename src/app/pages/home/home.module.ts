@@ -6,8 +6,8 @@ import { NgaModule } from '../../theme/nga.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { Home } from './home.component';
 import { routing } from './home.routing';
-import { StateButtonComponent } from '../../theme/components/state-button';
-import { DbNameComponent } from '../../theme/components/db-name';
+import { StateButtonComponent } from '../../components/state-button/state-button.component';
+import { DbNameComponent } from '../../components/db-name/db-name.component';
 import { RouterModule } from '@angular/router';
 import { } from './';
 import { InstancesComponent } from './instances/instances.component';
@@ -27,6 +27,8 @@ import { JobsComponent } from './jobs/jobs.component';
     Home,
     InstancesComponent,
     JobsComponent,
+    StateButtonComponent,
+    DbNameComponent,
   ],
   providers: [
   ],

@@ -1,11 +1,11 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { InstanceService } from '../../../services/';
-import { StateButtonComponent } from '../../../theme/components/state-button';
-import { DbNameComponent } from '../../../theme/components/db-name';
+import { InstanceService } from '../../../services/instance';
+import { StateButtonComponent } from '../../../components/state-button/state-button.component';
+import { DbNameComponent } from '../../../components/db-name/db-name.component';
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 
 @Component({
-  selector: 'home-instances',
+  selector: 'instances',
   templateUrl: './instances.component.html',
   styleUrls: ['./instances.component.scss']
 })
@@ -62,7 +62,7 @@ export class InstancesComponent {
     });
   }
 
-  onSearch(query: string = '') {
+   onSearch(query: string = '') {
 
     this.source.setFilter([
       // fields we want to include in the search
