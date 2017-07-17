@@ -5,11 +5,11 @@ import { DbNameComponent } from '../../../theme/components/db-name';
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 
 @Component({
-  selector: 'home-instances-view',
-  templateUrl: './instances-view.component.html',
-  styleUrls: ['./instances-view.component.scss']
+  selector: 'home-instances',
+  templateUrl: './instances.component.html',
+  styleUrls: ['./instances.component.scss']
 })
-export class InstancesViewComponent {
+export class InstancesComponent {
 
   source: LocalDataSource;
   showTable: Boolean = true;
