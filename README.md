@@ -1,11 +1,14 @@
+[![Build Status](https://travis-ci.org/cerndb/dbod-web.svg?branch=master)](https://travis-ci.org/cerndb/dbod-web)
+
 # Dbod
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.4.
 
 ## Setup
 
 After cloning the repository, run `npm install` to download dependencies.
-Depending on your setup you may need to update *npm*, *nodejs* or both.
+Depending on your setup you may need to update *npm>(^5.0.0)*, *nodejs(^8.0.0)* or both.
+
 
 ## Development server
 
