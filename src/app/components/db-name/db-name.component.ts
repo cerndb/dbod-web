@@ -9,7 +9,7 @@ import { ViewCell } from 'ng2-smart-table';
 export class DbNameComponent implements ViewCell, OnInit {
 
   renderValue = '';
-  @Input() value: string | number;
+  @Input() value: string | number = '';
 
   constructor() { }
 

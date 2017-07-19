@@ -8,7 +8,7 @@ import { LocalDataSource } from 'ng2-smart-table';
   templateUrl: './jobs.component.html',
   styleUrls: ['./jobs.component.scss']
 })
-export class JobsComponent {
+export class JobsComponent implements OnInit {
 
   source: LocalDataSource;
 
@@ -52,7 +52,11 @@ export class JobsComponent {
   };
 
   constructor(private _jobService: JobService) {
-    _jobService.getJobs().subscribe((res) => {
+    
+  }
+
+  ngOnInit() {
+    this._jobService.getJobs().subscribe((res) => {
       this.source = new LocalDataSource(res);
     });
   }
