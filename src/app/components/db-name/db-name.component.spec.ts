@@ -6,7 +6,7 @@ import { NO_ERRORS_SCHEMA, Directive } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 
-describe('DbNameComponent', () => {
+describe('DB NAME COMPONENT', () => {
   let component: DbNameComponent;
   let fixture: ComponentFixture<DbNameComponent>;
 

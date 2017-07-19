@@ -7,13 +7,17 @@ import { InstanceService } from '../../services/instance';
   styleUrls: ['./instance.scss'],
   templateUrl: './instance.html'
 })
-export class InstanceComponent {
+export class InstanceComponent implements OnInit {
 
     db_name: String;
-    data: Object;
+    data: Object = {};
 
     constructor( private route: ActivatedRoute, private router: Router, private instanceService: InstanceService ) {
 
+    }
+
+    ngOnInit() {
+        
       this.route.params.subscribe(params => {
           this.db_name = params['id'];
       });
