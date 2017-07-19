@@ -79,6 +79,16 @@ describe('JOBS COMPONENT', () => {
 
   describe('JOBS: Functional Specs', () => {
 
+    it('should set the source data via job service', fakeAsync(() => {
+
+        const service = fixture.debugElement.injector.get(JobService);
+        spyOn(service, 'getJobs').and.returnValue(Observable.of(jobs));
+        fixture.detectChanges();
+        tick();
+        expect(component.source.count()).toBe(jobs.length);
+    
+    }));
+
     it('should search jobs with onSearch() method', fakeAsync(() => {
         
         const service = fixture.debugElement.injector.get(JobService);
