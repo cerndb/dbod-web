@@ -10,7 +10,7 @@ export class StateButtonComponent implements ViewCell, OnInit {
 
   renderValue = '';
 
-  @Input() value: string | number;
+  @Input() value: string | number = '';
 
   states = {
     RUNNING: false,

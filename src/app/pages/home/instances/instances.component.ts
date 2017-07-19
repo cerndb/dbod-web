@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InstanceService } from '../../../services/instance';
 import { StateButtonComponent } from '../../../components/state-button/state-button.component';
 import { DbNameComponent } from '../../../components/db-name/db-name.component';
@@ -9,10 +9,9 @@ import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
   templateUrl: './instances.component.html',
   styleUrls: ['./instances.component.scss']
 })
-export class InstancesComponent {
+export class InstancesComponent implements OnInit {
 
   source: LocalDataSource;
-  showTable: Boolean = true;
 
   settings = {
     selectMode: 'multi',
@@ -57,7 +56,11 @@ export class InstancesComponent {
   };
 
   constructor(private _instanceService: InstanceService) {
-    _instanceService.getInstances().subscribe((res) => {
+    
+  }
+
+  ngOnInit() {
+    this._instanceService.getInstances().subscribe((res) => {
       this.source = new LocalDataSource(res);
     });
   }
