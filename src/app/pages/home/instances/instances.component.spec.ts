@@ -80,6 +80,16 @@ describe('INSTANCES COMPONENT', () => {
 
   describe('INSTANCES: Functional Specs', () => {
 
+    it('should set the source data via instance service', fakeAsync(() => {
+
+        const service = fixture.debugElement.injector.get(InstanceService);
+        spyOn(service, 'getInstances').and.returnValue(Observable.of(instances));
+        fixture.detectChanges();
+        tick();
+        expect(component.source.count()).toBe(instances.length);
+        
+    }));
+
     it('should search instances with onSearch() method', fakeAsync(() => {
 
         const service = fixture.debugElement.injector.get(InstanceService);
@@ -94,7 +104,7 @@ describe('INSTANCES COMPONENT', () => {
         expect(component.source.count()).toBe(1);
 
     }));
-      
+
   });
 
 });
