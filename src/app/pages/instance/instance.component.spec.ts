@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { InstanceComponent } from './instance.component';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -41,10 +41,28 @@ class ActivatedRouteStub {
     }
 }
 
-describe('InstanceComponent', () => {
-  let component: InstanceComponent;
+describe('INSTANCE COMPONENT', () => {
+  
+    let component: InstanceComponent;
   let fixture: ComponentFixture<InstanceComponent>;
   let activatedRoute;
+  
+  const instances = [{
+        db_name: 'pinocho',
+        hosts: 'host1',
+        username: 'user1',
+        class: 'REF',
+        db_type: 'MYSQL',
+        state: 'RUNNING',
+      },
+      { 
+        db_name: 'gepeto',
+        hosts: 'host2',
+        username: 'user2',
+        class: 'REF',
+        db_type: 'MYSQL',
+        state: 'BUSY',
+  }];
 
   beforeEach(async(() => {
 
@@ -63,11 +81,20 @@ describe('InstanceComponent', () => {
     fixture = TestBed.createComponent(InstanceComponent);
     component = fixture.componentInstance;
     activatedRoute = fixture.debugElement.injector.get(ActivatedRoute);
-    activatedRoute.testParams = { id: 'pinocho' };
-    fixture.detectChanges();
+    activatedRoute.testParams = { id: instances[0].db_name };
+    //fixture.detectChanges();
   });
 
   it('should be created', () => {
       expect(component).toBeTruthy();
   });
+
+  it('should initialize the data with correct parameter', fakeAsync(() => {
+        const service = fixture.debugElement.injector.get(InstanceService);
+        spyOn(service, 'getInstances').and.returnValue(Observable.of(instances));
+        fixture.detectChanges();
+        tick();
+        expect(component.data).toBe(instances[0]);
+  }));
+
 });

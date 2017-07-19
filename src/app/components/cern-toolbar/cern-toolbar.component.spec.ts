@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CernToolbarComponent } from './cern-toolbar.component';
 
-describe('CernToolbarComponent', () => {
+describe('CERN TOOLBAR COMPONENT', () => {
   let component: CernToolbarComponent;
   let fixture: ComponentFixture<CernToolbarComponent>;
 
