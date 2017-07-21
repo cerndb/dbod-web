@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/cerndb/dbod-web.svg?branch=master)](https://travis-ci.org/cerndb/dbod-web)
+[![Coverage Status](https://coveralls.io/repos/github/cerndb/dbod-web/badge.svg?branch=master)](https://coveralls.io/github/cerndb/dbod-web?branch=master)
 
 # Dbod
 
