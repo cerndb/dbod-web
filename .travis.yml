@@ -19,4 +19,7 @@ before_install:
  - npm i -g karma
 
 script:
-    - karma start karma.conf.js --single-run
+    - ng test --watch false --code-coverage
+
+after_script:
+  - cat ./coverage/*/lcov.info | ./node_modules/coveralls/bin/coveralls.js
