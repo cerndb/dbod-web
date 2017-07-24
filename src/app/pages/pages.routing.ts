@@ -13,7 +13,8 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', loadChildren: './home/home.module#HomeModule' },
-      { path: 'instance/:id', loadChildren: './instance/instance.module#InstanceModule' }
+      { path: 'instance/:id', loadChildren: './instance/instance.module#InstanceModule' },
+      { path: 'help',  loadChildren: './help/help.module#HelpModule' }
     ]
   }
 ];

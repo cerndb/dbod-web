@@ -45,7 +45,19 @@ export const PAGES_MENU = [
             }
           }
         ]
-      }
+      },
+      {
+        path: 'help',
+        data: {
+          menu: {
+            title: 'general.menu.help',
+            icon: 'ion-help',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
     ]
   }
 ];
