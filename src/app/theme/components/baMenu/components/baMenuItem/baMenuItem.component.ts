@@ -34,12 +34,11 @@ export class BaMenuItem {
   }
 
   public toggleMenu() {
-
-    if (this.menuItem.icon === 'ion-navicon'){
-        this.isMenuCollapsed = !this.isMenuCollapsed;
-        this._state.notifyDataChanged('menu.isCollapsed', this.isMenuCollapsed);
-        return false;
-    }
+    
+    this.isMenuCollapsed = !this.isMenuCollapsed;
+    this._state.notifyDataChanged('menu.isCollapsed', this.isMenuCollapsed);
+    return false;
+    
   }
 
   public scrolledChanged(isScrolled) {
