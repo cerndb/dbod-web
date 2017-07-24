@@ -3,6 +3,18 @@ export const PAGES_MENU = [
     path: 'pages',
     children: [
       {
+        path: '',
+        data: {
+          menu: {
+            title: '',
+            icon: 'ion-navicon',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
+      {
         path: 'home',
         data: {
           menu: {
