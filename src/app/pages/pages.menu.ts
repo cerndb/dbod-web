@@ -27,6 +27,18 @@ export const PAGES_MENU = [
         }
       },
       {
+        path: 'editor',
+        data: {
+          menu: {
+            title: 'general.menu.editor',
+            icon: 'ion-edit',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
+      {
         path: 'help',
         data: {
           menu: {

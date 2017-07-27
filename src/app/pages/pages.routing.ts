@@ -14,7 +14,8 @@ export const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', loadChildren: './home/home.module#HomeModule' },
       { path: 'instance/:id', loadChildren: './instance/instance.module#InstanceModule' },
-      { path: 'help',  loadChildren: './help/help.module#HelpModule' }
+      { path: 'help',  loadChildren: './help/help.module#HelpModule' },
+      { path: 'editor', loadChildren: './editor/editor.module#EditorModule' }
     ]
   }
 ];

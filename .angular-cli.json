@@ -30,7 +30,8 @@
         "../node_modules/handsontable/dist/handsontable.full.css",
         "../node_modules/ng2-slim-loading-bar/style.css",
         "app/theme/theme.scss",
-        "styles.scss"
+        "styles.scss",
+        "assets/css/jsoneditor.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
