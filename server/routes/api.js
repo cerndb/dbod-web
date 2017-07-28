@@ -49,4 +49,13 @@ router.post('/*', myProxy(ACL, apiOptions));
 router.put('/*', myProxy(ACL, apiOptions));
 router.delete('/*', myProxy(ACL, apiOptions));
 
-module.exports = router;
+function getToken(username, groups) {
+    const jwt = require('jsonwebtoken')
+    var jtoken = jwt.sign("test", config.secretKey)
+    return jtoken
+}
+
+module.exports = {
+    router: router,
+    getToken: getToken
+}
