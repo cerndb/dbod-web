@@ -65,6 +65,7 @@
     "core-js": "2.4.1",
     "easy-pie-chart": "2.1.7",
     "express": "^4.15.3",
+    "express-request-proxy": "^2.0.0",
     "font-awesome": "4.7.0",
     "fullcalendar": "3.3.1",
     "google-maps": "3.2.1",
