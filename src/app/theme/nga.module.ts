@@ -50,7 +50,8 @@ import {
   BaMenuService,
   BaThemePreloader,
   BaThemeSpinner,
-  InstanceService
+  InstanceService,
+  JobService
 } from './services';
 
 import {
@@ -98,7 +99,8 @@ const NGA_SERVICES = [
   BaThemePreloader,
   BaThemeSpinner,
   BaMenuService,
-  InstanceService
+  InstanceService,
+  JobService
 ];
 
 const NGA_VALIDATORS = [

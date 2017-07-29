@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 
 import { BaMenuService } from '../theme';
 import { InstanceService } from '../theme';
+import { JobService } from '../theme';
 import { PAGES_MENU } from './pages.menu';
 
 @Component({
