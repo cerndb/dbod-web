@@ -1,12 +1,21 @@
 
 <h1>Home</h1>
 <div style="padding-top: 30px">
-    <ba-card title="Instances Overview" baCardClass="with-scroll" class="smart-table-container">
+    <ba-card title="Instances" baCardClass="with-scroll" class="smart-table-container">
         <form>
             <div class="form-group">
                 <input #search type="text" class="form-control form-control-rounded" placeholder="Search..." (input)="onSearch(search.value)">
             </div>
         </form>
         <ng2-smart-table *ngIf="source" [settings]="settings" [source]="source"></ng2-smart-table>
+    </ba-card>
+
+    <ba-card title="Jobs" baCardClass="with-scroll" class="smart-table-container">
+        <form>
+            <div class="form-group">
+                <input #search type="text" class="form-control form-control-rounded" placeholder="Search..." (input)="onSearch(search.value)">
+            </div>
+        </form>
+        <ng2-smart-table *ngIf="sourceJobs" [settings]="settingsJobs" [source]="sourceJobs"></ng2-smart-table>
     </ba-card>
 </div>
