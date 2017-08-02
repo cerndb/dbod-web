@@ -1,0 +1,14 @@
+.file-edit-area {
+    width: 100%;
+    height: 700px;
+    resize: none;
+}
+
+.send-button {
+    float: right;
+    height: 38px;
+}
+
+.select-file {
+    width: 50%;
+}

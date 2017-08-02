@@ -15,31 +15,34 @@ export class JobsComponent implements OnInit {
 
   settings = {
      columns: {
+      job_launchers: {
+        title: '',
+      },
       instance_id: {
         title: 'Instance id',
-        filter: false
+        filter: false,
       },
       execution_id: {
         title: 'Execution id',
-        filter: false
+        filter: false,
       },
       command_name: {
         title: 'Command',
-        filter: false
+        filter: false,
       },
       creation_date: {
         title: 'Creation',
-        filter: false
+        filter: false,
       },
       completion_date: {
         title: 'Completion',
-        filter: false
+        filter: false,
       },
       state: {
         title: 'State',
         type: 'custom',
         renderComponent: StateButtonComponent,
-        filter: false
+        filter: false,
       },
     },
     actions: {
@@ -48,7 +51,7 @@ export class JobsComponent implements OnInit {
       delete: false,
     },
     hideSubHeader: true,
-    noDataMessage: 'No instance found.'
+    noDataMessage: 'No instance found.',
 
   };
 
@@ -95,5 +98,5 @@ export class JobsComponent implements OnInit {
     // (meaning all columns should contain search query or at least one)
     // 'AND' by default, so changing to 'OR' by setting false here
   }
-
+  
 }
