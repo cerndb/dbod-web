@@ -1,3 +1,4 @@
+import { JobsModule } from './../home/jobs/jobs.module';
 import { JobsComponent } from './../home/jobs/jobs.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -21,6 +22,7 @@ import { JWBootstrapSwitchModule } from 'jw-bootstrap-switch-ng2';
     InlineEditorModule,
     NgbModule.forRoot(),
     JWBootstrapSwitchModule,
+    JobsModule,
   ],
   declarations: [
     InstanceComponent,

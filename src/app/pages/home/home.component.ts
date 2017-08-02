@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Home {
 
+  jobsTitle: string = 'Jobs Overview';
+  instancesTitle: string = 'Instances Overview';
+
   constructor() { }
 
 }

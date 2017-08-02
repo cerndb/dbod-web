@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { JobService } from '../../../services/job';
 import { StateButtonComponent } from '../../../components/state-button/state-button.component';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -11,6 +11,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 export class JobsComponent implements OnInit {
 
   source: LocalDataSource;
+  @Input() title: string;
 
   settings = {
      columns: {
