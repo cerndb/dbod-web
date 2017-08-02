@@ -1,3 +1,4 @@
+import { MetadataEditorModule } from './../../components/metadata-editor/metadata-editor.module';
 import { FileEditorComponent } from './../../components/file-editor/file-editor.component';
 import { JobsModule } from './../home/jobs/jobs.module';
 import { NgModule } from '@angular/core';
@@ -23,6 +24,7 @@ import { JWBootstrapSwitchModule } from 'jw-bootstrap-switch-ng2';
     NgbModule.forRoot(),
     JWBootstrapSwitchModule,
     JobsModule,
+    MetadataEditorModule,
   ],
   declarations: [
     InstanceComponent,

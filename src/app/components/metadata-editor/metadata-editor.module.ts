@@ -4,20 +4,19 @@ import { CommonModule }  from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppTranslationModule } from '../../app.translation.module';
 import { NgaModule } from '../../theme/nga.module';
-import { EditorComponent } from './editor.component';
-import { routing } from './editor.routing';
+import { MetadataEditorComponent } from './metadata-editor.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    routing,
     AppTranslationModule,
     NgaModule,
-    Ng4JsonEditorModule
+    Ng4JsonEditorModule,
   ],
   declarations: [
-    EditorComponent
-  ]
+    MetadataEditorComponent,
+  ],
+exports: [Ng4JsonEditorModule, MetadataEditorComponent],
 })
-export class EditorModule {}
+export class MetadataEditorModule {}
