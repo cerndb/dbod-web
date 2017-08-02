@@ -1,13 +1,54 @@
-<h1>Information for instance {{ route.snapshot.params['id'] }}</h1>
-<div *ngIf="data">
-    <p>{{ data.datadir }}</p>
-    <p>{{ data.username }}</p>
-    <p>{{ data.version }}</p>
-    <p>{{ data.db_type }}</p>
-    <p>{{ data.basedir }}</p>
-    <p>{{ data.state }}</p>
-    <p>{{ data.class }}</p>
-    <p>{{ data.db_name }}</p>
-    <p>{{ data.port }}</p>
-</div>
-<span class="glyphicon glyphicon-menu-left"></span>
+<ba-card *ngIf="data" title="Information for instance {{ data.db_name }}" baCardClass="with-scroll" class="smart-table-container">
+    <table class="table table-striped">
+    <thead>
+    </thead>
+    <tbody>
+        <tr>
+            <th>Username</th>
+            <td><inline-editor type="text" [(ngModel)]="data.username"></inline-editor></td>
+            <th>Hosts</th>
+            <td>{{ data.hosts }}</td>
+            <th>DB Type</th>
+            <td><inline-editor  type="select" [(ngModel)]="instanceDbtypeEditable" [options]="editableSelectOpts.instanceDbtypeSelect"></inline-editor></td>
+        </tr>
+        <tr>
+            <th>Version</th>
+            <td><inline-editor type="text" [(ngModel)]="data.version"></inline-editor></td>
+            <th>Logdir</th>
+            <td><inline-editor type="text" [(ngModel)]="data.logdir"></inline-editor></td>
+            <th>Active</th>
+            <td>
+                <bSwitch [switch-size]="normal" [(ngModel)]="data.active"></bSwitch>
+            </td>
+        </tr>
+        <tr>
+            <th>Basedir</th>
+            <td><inline-editor type="text" [(ngModel)]="data.basedir"></inline-editor></td>
+            <th>Bindir</th>
+            <td><inline-editor type="text" [(ngModel)]="data.bindir"></inline-editor></td>
+            <th>State</th>
+            <td><inline-editor type="select" [(ngModel)]="instanceStateEditable" [options]="editableSelectOpts.instanceStateSelect"></inline-editor></td>
+        </tr>
+        <tr>
+            <th>Class</th>
+            <td>
+                <inline-editor type="select" [(ngModel)]="instanceClassEditable"  [options]="editableSelectOpts.instanceClassSelect"></inline-editor>
+            </td>
+            <th>Datadir</th>
+            <td><inline-editor type="text" [(ngModel)]="data.datadir"></inline-editor></td>
+            <th>Socket</th>
+            <td><inline-editor type="text" [(ngModel)]="data.socket"></inline-editor></td>
+        </tr>
+        <tr>
+            <th>Port</th>
+            <td><inline-editor type="text" [(ngModel)]="data.port"></inline-editor></td>
+            <th>DB Name</th>
+            <td><inline-editor type="text" [(ngModel)]="data.db_name"></inline-editor></td>
+            <th></th>
+            <td></td>
+        </tr>
+    </tbody>
+    </table>
+</ba-card>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.css">

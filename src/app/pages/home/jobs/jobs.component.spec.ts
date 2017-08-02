@@ -50,9 +50,9 @@ describe('JOBS COMPONENT', () => {
   describe('JOBS: Smart Table Settings', () => {
 
     it('should have INSTANCE ID, EXECUTION ID, COMMAND NAME, CREATION DATE, COMPLETION DATE and STATE fields', () => {
-      
-      const actualKeys = Object.keys(component.settings.columns).sort();
 
+      let includeElement = true;
+      const actualKeys = Object.keys(component.settings.columns);
       const expectedKeys = [
         'instance_id',
         'execution_id',
@@ -60,9 +60,16 @@ describe('JOBS COMPONENT', () => {
         'creation_date',
         'completion_date',
         'state',
-        ].sort();
+      ];
+      
+      expectedKeys.forEach(element => {
+          if (!actualKeys.includes(element)){
+            includeElement = false;
+          }
+      });
 
-        expect(actualKeys).toEqual(expectedKeys); 
+
+      expect(includeElement).toBeTruthy();
     });
 
     it('should NOT show subheader', () => {
