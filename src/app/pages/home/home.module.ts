@@ -7,6 +7,7 @@ import { AppTranslationModule } from '../../app.translation.module';
 import { NgaModule } from '../../theme/nga.module';
 import { Home } from './home.component';
 import { routing } from './home.routing';
+import { AuthenticationService } from '../../services/authentication';
 import { RouterModule } from '@angular/router';
 import { } from './';
 import { InstancesComponent } from './instances/instances.component';
@@ -26,6 +27,7 @@ import { InstancesComponent } from './instances/instances.component';
     Home,
   ],
   providers: [
+    AuthenticationService,
   ],
 })
 export class HomeModule {}

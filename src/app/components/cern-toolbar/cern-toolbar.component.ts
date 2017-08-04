@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Http, Headers, Response } from '@angular/http';
+import { AuthenticationService, User } from '../../services/authentication';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'cern-toolbar',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CernToolbarComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('username') username: ElementRef;
+
+  constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
+    this.authenticationService.loadUser().then(user => { 
+      this.username.nativeElement.innerHTML = `${user.username} (${user.affiliation})`;
+      this.username.nativeElement.title = `Signed in as ${user.fullname} (${user.username})`;
+    });
   }
 
 }
