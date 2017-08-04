@@ -54,7 +54,8 @@ import {
 
 import {
   InstanceService,
-  JobService
+  JobService,
+  AuthenticationService
 } from '../services';
 
 import {
@@ -99,7 +100,8 @@ const NGA_SERVICES = [
   BaThemeSpinner,
   BaMenuService,
   InstanceService,
-  JobService
+  JobService,
+  AuthenticationService
 ];
 
 const NGA_VALIDATORS = [
