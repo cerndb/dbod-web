@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpModule } from '@angular/http';
+import { AuthenticationService } from './../../services/authentication/authentication.service';
 import { CernToolbarComponent } from './cern-toolbar.component';
 
 describe('CERN TOOLBAR COMPONENT', () => {
@@ -8,7 +9,9 @@ describe('CERN TOOLBAR COMPONENT', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CernToolbarComponent ]
+      imports: [HttpModule],
+      declarations: [CernToolbarComponent],
+      providers: [AuthenticationService],
     })
     .compileComponents();
   }));
