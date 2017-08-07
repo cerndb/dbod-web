@@ -3,6 +3,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InstanceService } from '../../services/instance';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+/*
+
+Documentation for inline-editor can be found here !
+https://github.com/qontu/ngx-inline-editor
+
+Documentation for bSwitch can be found here !
+https://github.com/JulioWar/jw-bootstrap-switch-ng2
+
+Documentation for ngb-tabset and other ng-bootstrap components can be found here !
+https://ng-bootstrap.github.io/#/home
+
+*/
+
 @Component({
   selector: 'instance',
   styleUrls: ['./instance.scss'],

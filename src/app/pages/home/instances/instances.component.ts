@@ -4,6 +4,16 @@ import { StateButtonComponent } from '../../../components/state-button/state-but
 import { DbNameComponent } from '../../../components/db-name/db-name.component';
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 
+/*
+
+Documentation for ng2-admin can be found here !
+https://akveo.github.io/ng2-admin/articles/001-getting-started/
+
+Documentation for ng2-smart-table can be found here !
+https://akveo.github.io/ng2-smart-table/
+
+*/
+
 @Component({
   selector: 'instances',
   templateUrl: './instances.component.html',

@@ -1,6 +1,13 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation, Input } from '@angular/core';
 import { JsonEditorComponent, JsonEditorOptions } from '../../components/jsoneditor/jsoneditor.component';
 
+/*
+
+Documentation for metadata-editor can be found here !
+https://github.com/josdejong/jsoneditor/blob/master/docs/api.md
+
+*/
+
 @Component({
   selector: 'metadata-editor',
   templateUrl: 'metadata-editor.html',
