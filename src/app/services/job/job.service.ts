@@ -13,7 +13,7 @@ export class JobService {
     }
 
     getJobs(): Observable<any> {
-        return this.http.get('assets/job-info.json')
+        return this.http.post(`/api/v1/job`, '{"owner": "user02", "groups": ["testgroupB"], "admin": true}')
             .map((res: any) => res.json());
 
     }

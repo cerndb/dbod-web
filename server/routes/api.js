@@ -33,6 +33,19 @@ function validate(req, filter) {
 function myProxy(acl, apiOptions) {
     f = requestProxy(apiOptions) // f(req, res, next)
     return function(req, res, next) {
+        // Get authentication data
+        if (! req.session.isAuthenticated) {
+            res.redirect('/login');
+        }
+        // Get session information
+        userdata = {}
+        userdata.isAdmin = req.session.isAdmin
+        userdata.isAuthenticated = req.session.isAuthenticated
+        userdata.username = req.session.user.username
+        console.log("UserData: " + JSON.stringify(userdata, null, 2))
+        // Set auth headers
+        req.headers['auth'] = JSON.stringify(userdata, null, 2);
+        
         if (validate(req, acl) == true) {
             console.log('ACL: valid');
             f(req, res, next)
