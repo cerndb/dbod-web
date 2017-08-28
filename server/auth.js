@@ -26,6 +26,19 @@ const authorizationUri = oauth2.authorizationCode.authorizeURL({
     state: config.oauth.state,
 });
 
+function getAccessibleResources(session) {
+    var http = require('http');
+    http.request('http://localhost:5443/api/v1/instance', (response) => {
+        var str = ''
+        response.on('data', (d) => {
+            console.log("Data = " + d)
+        });
+        response.on('end', (s) => {
+            console.log("End data = " + s)
+        });
+    }).end();
+}
+
 function genApiatoToken(session, token, res) {
 	
     var https = require('https');
@@ -52,6 +65,9 @@ function genApiatoToken(session, token, res) {
               session.isAdmin = true
             }
 
+            // Get list of accessible resources (instances, clusters...) and save in the session
+            getAccessibleResources(session)
+            
             session.token = api.getToken('username', groups)
             // Fetch User info
             console.log('Accesing User Info');
