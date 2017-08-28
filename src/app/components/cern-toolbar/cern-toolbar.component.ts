@@ -17,7 +17,7 @@ export class CernToolbarComponent implements OnInit {
 
   ngOnInit() {
     this.authenticationService.loadUser().then(user => { 
-      this.username.nativeElement.innerHTML = `${user.username} (${user.affiliation})`;
+      this.username.nativeElement.innerHTML = `${user.username} (${user.federation})`;
       this.username.nativeElement.title = `Signed in as ${user.fullname} (${user.username})`;
     });
   }
