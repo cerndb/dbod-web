@@ -52,6 +52,10 @@ app.get('/auth', (req, res) => {
     res.send(response)
 });
 
+app.get('/debug', (req, res) => {
+    res.send(req.session)
+});
+
 // Callback service parsing the authorization token and asking for the access token
 app.get('/callback', oauth.callback)
 
