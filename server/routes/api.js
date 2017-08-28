@@ -25,6 +25,11 @@ function validate(req, filter) {
     console.log("Params: " + JSON.stringify(req.params, null, 2));
     console.log("Body: " + JSON.stringify(req.body, null, 2));
     // TODO: Implement ACL validation 
+    
+    if (!req.session.isAuthenticated) {
+        return false;
+    }
+    
     return true;
 }
 
