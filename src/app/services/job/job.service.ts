@@ -13,18 +13,18 @@ export class JobService {
     }
 
     getJobs(): Observable<any> {
-        return this.http.post(`/api/v1/job`, '{"owner": "user02", "groups": ["testgroupB"], "admin": true}')
-            .map((res: any) => res.json());
+        return this.http.get(`/api/v1/job`)
+                        .map((res: any) => res.json());
 
     }
 
-    getJobInfo(name: string, job: number): Observable<any> {
+    getJobDetail(name: string, job: number): Observable<any> {
         return this.http.get(`/api/v1/instance/${name}/job/${job}`)
-            .map(res => res.json());
+                        .map(res => res.json());
     }
 
     getJobsForInstance(name: string): Observable<any> {
         return this.http.get(`/api/v1/instance/${name}/job`)
-            .map(res => res.json());
+                        .map(res => res.json());
     }
 }

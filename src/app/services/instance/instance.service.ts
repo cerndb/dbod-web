@@ -8,14 +8,19 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class InstanceService {
     constructor(private http: Http) {
-         var obj;
-         this.getInstances().subscribe(data => obj=data, error => console.log(error));
+         let obj;
+         this.getInstances().subscribe(data => obj = data, error => console.log(error));
     }
 
     getInstances(): Observable<any> {
-         return this.http.get('assets/instance-info.json')
-                         .map((res:any) => res.json());
+        return this.http.get(`/api/v1/instance`)
+                        .map((res: any) => res.json());
 
+    }
+
+    getInstanceDetail(name: string, job: number): Observable<any> {
+        return this.http.get(`/api/v1/instance/${name}/metadata`)
+                        .map(res => res.json());
     }
 
 }
