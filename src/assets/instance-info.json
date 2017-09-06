@@ -50,13 +50,13 @@
   {
     "username": "user2",
     "version": "5.7.15",
-    "db_type": "MYSQL",
+    "db_type": "PG",
     "basedir": "/usr/local/mysql/mysql-5.7.15",
     "state": "RUNNING",
     "class": "TEST",
     "port": "5505",
-    "datadir": "/ORA/dbs03/GEPETO/mysql",
-    "db_name": "gepeto",
+    "datadir": "/ORA/dbs03/PGTEST/data",
+    "db_name": "pgtest",
     "hosts": [
       "host2"
     ],
@@ -96,13 +96,13 @@
   {
     "username": "user3",
     "version": "5.7.15",
-    "db_type": "MYSQL",
+    "db_type": "InfluxDB",
     "basedir": "/usr/local/mysql/mysql-5.7.15",
     "state": "RUNNING",
     "class": "TEST",
     "port": "5505",
-    "datadir": "/ORA/dbs03/GEPETO/mysql",
-    "db_name": "gepeto2",
+    "datadir": "/ORA/dbs03/INFLUXD2/mysql",
+    "db_name": "influxd2",
     "hosts": [
       "host2"
     ],

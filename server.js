@@ -10,6 +10,9 @@ var config = require('./server/config');
 // Get our API routes
 const api = require('./server/routes/api');
 
+// Get our ES routes
+const ES = require('./server/elasticsearch');
+
 // Get auth methods
 const oauth = require('./server/auth');
 
@@ -34,6 +37,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Set our API proxy
 app.use('/api/v1', api.router);
+// Set our ES proxy
+app.use('/ES', ES.router);
 
 // Initial page redirecting to Oauth server
 app.get('/login', (req, res) => {
