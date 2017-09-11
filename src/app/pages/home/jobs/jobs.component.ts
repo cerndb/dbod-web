@@ -15,19 +15,26 @@ export class JobsComponent implements OnInit {
 
   settings = {
      columns: {
-      job_launchers: {
-        title: '',
-      },
-      instance_id: {
-        title: 'Instance id',
-        filter: false,
-      },
-      execution_id: {
-        title: 'Execution id',
+      state: {
+        title: 'State',
+        type: 'custom',
+        renderComponent: StateButtonComponent,
         filter: false,
       },
       command_name: {
         title: 'Command',
+        filter: false,
+      },
+      db_name: {
+        title: 'DB Name',
+        filter: false,
+      },
+      type: {
+        title: 'DB Type',
+        filter: false,
+      },
+      category: {
+        title: 'DB Category',
         filter: false,
       },
       creation_date: {
@@ -36,12 +43,6 @@ export class JobsComponent implements OnInit {
       },
       completion_date: {
         title: 'Completion',
-        filter: false,
-      },
-      state: {
-        title: 'State',
-        type: 'custom',
-        renderComponent: StateButtonComponent,
         filter: false,
       },
     },
@@ -70,15 +71,19 @@ export class JobsComponent implements OnInit {
     this.source.setFilter([
       // fields we want to include in the search
       {
-        field: 'execution_id',
-        search: query,
-      },
-      {
         field: 'command_name',
         search: query,
       },
       {
-        field: 'username',
+        field: 'type',
+        search: query,
+      },
+      {
+        field: 'category',
+        search: query,
+      },
+      {
+        field: 'db_name',
         search: query,
       },
       {
