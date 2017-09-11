@@ -4,14 +4,55 @@
         
         <div class="form-group">
             <select class="form-control select-file">
-                <option>File 1</option>
-                <option>File 2</option>
-                <option>File 3</option>
+                <option>my.cnf</option>
             </select>
         </div>
      
         <div class="form-group">
-            <textarea class="form-control file-edit-area"></textarea>
+            <textarea class="form-control file-edit-area">
+[mysqld]
+max_user_connections = 300
+max_heap_table_size = 32M
+server-id = 1
+general-log-file = /DRIVE/DATABASE/mysql/mysql.log
+max_connections = 1000
+performance_schema
+innodb_flush_method = O_DIRECT
+innodb-read-io-threads = 4
+innodb_flush_log_at_trx_commit = 1
+log-slave-updates
+binlog_format = MIXED
+port = 5500
+socket = /var/lib/mysql/mysql.sock.5500
+tmp_table_size = 32M
+innodb_io_capacity = 200
+sync_binlog = 1
+query_cache_size = 128M
+expire_logs_days = 32
+innodb_write_io_threads = 4
+slow_query_log = 1
+thread_cache_size = 50
+innodb_open_files = 500
+table_definition_cache = 1000
+table_open_cache = 1000
+key_buffer_size = 256M
+innodb_file_per_table
+log_output = FILE
+datadir = /DRIVE/DATABASE/mysql
+log-bin = /DRIVE/DATABASE/mysql/binlog
+innodb_log_file_size = 16M
+innodb_buffer_pool_size = 1G
+max_binlog_size = 1073741824
+slow_query_log_file = /DRIVE/DATABASE/mysql/slow_queries.log
+max_allowed_packet=64M
+innodb_checksum_algorithm=innodb
+binlog_checksum=none
+query_cache_type=1
+ssl-cert=/etc/hostcert.pem
+ssl-ca=/etc/ca.pem
+ssl-key=/etc/hostkey.pem
+ssl-cipher=DHE-RSA-AES256-SHA:AES128-SHA
+            </textarea>
         </div>
     </form>
 </ba-card>
