@@ -1,12 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ViewCell } from 'ng2-smart-table';
 
 @Component({
   selector: 'state-button',
   templateUrl: './state-button.component.html',
   styleUrls: ['./state-button.component.scss']
 })
-export class StateButtonComponent implements ViewCell, OnInit {
+export class StateButtonComponent implements OnInit {
 
   renderValue = '';
 

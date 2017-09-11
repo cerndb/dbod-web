@@ -17,26 +17,30 @@ export class InstancesComponent implements OnInit {
   settings = {
     selectMode: 'multi',
     columns: {
-      db_name: {
+      name: {
         title: 'DB Name',
         filter: false,
         type: 'custom',
         renderComponent: DbNameComponent,
       },
-      hosts: {
-        title: 'Host',
-        filter: false,
-      },
       username: {
         title: 'Username',
+        filter: false,
+      },
+      host: {
+        title: 'Host',
         filter: false,
       },
       class: {
         title: 'Category',
         filter: false,
       },
-      db_type: {
+      type: {
         title: 'DB Type',
+        filter: false,
+      },
+      version: {
+        title: 'Version',
         filter: false,
       },
       state: {
@@ -71,11 +75,11 @@ export class InstancesComponent implements OnInit {
     this.source.setFilter([
       // fields we want to include in the search
       {
-        field: 'db_name',
+        field: 'name',
         search: query,
       },
       {
-        field: 'hosts',
+        field: 'host',
         search: query,
       },
       {
@@ -87,7 +91,7 @@ export class InstancesComponent implements OnInit {
         search: query,
       },
       {
-        field: 'db_type',
+        field: 'type',
         search: query,
       },
       {
