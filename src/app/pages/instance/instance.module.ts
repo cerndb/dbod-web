@@ -14,6 +14,8 @@ import { InlineEditorModule } from '@qontu/ngx-inline-editor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JWBootstrapSwitchModule } from 'jw-bootstrap-switch-ng2';
 import { InstanceJobsComponent } from './instance-jobs/instance-jobs.component';
+import { InstanceRecover } from './instance-recover/instance-recover.component';
+import { InstanceRecoverService } from './instance-recover/instance-recover.service';
 
 @NgModule({
   imports: [
@@ -31,9 +33,11 @@ import { InstanceJobsComponent } from './instance-jobs/instance-jobs.component';
     InstanceComponent,
     FileEditorComponent,
     InstanceJobsComponent,
+    InstanceRecover,
   ],
   providers: [
     InstanceService,
-  ]
+    InstanceRecoverService,
+  ],
 })
 export class InstanceModule {}
