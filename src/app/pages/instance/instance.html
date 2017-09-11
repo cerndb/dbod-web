@@ -4,47 +4,51 @@
     </thead>
     <tbody>
         <tr>
-            <th>Username</th>
+            <th style="width: 140px;">State:</th>
+            <td><span class="badge" [ngClass]="getStateClass()">{{data.state}}</span></td>
+            <th style="width: 140px;">DB Type:</th>
+            <td><inline-editor type="select" [(ngModel)]="instanceDbtypeEditable" [options]="editableSelectOpts.instanceDbtypeSelect"></inline-editor></td>
+            <th style="width: 140px;">Username:</th>
             <td><inline-editor type="text" [(ngModel)]="data.username"></inline-editor></td>
-            <th>Hosts</th>
-            <td>{{ data.hosts }}</td>
-            <th>DB Type</th>
-            <td><inline-editor  type="select" [(ngModel)]="instanceDbtypeEditable" [options]="editableSelectOpts.instanceDbtypeSelect"></inline-editor></td>
         </tr>
         <tr>
-            <th>Version</th>
+            <th>Project:</th>
+            <td><inline-editor type="text" [(ngModel)]="data.project"></inline-editor></td>
+            <th>Category:</th>
+            <td><inline-editor type="select" [(ngModel)]="instanceClassEditable" [options]="editableSelectOpts.instanceClassSelect"></inline-editor></td>
+            <th>Email:</th>
+            <td>{{data.user.email}}</td>
+        </tr>
+        <tr>
+            <th>e-Group:</th>
+            <td><inline-editor type="text" [(ngModel)]="data.egroup"></inline-editor></td>
+            <th>Version:</th>
             <td><inline-editor type="text" [(ngModel)]="data.version"></inline-editor></td>
-            <th>Logdir</th>
-            <td><inline-editor type="text" [(ngModel)]="data.logdir"></inline-editor></td>
-            <th>Active</th>
-            <td>
-                <bSwitch [switch-size]="normal" [(ngModel)]="data.active"></bSwitch>
-            </td>
+            <th>Full name:</th>
+            <td>{{data.user.first_name}} {{data.user.last_name}}</td>
         </tr>
         <tr>
-            <th>Basedir</th>
-            <td><inline-editor type="text" [(ngModel)]="data.basedir"></inline-editor></td>
-            <th>Bindir</th>
-            <td><inline-editor type="text" [(ngModel)]="data.bindir"></inline-editor></td>
-            <th>State</th>
-            <td><inline-editor type="select" [(ngModel)]="instanceStateEditable" [options]="editableSelectOpts.instanceStateSelect"></inline-editor></td>
+            <th>Creation Date:</th>
+            <td>{{data.creation_date}}</td>
+            <th>Host:</th>
+            <td>{{data.hosts}}</td>
+            <th>Org. Unit:</th>
+            <td>{{data.user.department}}-{{data.user.group}}-{{data.user.section}}</td>
         </tr>
         <tr>
-            <th>Class</th>
-            <td>
-                <inline-editor type="select" [(ngModel)]="instanceClassEditable"  [options]="editableSelectOpts.instanceClassSelect"></inline-editor>
-            </td>
-            <th>Datadir</th>
-            <td><inline-editor type="text" [(ngModel)]="data.datadir"></inline-editor></td>
-            <th>Socket</th>
-            <td><inline-editor type="text" [(ngModel)]="data.socket"></inline-editor></td>
-        </tr>
-        <tr>
-            <th>Port</th>
+            <th>Expiry Date:</th>
+            <td></td>
+            <th>Port:</th>
             <td><inline-editor type="text" [(ngModel)]="data.port"></inline-editor></td>
-            <th>DB Name</th>
-            <td><inline-editor type="text" [(ngModel)]="data.db_name"></inline-editor></td>
-            <th></th>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Description:</th>
+            <td><inline-editor type="text" [(ngModel)]="data.description"></inline-editor></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
         </tr>
     </tbody>

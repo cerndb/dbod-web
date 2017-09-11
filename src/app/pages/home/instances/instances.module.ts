@@ -1,6 +1,5 @@
 import { DbNameComponent } from './../../../components/db-name/db-name.component';
 import { InstancesComponent } from './instances.component';
-import { StateButtonComponent } from './../../../components/state-button/state-button.component';
 import { NgaModule } from './../../../theme/nga.module';
 import { JobService } from './../../../services/job/job.service';
 import { NgModule }      from '@angular/core';

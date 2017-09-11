@@ -56,6 +56,23 @@ export class InstanceComponent implements OnInit {
     ],          
   };
 
+  getStateClass() {
+    switch (this.data['state']) {
+      case 'RUNNING':
+        return 'badge-success';
+      case 'STOPPED':
+        return 'badge-danger';
+      case 'MAINTENANCE':
+        return 'badge-primary';
+      case 'BUSY':
+        return 'badge-warning';
+      case 'AWAITING':
+        return 'badge-info';
+      default:
+        return 'badge-info';
+    }
+  }
+
   constructor( private route: ActivatedRoute, private router: Router, private instanceService: InstanceService ) {}
 
   ngOnInit() {
@@ -68,7 +85,7 @@ export class InstanceComponent implements OnInit {
       console.log(res['response']);
       this.data = res['response'][0];
       this.instanceClassEditable = this.editableSelectOpts.instanceClass[this.data['class']];
-      this.instanceDbtypeEditable = this.editableSelectOpts.instanceDbtype[this.data['db_type']];
+      this.instanceDbtypeEditable = this.editableSelectOpts.instanceDbtype[this.data['type']];
       this.instanceStateEditable = this.editableSelectOpts.instanceState[this.data['state']];
     });
   }
