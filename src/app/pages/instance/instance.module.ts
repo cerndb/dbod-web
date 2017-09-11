@@ -13,6 +13,7 @@ import { routing } from './instance.routing';
 import { InlineEditorModule } from '@qontu/ngx-inline-editor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JWBootstrapSwitchModule } from 'jw-bootstrap-switch-ng2';
+import { InstanceJobsComponent } from './instance-jobs/instance-jobs.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { JWBootstrapSwitchModule } from 'jw-bootstrap-switch-ng2';
   declarations: [
     InstanceComponent,
     FileEditorComponent,
+    InstanceJobsComponent,
   ],
   providers: [
     InstanceService,
