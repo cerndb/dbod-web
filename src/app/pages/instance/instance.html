@@ -1,4 +1,4 @@
-<ba-card *ngIf="data" title="Information for instance {{ data.db_name }}" baCardClass="with-scroll" class="smart-table-container">
+<nb-card *ngIf="data" title="Information for instance {{ data.db_name }}" baCardClass="with-scroll" class="smart-table-container">
     <table class="table table-striped">
     <thead>
     </thead>
@@ -49,9 +49,9 @@
         </tr>
     </tbody>
     </table>
-</ba-card>
+</nb-card>
 
-<ba-card>
+<nb-card>
     <ngb-tabset>
         <ngb-tab title="Jobs" class="tabber">
             <ng-template ngbTabContent>
@@ -79,6 +79,6 @@
             </ng-template>
         </ngb-tab>
     </ngb-tabset>
-</ba-card>
+</nb-card>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.css">
