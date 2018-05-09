@@ -6,6 +6,7 @@ import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'instances',
+  providers: [InstanceService],
   templateUrl: './instances.component.html',
   styleUrls: ['./instances.component.scss']
 })
