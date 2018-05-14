@@ -1,5 +1,5 @@
-import { MetadataEditorModule } from './../../components/metadata-editor/metadata-editor.module';
-import { FileEditorComponent } from './../../components/file-editor/file-editor.component';
+import { MetadataEditorModule } from './../components/metadata-editor/metadata-editor.module';
+import { FileEditorComponent } from './../components/file-editor/file-editor.component';
 import { JobsModule } from './../home/jobs/jobs.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

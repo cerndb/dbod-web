@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { InstanceService } from '../../../services/instance';
-import { StateButtonComponent } from '../../../components/state-button/state-button.component';
-import { DbNameComponent } from '../../../components/db-name/db-name.component';
+import { StateButtonComponent } from '../../components/state-button/state-button.component';
+import { DbNameComponent } from '../../components/db-name/db-name.component';
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 
 @Component({
@@ -58,7 +58,7 @@ export class InstancesComponent implements OnInit {
   };
 
   constructor(private _instanceService: InstanceService) {
-    
+
   }
 
   ngOnInit() {

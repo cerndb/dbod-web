@@ -1,9 +1,9 @@
 import { ThemeModule } from './../../../@theme/theme.module';
 import { JobsComponent } from './jobs.component';
 import { JobService } from './../../../services/job/job.service';
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule }       from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 

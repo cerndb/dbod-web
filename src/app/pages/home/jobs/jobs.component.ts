@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { JobService } from '../../../services/job';
-import { StateButtonComponent } from '../../../components/state-button/state-button.component';
+import { StateButtonComponent } from '../../components/state-button/state-button.component';
 import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
@@ -56,7 +56,7 @@ export class JobsComponent implements OnInit {
   };
 
   constructor(private _jobService: JobService) {
-    
+
   }
 
   ngOnInit() {
@@ -98,5 +98,5 @@ export class JobsComponent implements OnInit {
     // (meaning all columns should contain search query or at least one)
     // 'AND' by default, so changing to 'OR' by setting false here
   }
-  
+
 }
