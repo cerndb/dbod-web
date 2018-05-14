@@ -19,10 +19,10 @@ const routes: Routes = [{
   }, {
     path: 'maps',
     loadChildren: './maps/maps.module#MapsModule',
-  }, {
+  }, /*{
     path: 'charts',
     loadChildren: './charts/charts.module#ChartsModule',
-  }, {
+  },*/ {
     path: 'editors',
     loadChildren: './editors/editors.module#EditorsModule',
   }, {
@@ -34,12 +34,12 @@ const routes: Routes = [{
   }, {
     path: 'home',
     loadChildren: './home/home.module#HomeModule',
-  }, { 
-    path: 'instance/:id', 
+  }, {
+    path: 'instance/:id',
     loadChildren: './instance/instance.module#InstanceModule'
   }, {
     path: 'help',
-    loadChildren: './help/help.module#HelpModule' 
+    loadChildren: './help/help.module#HelpModule'
   }, {
     path: '',
     redirectTo: 'dashboard',
