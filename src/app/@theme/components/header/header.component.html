@@ -1,25 +1,17 @@
 <div class="header-container"
      [class.left]="position === 'normal'"
      [class.right]="position === 'inverse'">
-  <div class="logo-containter">
-    <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
-    <div class="logo" (click)="goToHome()">ngx-<span>admin</span></div>
+   <div class="logo-container">
+     <div class="logo-cern"></div>
+     <div class="logo-dbod"></div>
+   </div>
+  <div class="container-fluid">
+    <h1>
+      <a href="http://home.cern" title="CERN">CERN <span>Accelerating science</span></a>
+    </h1>
+    <ul class="cern-signedin">
+      <li class="cern-accountlinks"><span>Signed in as: <a #username class="account" href="http://cern.ch/account" title=""></a></span><a class="cern-signout" href="/logout" title="Sign out of your account">Sign out</a></li>
+      <li><a class="cern-directory" href="http://cern.ch/directory" title="Search CERN resources and browse the directory">Directory</a></li>
+    </ul>
   </div>
-  <ngx-theme-switcher></ngx-theme-switcher>
 </div>
-
-<nb-actions
-  size="medium"
-  class="header-container"
-  [class.right]="position === 'normal'"
-  [class.left]="position === 'inverse'">
-  <nb-action icon="nb-grid-b" class="toggle-layout" (click)="toggleSettings()"></nb-action>
-  <nb-action *nbIsGranted="['view', 'user']" >
-    <nb-user [nbContextMenu]="userMenu" [name]="user?.name" [picture]="user?.picture"></nb-user>
-  </nb-action>
-  <nb-action class="control-item" disabled icon="nb-notifications"></nb-action>
-  <nb-action class="control-item" icon="nb-email"></nb-action>
-  <nb-action class="control-item">
-    <nb-search type="rotate-layout" (click)="startSearch()"></nb-search>
-  </nb-action>
-</nb-actions>

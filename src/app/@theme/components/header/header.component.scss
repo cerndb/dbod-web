@@ -18,9 +18,9 @@
     flex-direction: row-reverse;
   }
 
-  .logo-containter {
+  .logo-container {
     display: flex;
-    align-items: center;
+    align-items: right;
   }
 
   .control-item {
@@ -28,6 +28,7 @@
   }
 
   .header-container {
+
     display: flex;
     align-items: center;
     width: 100%;
@@ -53,17 +54,6 @@
       span {
         font-weight: nb-theme(font-weight-normal);
       }
-    }
-  }
-
-  .toggle-layout /deep/ a {
-    display: block;
-    text-decoration: none;
-    line-height: 1;
-
-    i {
-      color: nb-theme(color-fg-highlight);
-      font-size: 2.25rem;
     }
   }
 
@@ -111,5 +101,185 @@
       display: none;
     }
   }
+
+  // CERN Customizations
+
+  .logo-cern {
+    display: block;
+    background-image: url("../../../../assets/images/cern-logo.jpg");
+    background-repeat: no-repeat;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    width: 60px;
+    height: 60px;
+  }
+  
+  .logo-dbod {
+    display: block;
+    background-image: url("../../../../assets/images/dbod-logo.png");
+    background-repeat: no-repeat;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 30px;
+    padding-bottom: 15px;
+    width: 66px;
+    height: 60px;
+  }
+
+  header-container {
+    background-color: #222;
+    position: fixed;
+    width: 100%;
+    height: 40px;
+    z-index: 1006;
+    font-family: 'PT Sans', 'Trebuchet MS', Tahoma, sans-serif;
+    color: #999;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0 5%;
+    overflow: hidden;
+    -moz-box-shadow: inset 0 -1px 0 rgba(100, 100, 100, 0.2);
+    -webkit-box-shadow: inset 0 -1px 0 rgba(100, 100, 100, 0.2);
+    box-shadow: inset 0 -1px 0 rgba(100, 100, 100, 0.2);
+  }
+  
+  a {
+    color: #ccc;
+    text-decoration: none;
+    padding: 6px 8px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  a:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  .active a {
+    background-color: #f6f6f6;
+    color: #000;
+    padding-bottom: 20px;
+  }
+  .active .cern-account {
+    background-color: #fff;
+  }
+  h1 {
+    float: left;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    position: relative;
+    width: 200px;
+    left: -8px;
+    padding: 6px 0;
+    letter-spacing: 0.08em;
+    margin: 0;
+  }
+  h1 a { 
+    color:  #3861aa;
+  }
+  h1 span {
+    color: #999;
+    letter-spacing: normal;
+    padding: 0;
+  }
+  h1 a:hover span {
+    color: #fff;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    position: relative;
+    right: -8px;
+    margin: 0;
+  }
+  li {
+    float: left;
+    display: block;
+    margin-left: 1em;
+    padding: 6px 0;
+  }
+  .cern-multifactor {
+    padding-left: 32px;
+    background-image: url("../../../../assets/images/toolbarsprite.png");
+    background-repeat: no-repeat;
+    background-position: 0 -120px;
+  }
+  .cern-signout {
+    margin-left: 1em;
+  }
+  /* Animations */
+  a, a span {
+    -moz-transition: background-color 0.1s ease-out;
+    -webkit-transition: background-color 0.1s ease-out;
+    -ms-transition: background-color 0.1s ease-out;
+    -o-transition: background-color 0.1s ease-out;
+    transition: background-color 0.1s ease-out;
+  }
+  @media only screen and (max-width:750px) {
+    h1 span {
+      display: none;
+    }
+  
+    ul {
+      border-right: 1px solid #000;
+      -moz-box-shadow: 1px 0 0 #444;
+      -webkit-box-shadow: 1px 0 0 #444;
+      box-shadow: 1px 0 0 #444;
+    }
+  
+    li {
+      padding: 0;
+      margin: 0;
+      border-left: 1px solid #000;
+    }
+  
+    li a {
+      background-image: url("../../../../assets/images/toolbarsprite.png");
+      background-repeat: no-repeat;
+      height: 40px;
+      width: 40px;
+      -moz-border-radius: 0;
+      -webkit-border-radius: 0;
+      border-radius: 0;
+      text-indent: -5000px;
+      overflow: hidden;
+      border-left: 1px solid #444;
+    }
+  
+    .cern-account {
+      background-position: 9px 0;
+    }
+  
+    .cern-directory {
+      background-position: 9px -40px;
+    }
+  
+    .cern-signout {
+      background-position: 9px -80px;
+      margin-left: 0;
+    }
+  
+    .active .cern-account {
+      background-position: -31px 0;
+    }
+  
+    .active .cern-directory {
+      background-position: -31px -40px;
+    }
+  
+    .cern-accountlinks span {
+      display: none;
+    }
+  
+    .cern-multifactor {
+      background-image: none;
+      padding: 0;
+    }
+  }
+
 }
 
