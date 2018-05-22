@@ -14,20 +14,34 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {StateButtonComponent} from "./pages/components/state-button/state-button.component";
+import {DbNameComponent} from "./pages/components/db-name/db-name.component";
+import {HomeModule} from "./pages/home/home.module";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    StateButtonComponent,
+    DbNameComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    HomeModule,
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [
+    AppComponent,
+  ],
+  entryComponents: [
+    StateButtonComponent,
+    DbNameComponent,
+  ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
   ],

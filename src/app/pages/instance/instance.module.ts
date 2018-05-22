@@ -8,7 +8,6 @@ import { InstanceComponent } from './instance.component';
 import { InstanceService } from '../../services/instance';
 //import { AppTranslationModule } from '../../app.translation.module';
 import { RouterModule } from '@angular/router';
-import { routing } from './instance.routing';
 //import { InlineEditorModule } from '@qontu/ngx-inline-editor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { JWBootstrapSwitchModule } from 'jw-bootstrap-switch-ng2';
@@ -18,7 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     FormsModule,
     ThemeModule,
-    routing,
+    //routing,
     //InlineEditorModule,
     NgbModule.forRoot(),
     //JWBootstrapSwitchModule,
