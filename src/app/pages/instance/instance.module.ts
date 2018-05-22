@@ -1,6 +1,5 @@
 import { MetadataEditorModule } from './../components/metadata-editor/metadata-editor.module';
 import { FileEditorComponent } from './../components/file-editor/file-editor.component';
-import { JobsModule } from './../home/jobs/jobs.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +22,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     //InlineEditorModule,
     NgbModule.forRoot(),
     //JWBootstrapSwitchModule,
-    JobsModule,
     MetadataEditorModule,
   ],
   declarations: [
