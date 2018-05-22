@@ -9,8 +9,8 @@ import { Home } from './home.component';
 import { routing } from './home.routing';
 import { AuthenticationService } from '../../services/authentication';
 import { RouterModule } from '@angular/router';
-import { } from './';
-import { InstancesComponent } from './instances/instances.component';
+import {StateButtonComponent} from "../components/state-button/state-button.component";
+import {DbNameComponent} from "../components/db-name/db-name.component";
 
 @NgModule({
   imports: [
@@ -25,6 +25,8 @@ import { InstancesComponent } from './instances/instances.component';
   ],
   declarations: [
     Home,
+    StateButtonComponent,
+    DbNameComponent,
   ],
   providers: [
     AuthenticationService,
