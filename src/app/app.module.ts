@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {StateButtonComponent} from "./pages/components/state-button/state-button.component";
 import {DbNameComponent} from "./pages/components/db-name/db-name.component";
 import {HomeModule} from "./pages/home/home.module";
+import {HelpModule} from "./pages/help/help.module";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {HomeModule} from "./pages/home/home.module";
     HttpClientModule,
     AppRoutingModule,
     HomeModule,
+    HelpModule,
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),

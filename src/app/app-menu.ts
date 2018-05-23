@@ -4,7 +4,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Home',
     icon: 'nb-home',
-    link: '/pages/home',
+    link: '/home',
     home: true,
   },
   {
@@ -15,7 +15,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Help',
     icon: 'ion-help',
-    link: '/pages/help',
+    link: '/help',
   },
   {
     title: 'Create Service Request',

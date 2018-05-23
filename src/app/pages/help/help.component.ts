@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'help',
-  templateUrl: 'help.html',
+  templateUrl: 'help.component.html',
 })
 export class HelpComponent {
   constructor() {}
