@@ -1,5 +1,5 @@
-import { MetadataEditorModule } from './../components/metadata-editor/metadata-editor.module';
-import { FileEditorComponent } from './../components/file-editor/file-editor.component';
+//import { MetadataEditorModule } from './../components/metadata-editor/metadata-editor.module';
+//import { FileEditorComponent } from './../components/file-editor/file-editor.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -19,13 +19,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ThemeModule,
     //routing,
     //InlineEditorModule,
-    NgbModule.forRoot(),
+    //NgbModule.forRoot(),
     //JWBootstrapSwitchModule,
-    MetadataEditorModule,
+    //MetadataEditorModule,
   ],
   declarations: [
     InstanceComponent,
-    FileEditorComponent,
+    //FileEditorComponent,
   ],
   providers: [
     InstanceService,

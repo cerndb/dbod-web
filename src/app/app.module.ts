@@ -18,6 +18,7 @@ import {StateButtonComponent} from "./pages/components/state-button/state-button
 import {DbNameComponent} from "./pages/components/db-name/db-name.component";
 import {HomeModule} from "./pages/home/home.module";
 import {HelpModule} from "./pages/help/help.module";
+import {InstanceModule} from "./pages/instance/instance.module";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {HelpModule} from "./pages/help/help.module";
     HttpClientModule,
     AppRoutingModule,
     HomeModule,
+    InstanceModule,
     HelpModule,
 
     NgbModule.forRoot(),
