@@ -1,5 +1,5 @@
 //import { MetadataEditorModule } from './../components/metadata-editor/metadata-editor.module';
-//import { FileEditorComponent } from './../components/file-editor/file-editor.component';
+import { FileEditorComponent } from './../components/file-editor/file-editor.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +18,6 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
     CommonModule,
     FormsModule,
     ThemeModule,
-    //routing,
     InlineEditorModule,
     //NgbModule.forRoot(),
     //JWBootstrapSwitchModule,
@@ -27,7 +26,7 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
   ],
   declarations: [
     InstanceComponent,
-    //FileEditorComponent,
+    FileEditorComponent,
   ],
   providers: [
     InstanceService,
