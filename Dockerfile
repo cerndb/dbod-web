@@ -8,9 +8,9 @@ MAINTAINER Jose Andres Cordero Benitez <j.cordero@cern.ch>
 
 WORKDIR /opt/dbod/
 # Bundle app source
-COPY . /opt/dbod/
+COPY ./dist.tgz /opt/dbod/
 
-RUN npm i && npm cache clean --force && npm run build
+RUN tar xvzf dist.tgz
 
 RUN chown node:node /opt/dbod/sessions && chmod 0777 /opt/dbod/sessions
 USER node
