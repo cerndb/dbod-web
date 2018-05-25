@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 
-import { NbMenuService, NbSidebarService } from '@nebular/theme';
-import { AuthenticationService } from '../../../services';
+import { AuthenticationService, User } from '../../../services/authentication';
 
 @Component({
   selector: 'ngx-header',
@@ -20,8 +19,6 @@ export class HeaderComponent implements OnInit {
   user: {};
 
   constructor(
-    private sidebarService: NbSidebarService,
-    private menuService: NbMenuService,
     private authenticationService: AuthenticationService,
     ) {
   }
@@ -32,19 +29,4 @@ export class HeaderComponent implements OnInit {
       this.username.nativeElement.title = `Signed in as ${user.fullname} (${user.username})`;
     });
   }
-
-  toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, 'menu-sidebar');
-    return false;
-  }
-
-  toggleSettings(): boolean {
-    this.sidebarService.toggle(false, 'settings-sidebar');
-    return false;
-  }
-
-  goToHome() {
-    this.menuService.navigateHome();
-  }
-
 }
