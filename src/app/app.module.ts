@@ -19,12 +19,14 @@ import {DbNameComponent} from "./pages/components/db-name/db-name.component";
 import {HomeModule} from "./pages/home/home.module";
 import {HelpModule} from "./pages/help/help.module";
 import {InstanceModule} from "./pages/instance/instance.module";
+import { PlatformOverviewComponent } from './pages/platform-overview/platform-overview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StateButtonComponent,
     DbNameComponent,
+    PlatformOverviewComponent,
   ],
   imports: [
     BrowserModule,

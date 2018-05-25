@@ -8,9 +8,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'Platform Monitoring',
+    title: 'Platform Overview',
     icon: 'nb-bar-chart',
-    link: '/pages/platform-monitoring',
+    link: '/platform-overview',
   },
   {
     title: 'Help',

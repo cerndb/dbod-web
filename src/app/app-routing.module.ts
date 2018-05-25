@@ -11,6 +11,7 @@ import {
 import {HomeComponent} from "./pages/home/home.component";
 import {HelpComponent} from "./pages/help/help.component";
 import {InstanceComponent} from "./pages/instance/instance.component";
+import { PlatformOverviewComponent } from './pages/platform-overview/platform-overview.component';
 
 const routes: Routes = [
   // { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'help',
     component: HelpComponent,
+  },
+  {
+    path: 'platform-overview',
+    component: PlatformOverviewComponent,
   },
   /*{
     path: 'auth',
