@@ -27,4 +27,28 @@
       font-size: 1.5rem;
     }
   }
+
+  .logo-cern {
+    display: block;
+    background-image: url("../../../../assets/images/cern-logo.jpg");
+    background-repeat: no-repeat;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    width: 60px;
+    height: 60px;
+  }
+  
+  .logo-dbod {
+    display: block;
+    background-image: url("../../../../assets/images/dbod-logo.png");
+    background-repeat: no-repeat;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 30px;
+    padding-bottom: 15px;
+    width: 66px;
+    height: 60px;
+  }
 }

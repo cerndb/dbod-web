@@ -4,11 +4,11 @@
 @import '~@nebular/theme/styles/themes';
 
 // which themes you what to enable (empty to enable all)
-$nb-enabled-themes: (default, cosmic);
+$nb-enabled-themes: (default);
 
 $nb-themes: nb-register-theme((
  // app wise variables for each theme
-  sidebar-header-gap: 2rem,
+  sidebar-header-gap: 4rem,
   sidebar-header-height: initial,
   layout-content-width: 1400px,
 
@@ -19,13 +19,6 @@ $nb-themes: nb-register-theme((
   color-fg-text: #3861aa,
   color-fg-heading: #3861aa,
   color-fg-hightlight: #3861aa,
+  header-padding:0,
+  header-height:0,
 ), default, default);
-
-$nb-themes: nb-register-theme((
-  // app wise variables for each theme
-  sidebar-header-gap: 2rem,
-  sidebar-header-height: initial,
-  layout-content-width: 1400px,
-  font-main: Roboto,
-  font-secondary: Exo,
-), cosmic, cosmic);

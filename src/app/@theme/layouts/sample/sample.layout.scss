@@ -7,6 +7,10 @@
     flex: 0.15 !important;
   }
 
+  .nav.fixed {
+    padding: 0;
+  }
+
   nb-sidebar.settings-sidebar {
     $sidebar-width: 7.5rem;
 
