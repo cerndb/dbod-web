@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
-import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import { AuthenticationService } from '../../../services';
 
 @Component({
@@ -12,22 +11,26 @@ import { AuthenticationService } from '../../../services';
 
 export class HeaderComponent implements OnInit {
 
+  @ViewChild('username') username:ElementRef;
 
   @Input() position = 'normal';
 
-  user: any;
-
   userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
 
-  constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService,
-              private analyticsService: AnalyticsService,
-              private authenticationService: AuthenticationService,
-            ) {
+  user: {};
+
+  constructor(
+    private sidebarService: NbSidebarService,
+    private menuService: NbMenuService,
+    private authenticationService: AuthenticationService,
+    ) {
   }
 
   ngOnInit() {
-    this.user = this.authenticationService.loadUser();  
+    this.user = this.authenticationService.loadUser().then(user => {
+      this.username.nativeElement.innerHTML = `${user.username} (${user.affiliation})`;
+      this.username.nativeElement.title = `Signed in as ${user.fullname} (${user.username})`;
+    });
   }
 
   toggleSidebar(): boolean {
@@ -44,7 +47,4 @@ export class HeaderComponent implements OnInit {
     this.menuService.navigateHome();
   }
 
-  startSearch() {
-    this.analyticsService.trackEvent('startSearch');
-  }
 }
