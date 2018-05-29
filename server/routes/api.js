@@ -10,7 +10,7 @@ var requestProxy = require('express-request-proxy');
 var usernamePassword = config.apiato.user + ":" + config.apiato.password;
 
 const apiOptions = {
-    url: config.apiato.url,
+    url: config.apiato.url + "/*",
     headers: {
         Authorization: "Basic " + new Buffer(usernamePassword).toString('base64')
     }
@@ -31,11 +31,10 @@ function validate(req, filter) {
 // TODO: Proper error handling
 
 function myProxy(acl, apiOptions) {
-    f = requestProxy(apiOptions) // f(req, res, next)
     return function(req, res, next) {
         if (validate(req, acl) == true) {
             console.log('ACL: valid');
-            f(req, res, next)
+            requestProxy(apiOptions)(req, res, next)
         } else {
             console.log('ACL: invalid');
             res.statusCode = 403; // Forbidden access
@@ -43,11 +42,7 @@ function myProxy(acl, apiOptions) {
         }
     }
 }
-
-router.get('/*', myProxy(ACL, apiOptions));
-router.post('/*', myProxy(ACL, apiOptions));
-router.put('/*', myProxy(ACL, apiOptions));
-router.delete('/*', myProxy(ACL, apiOptions));
+router.all('/*', myProxy(ACL, apiOptions));
 
 function getToken(username, groups) {
     const jwt = require('jsonwebtoken')
