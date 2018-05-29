@@ -62,6 +62,7 @@
     "font-awesome": "4.7.0",
     "intl": "1.2.5",
     "ionicons": "2.0.1",
+    "jquery": "^3.3.1",
     "jsoneditor": "^5.16.0",
     "jsonwebtoken": "^8.2.1",
     "leaflet": "1.2.0",
