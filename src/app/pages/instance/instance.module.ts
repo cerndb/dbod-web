@@ -8,10 +8,10 @@ import { InlineEditorModule } from '@qontu/ngx-inline-editor';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { InstanceComponent } from './instance.component';
-import { FileEditorComponent } from './../components/file-editor/file-editor.component';
+import { FileEditorComponent } from '../components/file-editor/file-editor.component';
 import { MetadataEditorComponent } from './metadata-editor/metadata-editor.component';
 import { InstanceRecoverComponent } from './instance-recover/instance-recover.component';
-import { CalendarModule } from 'ap-angular2-fullcalendar';
+import { FullCalendarModule } from 'ng-fullcalendar';
 
 @NgModule({
   imports: [
@@ -21,7 +21,7 @@ import { CalendarModule } from 'ap-angular2-fullcalendar';
     InlineEditorModule,
     NgJsonEditorModule,
     UiSwitchModule,
-    CalendarModule,
+    FullCalendarModule,
   ],
   declarations: [
     InstanceComponent,
