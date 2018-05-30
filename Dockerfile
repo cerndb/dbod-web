@@ -8,6 +8,7 @@ MAINTAINER Ignacio Coterillo <ignacio.coterillo@cern.ch>
 WORKDIR /opt/dbod/
 # Bundle app source
 COPY server.js ./dist.tgz /opt/dbod/
+COPY package-server.json /opt/dbod/package.json
 COPY server/ /opt/dbod/server
 RUN tar xvzf dist.tgz
 RUN chown node:node /opt/dbod/sessions && chmod 0777 /opt/dbod/sessions
