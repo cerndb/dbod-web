@@ -10,6 +10,8 @@ import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { InstanceComponent } from './instance.component';
 import { FileEditorComponent } from './../components/file-editor/file-editor.component';
 import { MetadataEditorComponent } from './metadata-editor/metadata-editor.component';
+import { InstanceRecoverComponent } from './instance-recover/instance-recover.component';
+import { CalendarModule } from 'ap-angular2-fullcalendar';
 
 @NgModule({
   imports: [
@@ -19,11 +21,13 @@ import { MetadataEditorComponent } from './metadata-editor/metadata-editor.compo
     InlineEditorModule,
     NgJsonEditorModule,
     UiSwitchModule,
+    CalendarModule,
   ],
   declarations: [
     InstanceComponent,
     FileEditorComponent,
     MetadataEditorComponent,
+    InstanceRecoverComponent
   ],
   providers: [
     InstanceService,
