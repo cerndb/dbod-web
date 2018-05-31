@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './instance-backups.component.html',
   styleUrls: ['./instance-backups.component.scss']
 })
-export class InstanceBackups implements OnInit {
+export class InstanceBackupsComponent implements OnInit {
 
   value: Date;
 

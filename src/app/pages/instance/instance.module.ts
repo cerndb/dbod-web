@@ -14,7 +14,7 @@ import { MetadataEditorComponent } from './metadata-editor/metadata-editor.compo
 import { InstanceRecoverComponent } from './instance-recover/instance-recover.component';
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { InstanceJobsComponent } from './instance-jobs/instance-jobs.component';
-import { InstanceBackups } from './instance-backups/instance-backups.component';
+import { InstanceBackupsComponent } from './instance-backups/instance-backups.component';
 
 @NgModule({
   imports: [
@@ -33,7 +33,7 @@ import { InstanceBackups } from './instance-backups/instance-backups.component';
     MetadataEditorComponent,
     InstanceRecoverComponent,
     InstanceJobsComponent,
-    InstanceBackups,
+    InstanceBackupsComponent,
   ],
   providers: [
     InstanceService,
