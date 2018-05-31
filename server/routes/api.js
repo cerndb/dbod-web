@@ -24,8 +24,10 @@ function validate(req, filter) {
     console.log("Headers: " + JSON.stringify(req.headers, null, 2));
     console.log("Params: " + JSON.stringify(req.params, null, 2));
     console.log("Body: " + JSON.stringify(req.body, null, 2));
+    console.log("Session: " + JSON.stringify(req.session, null, 2)); 
     // TODO: Implement ACL validation 
-    return true;
+    if (req.session.isAuthenticated) return true;
+    else return false;
 }
 
 // TODO: Proper error handling
@@ -34,7 +36,14 @@ function myProxy(acl, apiOptions) {
     return function(req, res, next) {
         if (validate(req, acl) == true) {
             console.log('ACL: valid');
-            requestProxy(apiOptions)(req, res, next)
+            apiopts = apiOptions;
+            var auth = {};
+            auth.owner = req.session.user.username;
+            auth.admin = req.session.isAdmin || false ;
+            auth.groups = req.session.groups || {} ;
+            apiopts['headers']['auth'] = JSON.stringify(auth);
+            console.log("apiopts: " + JSON.stringify(apiopts));
+            requestProxy(apiopts)(req, res, next)
         } else {
             console.log('ACL: invalid');
             res.statusCode = 403; // Forbidden access
@@ -42,6 +51,7 @@ function myProxy(acl, apiOptions) {
         }
     }
 }
+
 router.all('/*', myProxy(ACL, apiOptions));
 
 function getToken(username, groups) {

@@ -72,11 +72,11 @@ export class InstancesComponent implements OnInit {
     this.source.setFilter([
       // fields we want to include in the search
       {
-        field: 'db_name',
+        field: 'instance',
         search: query,
       },
       {
-        field: 'hosts',
+        field: 'host',
         search: query,
       },
       {
@@ -84,7 +84,7 @@ export class InstancesComponent implements OnInit {
         search: query,
       },
       {
-        field: 'class',
+        field: 'category',
         search: query,
       },
       {

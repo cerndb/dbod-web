@@ -13,9 +13,9 @@ export class InstanceService {
     }
 
     getInstances(): Observable<any> {
-         return this.http.get('assets/instance-info.json')
+         //return this.http.get('assets/instance-info.json')
+         return this.http.get('./api/v1/instance')
                          .map((res:any) => res.json());
-
     }
 
 }
