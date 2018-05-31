@@ -18,13 +18,13 @@ export class InstancesComponent implements OnInit {
   settings = {
     selectMode: 'multi',
     columns: {
-      db_name: {
+      name: {
         title: 'DB Name',
         filter: false,
         type: 'custom',
         renderComponent: DbNameComponent,
       },
-      hosts: {
+      host: {
         title: 'Host',
         filter: false,
       },
@@ -32,11 +32,11 @@ export class InstancesComponent implements OnInit {
         title: 'Username',
         filter: false,
       },
-      class: {
+      category: {
         title: 'Category',
         filter: false,
       },
-      db_type: {
+      type: {
         title: 'DB Type',
         filter: false,
       },
@@ -84,11 +84,11 @@ export class InstancesComponent implements OnInit {
         search: query,
       },
       {
-        field: 'category',
+        field: 'class',
         search: query,
       },
       {
-        field: 'db_type',
+        field: 'type',
         search: query,
       },
       {
