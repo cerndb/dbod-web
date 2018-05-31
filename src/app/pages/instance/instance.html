@@ -11,7 +11,7 @@
         <th>Username</th>
         <td><inline-editor type="text" [(ngModel)]="data.username"></inline-editor></td>
         <th>Hosts</th>
-        <td>{{ data.hosts }}</td>
+        <td>{{ data.host }}</td>
         <th>DB Type</th>
         <td><inline-editor  type="select" [(ngModel)]="instanceDbtypeEditable" [options]="editableSelectOpts.instanceDbtypeSelect"></inline-editor></td>
       </tr>
@@ -47,7 +47,7 @@
         <th>Port</th>
         <td><inline-editor type="text" [(ngModel)]="data.port"></inline-editor></td>
         <th>DB Name</th>
-        <td><inline-editor type="text" [(ngModel)]="data.db_name"></inline-editor></td>
+        <td><inline-editor type="text" [(ngModel)]="data.name"></inline-editor></td>
         <th></th>
         <td></td>
       </tr>
