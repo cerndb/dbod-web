@@ -15,6 +15,7 @@ import { InstanceRecoverComponent } from './instance-recover/instance-recover.co
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { InstanceJobsComponent } from './instance-jobs/instance-jobs.component';
 import { InstanceBackupsComponent } from './instance-backups/instance-backups.component';
+import { InstanceRecoverService } from '../../services/instance/instance-recover.service';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { InstanceBackupsComponent } from './instance-backups/instance-backups.co
   ],
   providers: [
     InstanceService,
+    InstanceRecoverService,
   ]
 })
 export class InstanceModule {}
