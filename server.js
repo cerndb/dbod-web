@@ -49,6 +49,8 @@ app.get('/auth', (req, res) => {
     response.isAdmin = req.session.isAdmin
     response.isAuthenticated = req.session.isAuthenticated
     response.username = req.session.user.username
+    response.fullname = req.session.user.name
+    response.federation = req.session.user.federation
     res.send(response)
 });
 
@@ -64,7 +66,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-    console.log('Destroying session SID: ' + req.session.id); 
+    console.log('Destroying session SID: ' + req.session.id);
     req.session.destroy((error) => {
         if (error) {
         console.log(error)}

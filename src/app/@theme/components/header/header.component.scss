@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  
+
   .left {
     display: flex;
     width: 100%;
@@ -35,7 +35,7 @@
     -webkit-box-shadow: inset 0 -1px 0 rgba(100, 100, 100, 0.2);
     box-shadow: inset 0 -1px 0 rgba(100, 100, 100, 0.2);
   }
-  
+
   a {
     color: #ccc;
     text-decoration: none;
@@ -69,8 +69,8 @@
     letter-spacing: 0.08em;
     margin: 0;
   }
-  h1 a { 
-    color:  #3861aa;
+  h1 a {
+    color: #fff;
   }
   h1 span {
     color: #999;
@@ -114,20 +114,20 @@
     h1 span {
       display: none;
     }
-  
+
     ul {
       border-right: 1px solid #000;
       -moz-box-shadow: 1px 0 0 #444;
       -webkit-box-shadow: 1px 0 0 #444;
       box-shadow: 1px 0 0 #444;
     }
-  
+
     li {
       padding: 0;
       margin: 0;
       border-left: 1px solid #000;
     }
-  
+
     li a {
       background-image: url("../../../../assets/images/toolbarsprite.png");
       background-repeat: no-repeat;
@@ -140,32 +140,32 @@
       overflow: hidden;
       border-left: 1px solid #444;
     }
-  
+
     .cern-account {
       background-position: 9px 0;
     }
-  
+
     .cern-directory {
       background-position: 9px -40px;
     }
-  
+
     .cern-signout {
       background-position: 9px -80px;
       margin-left: 0;
     }
-  
+
     .active .cern-account {
       background-position: -31px 0;
     }
-  
+
     .active .cern-directory {
       background-position: -31px -40px;
     }
-  
+
     .cern-accountlinks span {
       display: none;
     }
-  
+
     .cern-multifactor {
       background-image: none;
       padding: 0;

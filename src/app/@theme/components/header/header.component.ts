@@ -10,7 +10,7 @@ import { AuthenticationService, User } from '../../../services/authentication';
 
 export class HeaderComponent implements OnInit {
 
-  @ViewChild('username') username:ElementRef;
+  @ViewChild('username') username: ElementRef;
 
   @Input() position = 'normal';
 
@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.authenticationService.loadUser().then(user => {
-      this.username.nativeElement.innerHTML = `${user.username} (${user.affiliation})`;
+      this.username.nativeElement.innerHTML = `${user.username} (${user.federation})`;
       this.username.nativeElement.title = `Signed in as ${user.fullname} (${user.username})`;
     });
   }
