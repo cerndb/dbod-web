@@ -20,10 +20,12 @@ export class InstanceComponent implements OnInit {
       instanceClass: {
         'REF': 0,
         'TEST': 1,
+        'PROD': 2,
       },
       instanceClassSelect: [
         { value: 0, text: 'REF' },
         { value: 1, text: 'TEST' },
+        { value: 2, text: 'PROD' },
       ],
       instanceDbtype: {
         'MYSQL': 0,

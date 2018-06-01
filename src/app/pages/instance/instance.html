@@ -1,6 +1,6 @@
 <nb-card *ngIf="data">
   <nb-card-header>
-    <h2>Information for instance {{ data.db_name }}</h2>
+    <h2>{{ data.name }} Information</h2>
   </nb-card-header>
   <nb-card-body>
     <table class="table table-striped">
@@ -8,48 +8,38 @@
       </thead>
       <tbody>
       <tr>
-        <th>Username</th>
+        <th>Name</th>
+        <td><inline-editor type="text" [(ngModel)]="data.name"></inline-editor></td>
+        <th>Owner</th>
         <td><inline-editor type="text" [(ngModel)]="data.username"></inline-editor></td>
-        <th>Hosts</th>
-        <td>{{ data.host }}</td>
-        <th>DB Type</th>
-        <td><inline-editor  type="select" [(ngModel)]="instanceDbtypeEditable" [options]="editableSelectOpts.instanceDbtypeSelect"></inline-editor></td>
-      </tr>
-      <tr>
-        <th>Version</th>
-        <td><inline-editor type="text" [(ngModel)]="data.version"></inline-editor></td>
-        <th>Logdir</th>
-        <td><inline-editor type="text" [(ngModel)]="data.logdir"></inline-editor></td>
         <th>Active</th>
         <td>
           <ui-switch  [(ngModel)]="data.active"></ui-switch>
         </td>
-      </tr>
-      <tr>
-        <th>Basedir</th>
-        <td><inline-editor type="text" [(ngModel)]="data.basedir"></inline-editor></td>
-        <th>Bindir</th>
-        <td><inline-editor type="text" [(ngModel)]="data.bindir"></inline-editor></td>
         <th>State</th>
         <td><inline-editor type="select" [(ngModel)]="instanceStateEditable" [options]="editableSelectOpts.instanceStateSelect"></inline-editor></td>
       </tr>
       <tr>
+        <th>Admin e-group</th>
+        <td>{{ data.e_group }}</td>
+        <th>Type</th>
+        <td><inline-editor  type="select" [(ngModel)]="instanceDbtypeEditable" [options]="editableSelectOpts.instanceDbtypeSelect"></inline-editor></td>
         <th>Class</th>
         <td>
           <inline-editor type="select" [(ngModel)]="instanceClassEditable"  [options]="editableSelectOpts.instanceClassSelect"></inline-editor>
         </td>
-        <th>Datadir</th>
-        <td><inline-editor type="text" [(ngModel)]="data.datadir"></inline-editor></td>
-        <th>Socket</th>
-        <td><inline-editor type="text" [(ngModel)]="data.socket"></inline-editor></td>
+        <th>Version</th>
+        <td><inline-editor type="text" [(ngModel)]="data.version"></inline-editor></td>
       </tr>
       <tr>
+        <th>IP Alias</th>
+        <td>dbod-{{ data.name }}.cern.ch</td>
         <th>Port</th>
         <td><inline-editor type="text" [(ngModel)]="data.port"></inline-editor></td>
-        <th>DB Name</th>
-        <td><inline-editor type="text" [(ngModel)]="data.name"></inline-editor></td>
-        <th></th>
+        <th>Project</th>
+        <td>{{ data.project }}</td>
         <td></td>
+        <th></th>
       </tr>
       </tbody>
     </table>
