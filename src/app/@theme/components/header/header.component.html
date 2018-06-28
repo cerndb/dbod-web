@@ -1,0 +1,20 @@
+<div class="header-container">
+  <div class="logo-containter">
+    <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
+    <div class="logo" (click)="goToHome()">CERN <span>Accelerating science</span></div>
+  </div>
+</div>
+
+<div class="header-container">
+  <nb-actions size="medium">
+    <nb-action>
+      <a><span>Signed in as: {{ user?.name }}</span></a>
+    </nb-action>
+    <nb-action>
+      <a href="/logout">Signout</a>
+    </nb-action>
+    <nb-action>
+      <a href="https://cern.ch/directory">Directory</a>
+    </nb-action>
+  </nb-actions>
+</div>
