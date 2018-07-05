@@ -29,7 +29,6 @@ const authorizationUri = oauth2.authorizationCode.authorizeURL({
 function genApiatoToken(session, token, res) {
 	
     var https = require('https');
-	console.log('access_token: ', token.token.access_token)
 
 	var options = {
 	  host: config.oauth.resourceHost,
@@ -45,7 +44,6 @@ function genApiatoToken(session, token, res) {
 			str += chunk;
 		  });
 		  response.on('end', function () {
-			console.log(str)
             var groups = JSON.parse(str).groups
             if (groups.indexOf(config.adminGroup) >= 0) {
               // If the user is member of the admin e-group
@@ -54,7 +52,6 @@ function genApiatoToken(session, token, res) {
 
             session.token = api.getToken('username', groups)
             // Fetch User info
-            console.log('Accesing User Info');
             options.path = config.oauth.resourcePathUser
 
             https.request(options, (response) => {
@@ -63,7 +60,6 @@ function genApiatoToken(session, token, res) {
                   str += chunk;
                 });
                 response.on('end', function () {
-                    console.log('User Info: ' + str);
                     session.user = JSON.parse(str)
                     session.isAuthenticated = true
 	    		    res.redirect('/')
@@ -80,8 +76,6 @@ function callback(req, res) {
     code: code,
     redirect_uri: config.oauth.redirect_uri,
   };
-
-  console.log("Code: ", code);
 
   oauth2.authorizationCode.getToken(options, (error, result) => {
     if (error) {

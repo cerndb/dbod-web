@@ -1,0 +1,22 @@
+<div class="flex-container">
+	<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" class="flex-left"></ngb-pagination>
+	<div ngbDropdown placement="top-right" class="flex-right">
+	  <button class="btn btn-outline-success" id="dropdownBasic2" style="color: #5cb85c" ngbDropdownToggle>Items per page</button>
+	  <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+	    <button class="dropdown-item" on-click="changeItemsPerPage(10)">10</button>
+	    <button class="dropdown-item" on-click="changeItemsPerPage(20)">20</button>
+	    <button class="dropdown-item" on-click="changeItemsPerPage(50)">50</button>
+	    <button class="dropdown-item" on-click="changeItemsPerPage(100)">100</button>
+	  </div>
+	</div>
+</div>
+
+<ngb-accordion #acc="ngbAccordion" closeOthers=true>
+  <div *ngFor="let item of this.source">
+	<ngb-panel title="{{ item.message }}">
+	  <ng-template ngbPanelContent>
+	  	<prettyjson [obj]="item"></prettyjson>
+	  </ng-template>
+	</ngb-panel>
+  </div>
+</ngb-accordion>
