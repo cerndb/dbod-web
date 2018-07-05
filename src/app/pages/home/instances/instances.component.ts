@@ -8,7 +8,10 @@ import { LocalDataSource } from 'ng2-smart-table';
   selector: 'instances',
   providers: [InstanceService],
   templateUrl: './instances.component.html',
-  styleUrls: ['./instances.component.scss']
+  styleUrls: ['./instances.component.scss'],
+  entryComponents: [
+    DbNameComponent
+  ]
 })
 export class InstancesComponent implements OnInit {
 
@@ -68,37 +71,40 @@ export class InstancesComponent implements OnInit {
   }
 
    onSearch(query: string = '') {
-
-    this.source.setFilter([
-      // fields we want to include in the search
-      {
-        field: 'instance',
-        search: query,
-      },
-      {
-        field: 'host',
-        search: query,
-      },
-      {
-        field: 'username',
-        search: query,
-      },
-      {
-        field: 'class',
-        search: query,
-      },
-      {
-        field: 'type',
-        search: query,
-      },
-      {
-        field: 'state',
-        search: query,
-      },
-    ], false);
-    // second parameter specifying whether to perform 'AND' or 'OR' search
-    // (meaning all columns should contain search query or at least one)
-    // 'AND' by default, so changing to 'OR' by setting false here
+    if(query!=''){
+      this.source.setFilter([
+        // fields we want to include in the search
+        {
+          field: 'name',
+          search: query,
+        },
+        {
+          field: 'host',
+          search: query,
+        },
+        {
+          field: 'username',
+          search: query,
+        },
+        {
+          field: 'category',
+          search: query,
+        },
+        {
+          field: 'type',
+          search: query,
+        },
+        {
+          field: 'state',
+          search: query,
+        },
+      ], false);
+      // second parameter specifying whether to perform 'AND' or 'OR' search
+      // (meaning all columns should contain search query or at least one)
+      // 'AND' by default, so changing to 'OR' by setting false here
+    }
+    else {
+      this.source.setFilter([]);
+    }
   }
-
 }

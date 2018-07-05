@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'home',
+  selector: 'kebab-case',
   styleUrls: ['./home.scss'],
-  templateUrl: './home.html'
+  templateUrl: './home.html',
 })
 export class HomeComponent {
 

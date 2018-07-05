@@ -36,7 +36,6 @@ import { PlatformOverviewComponent } from './pages/platform-overview/platform-ov
     HomeModule,
     InstanceModule,
     HelpModule,
-
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),

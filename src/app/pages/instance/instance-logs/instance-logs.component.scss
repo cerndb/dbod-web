@@ -1,0 +1,14 @@
+$default-text: #e9ebec;
+
+.flex-container{
+  display: flex;
+  justify-content:: space-evenly;
+  margin-bottom:2px;
+}
+
+pre span {white-space: normal;}
+   .string { color: green; }
+   .number { color: darkorange; }
+   .boolean { color: blue; }
+   .null { color: magenta; }
+   .key { color: red; }

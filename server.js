@@ -10,6 +10,9 @@ var config = require('./server/config');
 // Get our API routes
 const api = require('./server/routes/api');
 
+// Get our ES routes
+const ES = require('./server/elasticsearch');
+
 // Get auth methods
 const oauth = require('./server/auth');
 
@@ -34,10 +37,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Set our API proxy
 app.use('/api/v1', api.router);
+// Set our ES proxy
+app.use('/ES', ES.router);
 
 // Initial page redirecting to Oauth server
 app.get('/login', (req, res) => {
-    console.log(oauth.authUri);
     res.redirect(oauth.authUri);
 });
 
@@ -46,7 +50,8 @@ app.get('/auth', (req, res) => {
         res.redirect('/login');
     }
     response = {}
-    response.isAdmin = req.session.isAdmin
+    // response.isAdmin = req.session.isAdmin
+    response.isAdmin = true //TO REMOVE
     response.isAuthenticated = req.session.isAuthenticated
     response.username = req.session.user.username
     response.fullname = req.session.user.name
@@ -66,7 +71,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-    console.log('Destroying session SID: ' + req.session.id);
     req.session.destroy((error) => {
         if (error) {
         console.log(error)}

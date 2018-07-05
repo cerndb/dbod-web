@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'help',
+  selector: 'kebab-case',
   templateUrl: 'help.component.html',
 })
 export class HelpComponent {
