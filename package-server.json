@@ -1,0 +1,15 @@
+{
+  "name": "dbod-web",
+  "version": "0.1.0",
+  "license": "GPLv3",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cerndb/dbod-web.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cerndb/dbod-web/issues"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}
