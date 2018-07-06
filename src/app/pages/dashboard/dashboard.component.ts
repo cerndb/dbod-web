@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'cern-dashboard',
-    templateUrl: './dashboard.component.html',
-    styleUrls: [ './dashboard.component.scss' ],
+  selector: 'dashboard',
+  styleUrls: ['./dashboard.scss'],
+  templateUrl: './dashboard.html'
 })
-export class DashboardComponent implements OnInit {
-    constructor() {}
+export class DashboardComponent {
 
-    ngOnInit() {}
+  jobsTitle: string = 'Jobs Overview';
+  instancesTitle: string = 'Instances Overview';
+
+  constructor() { }
+
 }

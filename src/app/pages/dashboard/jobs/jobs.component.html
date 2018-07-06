@@ -1,0 +1,13 @@
+<nb-card>
+    <nb-card-header>
+        <h2>Jobs</h2>
+    </nb-card-header>
+    <nb-card-body>
+        <form>
+            <div class="form-group">
+                <input #search type="text" class="form-control form-control-rounded" placeholder="Search..." (input)="onSearch(search.value)">
+            </div>
+        </form>
+        <ng2-smart-table *ngIf="source" [settings]="settings" [source]="source"></ng2-smart-table>
+    </nb-card-body>
+</nb-card>
