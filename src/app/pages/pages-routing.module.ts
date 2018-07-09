@@ -5,27 +5,17 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OverviewComponent } from './overview/overview.component';
 
+import { InstanceComponent } from './instance/instance.component';
+
 const routes: Routes = [
   {
-    path: '',
-    component: PagesComponent,
+    path: '',  component: PagesComponent,
     children: [
-      {
-        path: 'dashboard',
-        component: DashboardComponent,
-      },
-      {
-        path: 'overview',
-        component: OverviewComponent,
-      },
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-      },
-      {
-        path: '**',
-      },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'overview', component: OverviewComponent },
+      { path: 'instance/:id', component: InstanceComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '**', redirectTo: 'pages' },
     ],
   },
 ];
