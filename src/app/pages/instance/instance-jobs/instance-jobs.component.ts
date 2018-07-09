@@ -5,7 +5,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { StateButtonComponent } from '../../components/state-button/state-button.component';
 
 @Component({
-  selector: 'instance-jobs',
+  selector: 'cern-instance-jobs',
   templateUrl: './instance-jobs.component.html',
   styleUrls: ['./instance-jobs.component.scss']
 })
@@ -45,9 +45,11 @@ export class InstanceJobsComponent implements OnInit {
 
   };
 
-  constructor(private route: ActivatedRoute, private _jobService: JobService) {
+  constructor(
+    private route: ActivatedRoute,
+    private _jobService: JobService) {
 
-  }
+    }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
