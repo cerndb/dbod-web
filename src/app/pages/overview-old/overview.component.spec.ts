@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlatformOverviewComponent } from './platform-overview.component';
+import { OverviewComponent } from './overview.component';
 
-describe('PlatformMonitoringComponent', () => {
-  let component: PlatformOverviewComponent;
-  let fixture: ComponentFixture<PlatformOverviewComponent>;
+describe('OverviewComponent', () => {
+  let component: OverviewComponent;
+  let fixture: ComponentFixture<OverviewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlatformOverviewComponent ]
+      declarations: [ OverviewComponent ],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlatformOverviewComponent);
+    fixture = TestBed.createComponent(OverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

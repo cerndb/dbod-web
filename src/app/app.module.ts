@@ -19,14 +19,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InstanceModule } from './pages/instance/instance.module';
 import { DbNameComponent } from './pages/components/db-name/db-name.component';
 import { StateButtonComponent } from './pages/components/state-button/state-button.component';
-import { PlatformOverviewComponent } from './pages/platform-overview/platform-overview.component';
+import { OverviewModule } from './pages/overview/overview.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     StateButtonComponent,
     DbNameComponent,
-    PlatformOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +33,7 @@ import { PlatformOverviewComponent } from './pages/platform-overview/platform-ov
     HttpClientModule,
     AppRoutingModule,
     InstanceModule,
+    OverviewModule,
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
