@@ -28,8 +28,8 @@ export class InstancesComponent implements OnInit {
         title: 'Host',
         filter: false,
       },
-      username: {
-        title: 'Username',
+      owner: {
+        title: 'Owner',
         filter: false,
       },
       category: {
@@ -80,7 +80,7 @@ export class InstancesComponent implements OnInit {
         search: query,
       },
       {
-        field: 'username',
+        field: 'owner',
         search: query,
       },
       {
