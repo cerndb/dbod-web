@@ -15,6 +15,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
+import { InstanceModule } from './pages/instance/instance.module';
 import { DbNameComponent } from './pages/components/db-name/db-name.component';
 import { StateButtonComponent } from './pages/components/state-button/state-button.component';
 import { PlatformOverviewComponent } from './pages/platform-overview/platform-overview.component';
@@ -31,6 +33,7 @@ import { PlatformOverviewComponent } from './pages/platform-overview/platform-ov
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    InstanceModule,
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),

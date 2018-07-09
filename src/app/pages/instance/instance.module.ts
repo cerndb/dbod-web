@@ -39,6 +39,6 @@ import { InstanceRecoverService } from '../../services/instance/instance-recover
   providers: [
     InstanceService,
     InstanceRecoverService,
-  ]
+  ],
 })
 export class InstanceModule {}
