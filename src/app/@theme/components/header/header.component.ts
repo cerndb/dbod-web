@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
-import { UserService } from '../../../@core/data/users.service';
+import { AuthenticationService } from '../../../services/authentication/authentication.service';
 
 @Component({
     selector: 'cern-ngx-header',
@@ -8,18 +8,19 @@ import { UserService } from '../../../@core/data/users.service';
     templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
-    @Input() position = 'normal';
 
     user: any;
 
     constructor(
         private sidebarService: NbSidebarService,
         private menuService: NbMenuService,
-        private userService: UserService,
+        private authService: AuthenticationService,
     ) {}
 
     ngOnInit() {
-        this.userService.getUsers().subscribe((users: any) => (this.user = users.nick));
+        this.authService
+        .loadUser()
+        .subscribe(data => (this.user = data), err => console.log(err));
     }
 
     toggleSidebar(): boolean {
