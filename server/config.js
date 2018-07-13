@@ -30,4 +30,18 @@ oauth.resourcePathUser = '/api/User'
 
 config.oauth = oauth
 
+var elasticsearch ={}
+
+elasticsearch.user= process.env.ES_USER || 'itdb'
+elasticsearch.password= process.env.ES_PASSWORD || 'secret'
+elasticsearch.host= process.env.ES_HOST || 'https://es-itdb.cern.ch:9203'
+var indexNames ={}
+indexNames.mylog='itdb_dbod-mylog-*'
+indexNames.myslowlog='itdb_dbod-myslowlog-*'
+indexNames.inflog='itdb_dbod-inflog-*'
+indexNames.pglog='itdb_dbod-pglog-*'
+elasticsearch.indexNames = indexNames
+
+config.elasticsearch = elasticsearch
+
 module.exports = config

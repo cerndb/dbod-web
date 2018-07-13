@@ -21,6 +21,11 @@ import { DbNameComponent } from './pages/components/db-name/db-name.component';
 import { StateButtonComponent } from './pages/components/state-button/state-button.component';
 import { OverviewModule } from './pages/overview/overview.module';
 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { environment } from '../environments/environment';
+
+const config: SocketIoConfig = { url: environment.socketio_url, options: {} };
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +43,7 @@ import { OverviewModule } from './pages/overview/overview.module';
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    SocketIoModule.forRoot(config),
   ],
   bootstrap: [AppComponent],
   entryComponents: [
