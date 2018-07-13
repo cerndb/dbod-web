@@ -83,3 +83,105 @@ app.use(express.static(path.join(__dirname, 'dist')));
 const server = http.createServer(app);
 
 server.listen(config.port, () => console.log(`API running on localhost:${config.port}`));
+
+////////////////////////////////////////////////////////////
+// SOCKET.IO FOR REALTIME COMMUNICATION THROUGH WEBSOCKET //
+////////////////////////////////////////////////////////////
+
+var io = require('socket.io');
+
+/////////////////////////
+// Elasticsearch, logs //
+/////////////////////////
+
+var elasticsearch = require('elasticsearch');
+
+var connection_string = config.elasticsearch.host;
+connection_string = connection_string.replace("//", "//" + config.elasticsearch.user + ":" + config.elasticsearch.password + "@");
+
+var client = new elasticsearch.Client({
+    host: connection_string,
+    // log: 'trace' // FOR MONITORING
+});
+
+// WebSocket for real-time communication ("logs" usage)
+io = io(server);
+app.use(function(req, res, next) {
+  req.io = io;
+  next();
+});
+
+io.on('connection', function(socket) {
+  // console.log('socket.io connection made');
+  var dataLogs;
+  var jsonHitsPrec = '';
+  var monitoringLogs=false;
+  var monitoringLogsTimeout=0;
+
+  var monitorLogs = function() {
+    //console.log(monitoringLogs);
+    if(monitoringLogs) {
+      client.search({
+        index: config.elasticsearch.indexNames[dataLogs.logType],
+        body: {
+          query: {
+            term: { instance: dataLogs.name }
+          },
+          "from": dataLogs.from,
+          "size": dataLogs.size,
+          "sort": [
+            {
+              "@timestamp": {
+                "order": "desc"
+              }
+            }
+          ]
+        }
+      }).then(function (resp) {
+        var hits = resp.hits.hits.map(res => res._source);
+        jsonHits = JSON.stringify(hits);
+        if(jsonHits!=jsonHitsPrec) {
+            jsonHitsPrec = jsonHits;
+
+            client.count({
+              index: config.elasticsearch.indexNames[dataLogs.logType],
+              body: {
+                query: {
+                  term: { instance: dataLogs.name }
+                }
+              }
+            }).then(function (resp) {
+              //console.log(JSON.stringify(jsonHits));
+              socket.emit('countlogs', JSON.stringify(resp));
+              socket.emit('logs', jsonHits);
+            }, function (err) {
+              console.trace(err.message);
+            });
+        }
+      }, function (err) {
+        console.trace(err.message);
+      });
+      monitoringLogsTimeout = setTimeout(monitorLogs, 500); // Choose the refresh time
+    }
+    else {
+      clearTimeout(monitoringLogsTimeout);
+    }
+  }
+
+  socket.on('logs_getter', (data) => {
+    dataLogs = data;
+    jsonHitsPrec = '';
+    if(!monitoringLogs) {
+      monitoringLogs=true;
+      monitorLogs();
+    }
+  });
+
+  socket.on('close_logs_getter', (data) => {
+    monitoringLogs=false;
+  });
+
+  socket.on('disconnect', (reason) => {
+    monitoringLogs=false;
+  });
+});

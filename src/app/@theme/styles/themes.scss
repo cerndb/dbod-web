@@ -7,7 +7,11 @@
 $nb-enabled-themes: (corporate);
 
 $nb-themes: nb-register-theme((
-  // app wise variables for each theme
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Add here the custom properties, overwriting those of "@nebular/theme/styles/themes/_default.scss" //
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   sidebar-header-gap: 2rem,
   sidebar-header-height: initial,
   layout-content-width: 1400px,
@@ -18,4 +22,6 @@ $nb-themes: nb-register-theme((
   switcher-background: #2b2d34,
   switcher-background-percentage: 14%,
   drops-icon-line-gadient: -webkit-linear-gradient(#e9e8eb, #a7a2be),
+
+  color-primary: #5dcfe3,
 ), corporate, corporate);

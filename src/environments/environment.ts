@@ -10,4 +10,5 @@
 
 export const environment = {
   production: false,
+  socketio_url: 'http://pcitdb88:3000', //TO ADAPT
 };

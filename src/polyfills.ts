@@ -74,3 +74,5 @@ import 'core-js/es7/object';
 if (typeof SVGElement.prototype.contains === 'undefined') {
   SVGElement.prototype.contains = HTMLDivElement.prototype.contains;
 }
+
+(window as any).global = window; // Quickfix : https://github.com/socketio/socket.io-client/issues/1166

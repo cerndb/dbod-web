@@ -17,6 +17,9 @@ import { FullCalendarModule } from 'ng-fullcalendar';
 import { InstanceJobsComponent } from './instance-jobs/instance-jobs.component';
 import { InstanceBackupsComponent } from './instance-backups/instance-backups.component';
 import { InstanceRecoverService } from '../../services/instance/instance-recover.service';
+import { InstanceLogsComponent } from './instance-logs/instance-logs.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PrettyJsonModule } from 'angular2-prettyjson';
 
 @NgModule({
   imports: [
@@ -28,6 +31,8 @@ import { InstanceRecoverService } from '../../services/instance/instance-recover
     UiSwitchModule,
     FullCalendarModule,
     Ng2SmartTableModule,
+    NgbModule.forRoot(),
+    PrettyJsonModule,
   ],
   declarations: [
     InstanceComponent,
@@ -36,6 +41,7 @@ import { InstanceRecoverService } from '../../services/instance/instance-recover
     InstanceRecoverComponent,
     InstanceJobsComponent,
     InstanceBackupsComponent,
+    InstanceLogsComponent,
   ],
   providers: [
     InstanceService,

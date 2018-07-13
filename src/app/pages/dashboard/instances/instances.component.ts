@@ -67,35 +67,43 @@ export class InstancesComponent implements OnInit {
     });
   }
 
-   onSearch(query: string = '') {
+  onSearch(query: string = '') {
 
-    this.source.setFilter([
-      // fields we want to include in the search
-      {
-        field: 'instance',
-        search: query,
-      },
-      {
-        field: 'host',
-        search: query,
-      },
-      {
-        field: 'owner',
-        search: query,
-      },
-      {
-        field: 'class',
-        search: query,
-      },
-      {
-        field: 'type',
-        search: query,
-      },
-      {
-        field: 'state',
-        search: query,
-      },
-    ], false);
+    if(query!='') {
+      this.source.setFilter([
+        // fields we want to include in the search
+        {
+          field: 'name',
+          search: query,
+        },
+        {
+          field: 'host',
+          search: query,
+        },
+        {
+          field: 'username',
+          search: query,
+        },
+        {
+          field: 'category',
+          search: query,
+        },
+        {
+          field: 'type',
+          search: query,
+        },
+        {
+          field: 'state',
+          search: query,
+        },
+      ], false);
+      // second parameter specifying whether to perform 'AND' or 'OR' search
+      // (meaning all columns should contain search query or at least one)
+      // 'AND' by default, so changing to 'OR' by setting false here
+    }
+    else {
+      this.source.setFilter([]);
+    }
     // second parameter specifying whether to perform 'AND' or 'OR' search
     // (meaning all columns should contain search query or at least one)
     // 'AND' by default, so changing to 'OR' by setting false here
