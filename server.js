@@ -130,11 +130,8 @@ io.on('connection', function(socket) {
           "from": dataLogs.from,
           "size": dataLogs.size,
           "sort": [
-            {
-              "@timestamp": {
-                "order": "desc"
-              }
-            }
+            { "@timestamp": { "order": "desc" } },
+            { "offset": { "order": "desc" } }
           ]
         }
       }).then(function (resp) {
