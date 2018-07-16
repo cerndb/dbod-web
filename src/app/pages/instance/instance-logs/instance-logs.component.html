@@ -15,7 +15,7 @@
   <div *ngFor="let item of this.source">
 	<ngb-panel>
 	  <ng-template ngbPanelTitle>
-        {{ item.message }}
+        {{ item.timestamp_processed_in_logstash }} <span class="message">{{ item.message }}</span>
       </ng-template>
 	  <ng-template ngbPanelContent>
 	  	<prettyjson [obj]="item"></prettyjson> 
