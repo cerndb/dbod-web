@@ -5,4 +5,5 @@
  */
 export const environment = {
   production: true,
+  socketio_url: 'http://localhost:3000',
 };

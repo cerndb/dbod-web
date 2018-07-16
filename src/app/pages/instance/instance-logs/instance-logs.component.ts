@@ -12,6 +12,8 @@ import { Socket } from 'ngx-socket-io';
 
 export class InstanceLogsComponent implements OnInit {
 
+  @Input() data: any;
+
   source = new Array();
   numberOfItems: number;
   pageLength: number;
@@ -43,17 +45,9 @@ export class InstanceLogsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.dbName = 'ipmiexc'; //TO REMOVE
-      // this.dbName = params['id'];
-      this.logType = 'mylog';
-    });
-
     this.opened = false;
     this.page = 1;
     this.pageLength = 10;
-
-    this.socket.emit('logs_getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
 
     this.socket.on('countlogs', (data) => {
       this.numberOfItems = JSON.parse(data).count;
@@ -65,6 +59,18 @@ export class InstanceLogsComponent implements OnInit {
         // console.log('receive');
       }
     });
+  }
+
+  ngOnChanges() {
+    if(this.data.hasOwnProperty('type')) {
+      this.dbName = this.data.name;
+      switch(this.data.type) {
+        case 'MYSQL': this.logType = 'mylog'; break;
+        case 'InfluxDB': this.logType = 'inflog'; break;
+        case 'PG': this.logType = 'pglog'; break;
+      }
+      this.socket.emit('logs_getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
+    }
   }
 
   ngOnDestroy() {
