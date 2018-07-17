@@ -24,8 +24,8 @@ function validate(req, filter) {
     console.log("Headers: " + JSON.stringify(req.headers, null, 2));
     console.log("Params: " + JSON.stringify(req.params, null, 2));
     console.log("Body: " + JSON.stringify(req.body, null, 2));
-    console.log("Session: " + JSON.stringify(req.session, null, 2)); 
-    // TODO: Implement ACL validation 
+    console.log("Session: " + JSON.stringify(req.session, null, 2));
+    // TODO: Implement ACL validation
     if (req.session.isAuthenticated) return true;
     else return false;
 }
@@ -40,7 +40,7 @@ function myProxy(acl, apiOptions) {
             var auth = {};
             auth.owner = req.session.user.username;
             auth.admin = req.session.isAdmin || false ;
-            auth.groups = req.session.groups || {} ;
+            auth.groups = req.session.groups || {}
             apiopts['headers']['auth'] = JSON.stringify(auth);
             console.log("apiopts: " + JSON.stringify(apiopts));
             requestProxy(apiopts)(req, res, next)
@@ -55,10 +55,56 @@ function myProxy(acl, apiOptions) {
 router.all('/*', myProxy(ACL, apiOptions));
 
 function getToken(username, groups) {
-    const jwt = require('jsonwebtoken')
-    var jtoken = jwt.sign("test", config.secretKey)
-    return jtoken
+
+  var options = config.apiato.urlResources;
+  var https = require('https');
+
+  https.request(options, (response) => {
+		  //var str = ''
+      var str = [
+        {  "owner" : "owner1",
+            "admin" : true,
+            "groups" : [
+              "group1",
+              "group2"
+            ]
+        },
+
+        {
+          "owner" : "owner2",
+          "admin" : false,
+          "groups" : [
+            "group3",
+            "group4",
+            "group5"
+          ]
+        },
+
+        {
+          "owner" : "owner3",
+          "admin" : true,
+          "groups" : [
+            "group6",
+            "group7",
+            "group8"
+          ]
+        }
+      ]
+  response.on('data', function (chunk) {
+    str += chunk;
+    console.log("STRING---------------------------" + str);
+  });
+
+  response.on('end', function () {
+      //var groups = JSON.parse(str)
+      console.log("String/////////////////////////////////////////" + str);
+      //console.log("GROUPS////////////////////////" + groups);
+  })
+}).end();
+
 }
+
+
 
 module.exports = {
     router: router,
