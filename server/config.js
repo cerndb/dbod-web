@@ -7,6 +7,7 @@ config.userGroup = process.env.USER_EGROUP || 'user-group'
 
 var apiato = {};
 
+apiato.urlResources = process.env.APIATO_URL || "https://localhost:5443/api/v1/auth/resources"
 apiato.url = process.env.APIATO_URL || "http://localhost:5443/api/v1/*"
 apiato.user = process.env.APIATO_USER || "dummyuser"
 apiato.password = process.env.APIATO_PASSWORD || "dummypassword"
@@ -18,7 +19,7 @@ apiato.ACL = {};
 config.apiato = apiato;
 
 var oauth = {}
-  
+
 oauth.client_id= process.env.OAUTH_CLIENT_ID || 'client_id'
 oauth.secret = process.env.OAUTH_SECRET || 'secret'
 oauth.tokenHost= process.env.OAUTH_TOKEN_HOST || 'https://oauth.host.dom'
