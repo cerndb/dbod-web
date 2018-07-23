@@ -1,103 +1,74 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { JobService } from '../../../services/job';
 import { ActivatedRoute } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
 import { StateButtonComponent } from '../../components/state-button/state-button.component';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
-  selector: 'cern-instance-jobs',
+  selector: 'instance-jobs',
   templateUrl: './instance-jobs.component.html',
   styleUrls: ['./instance-jobs.component.scss']
 })
 export class InstanceJobsComponent implements OnInit {
 
-  source: LocalDataSource;
-  dbName: string;
+  @Input() data: any;
 
-  settings = {
-     columns: {
-      state: {
-        title: 'State',
-        type: 'custom',
-        renderComponent: StateButtonComponent,
-        filter: false,
-      },
-      command_name: {
-        title: 'Command',
-        filter: false,
-      },
-      creation_date: {
-        title: 'Creation',
-        filter: false,
-      },
-      completion_date: {
-        title: 'Completion',
-        filter: false,
-      },
-    },
-    actions: {
-      add: false,
-      edit: false,
-      delete: false,
-    },
-    hideSubHeader: true,
-    noDataMessage: 'No jobs found.',
+  source = new Array();
+  numberOfItems: number;
+  pageLength: number;
+  id: number;
+  page :number;
+  opened: boolean;
 
-  };
+  constructor(private route: ActivatedRoute, private socket: Socket) {
+  
+  }
 
-  constructor(
-    private route: ActivatedRoute,
-    private _jobService: JobService) {
-
+  pageChanged(page) {
+    if(!isNaN(page)) {
+      this.socket.emit('jobs_getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength});
     }
+  }
+
+  changeItemsPerPage(number) {
+    this.pageLength = number
+    this.socket.emit('jobs_getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength});
+  }
+
+  panelChange(event) {
+    this.opened = event.nextState;
+    if(!this.opened) {
+      this.socket.emit('jobs_getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength});
+    }
+  }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.dbName = params['id'];
-      console.log(this.dbName);
+    this.opened = false;
+    this.page = 1;
+    this.pageLength = 10;
+
+    this.socket.on('countjobs', (data) => {
+      this.numberOfItems = JSON.parse(data);
     });
 
-    this._jobService.getJobs().subscribe((res) => {
-      this.source = new LocalDataSource(res);
+    this.socket.on('jobs', (data) => {
+      if(!this.opened) {
+        this.source = JSON.parse(data);
+        // console.log('receive');
+      }
     });
   }
 
-  onSearch(query: string = '') {
-
-    this.source.setFilter([
-      // fields we want to include in the search
-      {
-        field: 'command_name',
-        search: query,
-      },
-      {
-        field: 'type',
-        search: query,
-      },
-      {
-        field: 'category',
-        search: query,
-      },
-      {
-        field: 'db_name',
-        search: query,
-      },
-      {
-        field: 'creation_date',
-        search: query,
-      },
-      {
-        field: 'completion_date',
-        search: query,
-      },
-      {
-        field: 'state',
-        search: query,
-      },
-    ], false);
-    // second parameter specifying whether to perform 'AND' or 'OR' search
-    // (meaning all columns should contain search query or at least one)
-    // 'AND' by default, so changing to 'OR' by setting false here
+  ngOnChanges() {
+    this.page = 1;
+    this.pageLength = 10;
+    if(this.data.hasOwnProperty('id')) {
+      this.id = this.data.name; //TODO : replace name by id
+      this.socket.emit('jobs_getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength});
+    }
   }
 
+  ngOnDestroy() {
+    this.socket.emit('close_jobs_getter');
+  }
 }

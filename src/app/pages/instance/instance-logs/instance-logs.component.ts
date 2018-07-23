@@ -62,6 +62,8 @@ export class InstanceLogsComponent implements OnInit {
   }
 
   ngOnChanges() {
+    this.page = 1;
+    this.pageLength = 10;
     if(this.data.hasOwnProperty('type')) {
       this.dbName = this.data.name;
       switch(this.data.type) {

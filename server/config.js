@@ -10,7 +10,10 @@ var apiato = {};
 apiato.url = process.env.APIATO_URL || "http://localhost:5443/api/v1/*"
 apiato.user = process.env.APIATO_USER || "dummyuser"
 apiato.password = process.env.APIATO_PASSWORD || "dummypassword"
-apiato.ACL = {}
+apiato.host = apiato.url.split('/')[2].split(':')[0];
+apiato.port = apiato.url.split(':')[2].split('/')[0];
+apiato.path = apiato.url.split(apiato.host+':'+apiato.port)[1];
+apiato.ACL = {};
 
 config.apiato = apiato;
 

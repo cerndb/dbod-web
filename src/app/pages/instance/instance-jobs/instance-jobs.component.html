@@ -1,4 +1,31 @@
-<div class="form-group">
-    <input #search type="text" class="form-control form-control-rounded" placeholder="Search..." (input)="onSearch(search.value)">
+<div class="flex-container">
+	<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" class="flex-left"></ngb-pagination>
+	<div ngbDropdown placement="top-right" class="flex-right">
+	  <button class="btn btn-outline-primary" id="dropdownBasic1" placement="bottom-right" ngbDropdownToggle><span class="itemsPerPage">Items per page </span></button>
+	  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+	    <button class="dropdown-item" on-click="changeItemsPerPage(10)">10</button>
+	    <button class="dropdown-item" on-click="changeItemsPerPage(20)">20</button>
+	    <button class="dropdown-item" on-click="changeItemsPerPage(50)">50</button>
+	    <button class="dropdown-item" on-click="changeItemsPerPage(100)">100</button>
+	  </div>
+	</div>
 </div>
-<ng2-smart-table *ngIf="source" [settings]="settings" [source]="source"></ng2-smart-table>
+
+<ngb-accordion #acc="ngbAccordion" closeOthers=true (panelChange)="panelChange($event)">
+  <div *ngFor="let item of this.source">
+	<ngb-panel>
+	  <ng-template ngbPanelTitle>
+        {{ item.creation_date }} <span style="margin-left: 2em" *ngIf="item.state!='PENDING'">{{ item.completion_date }}</span>
+        <span class="state" [ngSwitch]="item.state">
+		  <span class="badge badge-success" *ngSwitchCase="'FINISHED_OK'">Finished</span>
+		  <span class="badge badge-danger" *ngSwitchCase="'FINISHED_FAIL'">Failed</span>
+		  <span class="badge badge-warning" *ngSwitchCase="'PENDING'">Pending</span>
+		</span>
+		<span class="message">{{ item.command_name }} requested by {{ item.requester }}</span>
+      </ng-template>
+	  <ng-template ngbPanelContent>
+	  	<prettyjson [obj]="item"></prettyjson> 
+	  </ng-template>
+	</ngb-panel>
+  </div>
+</ngb-accordion>

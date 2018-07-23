@@ -63,7 +63,7 @@ export class InstancesComponent implements OnInit {
 
   ngOnInit() {
     this._instanceService.getInstances().subscribe((res) => {
-      this.source = new LocalDataSource(res);
+      this.source = new LocalDataSource(res['response']);
     });
   }
 
