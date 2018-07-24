@@ -66,7 +66,7 @@ export class InstanceComponent implements OnInit {
     });
 
     this.instanceService.getInstances().subscribe((res) => {
-      this.data = res.find(x => x.name === this.dbName);
+       this.data = res["response"].find(x => x.name === this.dbName);
       this.instanceClassEditable = this.editableSelectOpts.instanceClass[this.data['category']];
       this.instanceDbtypeEditable = this.editableSelectOpts.instanceDbtype[this.data['type']];
       this.instanceStateEditable = this.editableSelectOpts.instanceState[this.data['state']];

@@ -41,3 +41,7 @@ testem.log
 Thumbs.db
 
 .vscode
+
+# Dev env
+.sessions/
+./devenv.sh

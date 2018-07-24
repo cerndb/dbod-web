@@ -50,51 +50,8 @@ function genApiatoToken(session, token, res) {
             if (groups.indexOf(config.adminGroup) >= 0) {
               // If the user is member of the admin e-group
               session.isAdmin = true
-              //session.groups = JSON.parse(str).groups
             }
-/*
-            options.path = config.apiato.urlResources
-            https.request(options, (response) => {
-                var str = [
-                  {  "owner" : "driverab",
-                      "admin" : true,
-                      "groups" : [
-                        "grupo1",
-                        "dbondemand-admin"
-                      ]
-                  },
 
-                  {
-                    "owner" : "domarack",
-                    "admin" : false,
-                    "groups" : [
-                      "avworkflow-admins",
-                      "grupo4",
-                      "dbondemand-admin"
-                    ]
-                  },
-
-                  {
-                    "owner" : "eduardoa",
-                    "admin" : true,
-                    "groups" : [
-                      "drupal-admins",
-                      "grupo4",
-                      "dbondemand-admin"
-                    ]
-                  }
-                ]
-                response.on('data', function (chunk) {
-                  str += chunk;
-                  console.log("STR: " + str);
-                });
-                response.on('end', function () {
-                    //var groups = JSON.parse(str).groups
-                    console.log("GROUPS////////////////////////" + str);
-                })
-            }).end();
-*/
-            session.token = api.getToken('username', groups)
             // Fetch User info
             console.log('Accesing User Info');
             options.path = config.oauth.resourcePathUser
@@ -104,11 +61,13 @@ function genApiatoToken(session, token, res) {
                 response.on('data', function (chunk) {
                   str += chunk;
                 });
-                response.on('end', function () {
+                response.on('end', async function () {
                     console.log('User Info: ' + str);
                     session.user = JSON.parse(str)
                     session.isAuthenticated = true
+                    session.token = await api.getToken(session.user.username, groups);
 	    		    res.redirect('/')
+
                 })
             }).end();
 		  });
