@@ -55,29 +55,28 @@ function myProxy(acl, apiOptions) {
 router.all('/*', myProxy(ACL, apiOptions));
 
 function getToken(username, groups) {
+  
+  const request = require('request');
+  var url = config.apiato.url + "/auth/resources";
+  var bod = {"username": username, "admin": false, "groups": groups};
+  var options = {
+    uri : url,
+    body : bod,
+  }
 
-      const request = require('request');
-      var url = config.apiato.url + "/auth/resources";
-      var bod = {"username": username, "admin": false, "groups": groups};
-      var options = {
-          uri : url,
-          body : bod,
+  return new Promise((resolve, reject) => {
+    request(url, { json: true, body:bod }, (err, res, body) => {
+      if (err) { return console.log(err);
+        console.log(err);
+        console.log(body.url);
+        console.log(body.explanation);
       }
-      return new Promise((resolve, reject) => {
-      request(url, { json: true, body:bod }, (err, res, body) => {
-            console.log(body);
-            if (err) { return console.log(err);
-              console.log(err);
-              console.log(body.url);
-              console.log(body.explanation);
-            }
-            const jwt = require('jsonwebtoken')
-            var jtoken = jwt.sign(body, config.secretKey)
-            resolve(jtoken);
+      const jwt = require('jsonwebtoken')
+      var jtoken = jwt.sign(body, config.secretKey)
+      resolve(jtoken);
+    });
 
-       });
-
-});
+  });
 
 }
 
