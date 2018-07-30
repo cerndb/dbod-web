@@ -108,4 +108,5 @@ app.use(function(req, res, next) {
 });
 
 var logs_module = require('./server/socketio/logs')(io,config,client);
+var jobs_module = require('./server/socketio/logs_statistics')(io,config,client);
 var jobs_module = require('./server/socketio/jobs')(io,config,client);

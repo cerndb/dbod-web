@@ -18,8 +18,11 @@ import { InstanceJobsComponent } from './instance-jobs/instance-jobs.component';
 import { InstanceBackupsComponent } from './instance-backups/instance-backups.component';
 import { InstanceRecoverService } from '../../services/instance/instance-recover.service';
 import { InstanceLogsComponent } from './instance-logs/instance-logs.component';
+import { InstanceLogsStatisticsComponent } from './instance-logs/instance-logs-statistics/instance-logs-statistics.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PrettyJsonModule } from 'angular2-prettyjson';
+import { ChartsModule } from 'ng2-charts';
+import {MatSliderModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -33,6 +36,8 @@ import { PrettyJsonModule } from 'angular2-prettyjson';
     Ng2SmartTableModule,
     NgbModule.forRoot(),
     PrettyJsonModule,
+    ChartsModule,
+    MatSliderModule,
   ],
   declarations: [
     InstanceComponent,
@@ -42,6 +47,7 @@ import { PrettyJsonModule } from 'angular2-prettyjson';
     InstanceJobsComponent,
     InstanceBackupsComponent,
     InstanceLogsComponent,
+    InstanceLogsStatisticsComponent,
   ],
   providers: [
     InstanceService,

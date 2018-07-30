@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { LocalDataSource } from 'ng2-smart-table';
 import { StateButtonComponent } from '../../components/state-button/state-button.component';
 import { Socket } from 'ngx-socket-io';
 
@@ -20,7 +18,7 @@ export class InstanceJobsComponent implements OnInit {
   page :number;
   opened: boolean;
 
-  constructor(private route: ActivatedRoute, private socket: Socket) {
+  constructor(private socket: Socket) {
   
   }
 

@@ -1,0 +1,58 @@
+<div class="card">
+	<p> Work in progress !</p>
+	<div class="card-body">
+      <canvas baseChart height="50" #baseChart="base-chart"
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+	</div>
+
+	<form class="form-inline">
+	  <div class="form-group">
+	    <div class="input-group">
+	      <input class="form-control" placeholder="yyyy-mm-dd"
+	             name="dtmin" [(ngModel)]="tmin" (ngModelChange)="changeTimeBase()" ngbDatepicker #dmin="ngbDatepicker">
+	      <div class="input-group-append">
+	        <button class="btn btn-outline-secondary" (click)="dmin.toggle()" type="button">
+	          <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+	        </button>
+	      </div>
+	    </div>
+	  </div>
+	</form>
+
+	<form class="form-inline">
+	  <div class="form-group">
+	    <div class="input-group">
+	      <input class="form-control" placeholder="yyyy-mm-dd"
+	             name="dtmax" [(ngModel)]="tmax" (ngModelChange)="changeTimeBase()" ngbDatepicker #dmax="ngbDatepicker">
+	      <div class="input-group-append">
+	        <button class="btn btn-outline-secondary" (click)="dmax.toggle()" type="button">
+	          <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+	        </button>
+	      </div>
+	    </div>
+	  </div>
+	</form>
+
+	<form class="form-inline">
+    <button class="btn btn-outline-secondary" (click)="autoResize()" type="button">Resize</button>
+	</form>
+
+	<mat-slider
+      [disabled]="false"
+      [invert]="false"
+      [max]="2"
+      [min]="1"
+      [step]="0.001"
+      [thumbLabel]="false"
+      [tickInterval]="false"
+      [(ngModel)]="logn"
+      (ngModelChange)="changeTimeBase()"
+      [vertical]="false">
+  </mat-slider>
+</div>

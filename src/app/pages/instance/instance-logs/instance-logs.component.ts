@@ -1,7 +1,4 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { LocalDataSource } from 'ng2-smart-table';
-import { StateButtonComponent } from '../../components/state-button/state-button.component';
 import { Socket } from 'ngx-socket-io';
 
 @Component({
@@ -22,7 +19,9 @@ export class InstanceLogsComponent implements OnInit {
   page :number;
   opened: boolean;
 
-  constructor(private route: ActivatedRoute, private socket: Socket) {
+  public statisticsCollapsed = true;
+
+  constructor(private socket: Socket) {
   
   }
 

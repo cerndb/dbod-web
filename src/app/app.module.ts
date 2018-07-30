@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { CoreModule } from './@core/core.module';
 
 import { AppComponent } from './app.component';
@@ -36,6 +37,7 @@ const config: SocketIoConfig = { url: environment.socketio_url, options: {} };
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    HttpModule,
     AppRoutingModule,
     InstanceModule,
     OverviewModule,

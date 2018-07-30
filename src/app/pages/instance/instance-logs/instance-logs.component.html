@@ -1,14 +1,21 @@
 <div class="flex-container">
 	<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" class="flex-left"></ngb-pagination>
-	<div ngbDropdown placement="top-right" class="flex-right">
-	  <button class="btn btn-outline-primary" id="dropdownBasic1" placement="bottom-right" ngbDropdownToggle><span class="itemsPerPage">Items per page </span></button>
-	  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-	    <button class="dropdown-item" on-click="changeItemsPerPage(10)">10</button>
-	    <button class="dropdown-item" on-click="changeItemsPerPage(20)">20</button>
-	    <button class="dropdown-item" on-click="changeItemsPerPage(50)">50</button>
-	    <button class="dropdown-item" on-click="changeItemsPerPage(100)">100</button>
-	  </div>
+	<div>
+		<div ngbDropdown class="d-inline-block">
+		  <button class="btn btn-outline-primary" id="dropdownBasic1" placement="bottom-right" ngbDropdownToggle><span class="itemsPerPage">Items per page </span></button>
+		  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+		    <button class="dropdown-item" on-click="changeItemsPerPage(10)">10</button>
+		    <button class="dropdown-item" on-click="changeItemsPerPage(20)">20</button>
+		    <button class="dropdown-item" on-click="changeItemsPerPage(50)">50</button>
+		    <button class="dropdown-item" on-click="changeItemsPerPage(100)">100</button>
+		  </div>
+		</div>
+		<button type="button" class="btn btn-outline-primary" (click)="statisticsCollapsed = !statisticsCollapsed" [attr.aria-expanded]="!statisticsCollapsed" aria-controls="collapseStatistics" style="margin-left: 10px">Statistics</button>
 	</div>
+</div>
+
+<div id="collapseStatistics" [ngbCollapse]="statisticsCollapsed">
+  <instance-logs-statistics [data]="data"></instance-logs-statistics>
 </div>
 
 <ngb-accordion #acc="ngbAccordion" closeOthers=true (panelChange)="panelChange($event)">
