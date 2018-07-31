@@ -28,16 +28,18 @@ export class InstanceJobsComponent implements OnInit {
     }
   }
 
-  changeItemsPerPage(number) {
-    this.pageLength = number
+  changeItemsPerPage(e) {
+    this.pageLength = e.value;
     this.socket.emit('jobs_getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength});
   }
 
-  panelChange(event) {
-    this.opened = event.nextState;
-    if(!this.opened) {
-      this.socket.emit('jobs_getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength});
-    }
+    panelOpened() {
+    this.opened = true;
+  }
+
+  panelClosed() {
+    this.opened = false;
+    this.socket.emit('jobs_getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength});
   }
 
   ngOnInit() {

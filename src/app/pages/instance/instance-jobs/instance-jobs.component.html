@@ -1,31 +1,30 @@
 <div class="flex-container">
 	<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" class="flex-left"></ngb-pagination>
-	<div ngbDropdown placement="top-right" class="flex-right">
-	  <button class="btn btn-outline-primary" id="dropdownBasic1" placement="bottom-right" ngbDropdownToggle><span class="itemsPerPage">Items per page </span></button>
-	  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-	    <button class="dropdown-item" on-click="changeItemsPerPage(10)">10</button>
-	    <button class="dropdown-item" on-click="changeItemsPerPage(20)">20</button>
-	    <button class="dropdown-item" on-click="changeItemsPerPage(50)">50</button>
-	    <button class="dropdown-item" on-click="changeItemsPerPage(100)">100</button>
-	  </div>
-	</div>
+	<mat-form-field>
+    <mat-select placeholder="Items per page" (selectionChange)="changeItemsPerPage($event)">
+      <mat-option [value]="10">10</mat-option>
+      <mat-option [value]="20">20</mat-option>
+      <mat-option [value]="50">50</mat-option>
+      <mat-option [value]="100">100</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 
-<ngb-accordion #acc="ngbAccordion" closeOthers=true (panelChange)="panelChange($event)">
-  <div *ngFor="let item of this.source">
-	<ngb-panel>
-	  <ng-template ngbPanelTitle>
-        {{ item.creation_date }} <span style="margin-left: 2em" *ngIf="item.state!='PENDING'">{{ item.completion_date }}</span>
-        <span class="state" [ngSwitch]="item.state">
-		  <span class="badge badge-success" *ngSwitchCase="'FINISHED_OK'">Finished</span>
-		  <span class="badge badge-danger" *ngSwitchCase="'FINISHED_FAIL'">Failed</span>
-		  <span class="badge badge-warning" *ngSwitchCase="'PENDING'">Pending</span>
-		</span>
-		<span class="message">{{ item.command_name }} requested by {{ item.requester }}</span>
-      </ng-template>
-	  <ng-template ngbPanelContent>
-	  	<prettyjson [obj]="item"></prettyjson> 
-	  </ng-template>
-	</ngb-panel>
-  </div>
-</ngb-accordion>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let item of this.source" (opened)="panelOpened()" (closed)="panelClosed()">
+  	<mat-expansion-panel-header>
+	    <mat-panel-title>
+	    	<span class="state" [ngSwitch]="item.state">
+				  <span class="badge badge-success" *ngSwitchCase="'FINISHED_OK'">Finished</span>
+				  <span class="badge badge-danger" *ngSwitchCase="'FINISHED_FAIL'">Failed</span>
+				  <span class="badge badge-warning" *ngSwitchCase="'PENDING'">Pending</span>
+				</span>
+	      <span style="margin-left: 2em">{{ item.creation_date | date : 'medium' }}</span> <span style="margin-left: 2em" *ngIf="item.state!='PENDING'">{{ item.completion_date | date : 'medium' }}</span>
+	    </mat-panel-title>
+	    <mat-panel-description>
+				{{ item.command_name }} requested by {{ item.requester }}
+	    </mat-panel-description>
+	  </mat-expansion-panel-header>
+	  <prettyjson [obj]="item"></prettyjson> 
+  </mat-expansion-panel>
+</mat-accordion>

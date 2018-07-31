@@ -23,6 +23,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PrettyJsonModule } from 'angular2-prettyjson';
 import { ChartsModule } from 'ng2-charts';
 import {MatSliderModule} from '@angular/material';
+import {MatExpansionModule} from '@angular/material';
+import {MatSelectModule} from '@angular/material';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   imports: [
@@ -38,6 +41,9 @@ import {MatSliderModule} from '@angular/material';
     PrettyJsonModule,
     ChartsModule,
     MatSliderModule,
+    MatExpansionModule,
+    MatSelectModule,
+    MatButtonModule,
   ],
   declarations: [
     InstanceComponent,

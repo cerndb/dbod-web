@@ -31,16 +31,18 @@ export class InstanceLogsComponent implements OnInit {
     }
   }
 
-  changeItemsPerPage(number) {
-    this.pageLength = number
+  changeItemsPerPage(e) {
+    this.pageLength = e.value;
     this.socket.emit('logs_getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
   }
 
-  panelChange(event) {
-    this.opened = event.nextState;
-    if(!this.opened) {
-      this.socket.emit('logs_getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
-    }
+  panelOpened() {
+    this.opened = true;
+  }
+
+  panelClosed() {
+    this.opened = false;
+    this.socket.emit('logs_getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
   }
 
   ngOnInit() {

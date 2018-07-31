@@ -1,16 +1,15 @@
 <div class="flex-container">
 	<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" class="flex-left"></ngb-pagination>
 	<div>
-		<div ngbDropdown class="d-inline-block">
-		  <button class="btn btn-outline-primary" id="dropdownBasic1" placement="bottom-right" ngbDropdownToggle><span class="itemsPerPage">Items per page </span></button>
-		  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-		    <button class="dropdown-item" on-click="changeItemsPerPage(10)">10</button>
-		    <button class="dropdown-item" on-click="changeItemsPerPage(20)">20</button>
-		    <button class="dropdown-item" on-click="changeItemsPerPage(50)">50</button>
-		    <button class="dropdown-item" on-click="changeItemsPerPage(100)">100</button>
-		  </div>
-		</div>
-		<button type="button" class="btn btn-outline-primary" (click)="statisticsCollapsed = !statisticsCollapsed" [attr.aria-expanded]="!statisticsCollapsed" aria-controls="collapseStatistics" style="margin-left: 10px">Statistics</button>
+		<mat-form-field>
+	    <mat-select placeholder="Items per page" (selectionChange)="changeItemsPerPage($event)">
+	      <mat-option [value]="10">10</mat-option>
+	      <mat-option [value]="20">20</mat-option>
+	      <mat-option [value]="50">50</mat-option>
+	      <mat-option [value]="100">100</mat-option>
+	    </mat-select>
+	  </mat-form-field>
+	  <button mat-raised-button color="primary" (click)="statisticsCollapsed = !statisticsCollapsed" style="margin-left: 10px">Statistics</button>
 	</div>
 </div>
 
@@ -18,15 +17,16 @@
   <instance-logs-statistics [data]="data"></instance-logs-statistics>
 </div>
 
-<ngb-accordion #acc="ngbAccordion" closeOthers=true (panelChange)="panelChange($event)">
-  <div *ngFor="let item of this.source">
-	<ngb-panel>
-	  <ng-template ngbPanelTitle>
-        {{ item.timestamp_processed_in_logstash }} <span class="message">{{ item.message }}</span>
-      </ng-template>
-	  <ng-template ngbPanelContent>
-	  	<prettyjson [obj]="item"></prettyjson> 
-	  </ng-template>
-	</ngb-panel>
-  </div>
-</ngb-accordion>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let item of this.source" (opened)="panelOpened()" (closed)="panelClosed()">
+  	<mat-expansion-panel-header>
+	    <mat-panel-title>
+	      {{ item.timestamp_processed_in_logstash | date : 'medium' }}
+	    </mat-panel-title>
+	    <mat-panel-description>
+	      {{ item.message }}
+	    </mat-panel-description>
+	  </mat-expansion-panel-header>
+	  <prettyjson [obj]="item"></prettyjson> 
+  </mat-expansion-panel>
+</mat-accordion>

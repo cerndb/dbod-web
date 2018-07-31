@@ -35,6 +35,14 @@ export class InstanceLogsStatisticsComponent implements OnInit {
     }
   };
 
+  public barChartColors:Array<any> = [
+    {
+      backgroundColor: 'rgba(93,207,227,0.2)',
+      borderColor: 'rgba(93,207,227,1)',
+      borderWidth: 1,
+    }
+  ];
+
   public barChartLabels:string[] = [];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = false;
@@ -63,7 +71,7 @@ export class InstanceLogsStatisticsComponent implements OnInit {
       // console.log('receive');
 
       var labelsTemp:string[] = [];
-      var dataTemp:any[] = [{data:[]}];
+      var dataTemp:any[] = [{data: []}];
       for(var i=0; i<this.source.histogram.length; i++) {
         labelsTemp.push(this.source.histogram[i].tminSlice);
         dataTemp[0].data.push(this.source.histogram[i].numberOfLogs);
