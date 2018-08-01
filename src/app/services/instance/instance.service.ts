@@ -17,5 +17,4 @@ export class InstanceService {
          return this.http.get('./api/v1/instance')
                          .map((res:any) => res.json());
     }
-
 }

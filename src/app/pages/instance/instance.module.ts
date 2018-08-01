@@ -26,6 +26,9 @@ import {MatSliderModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material';
 import {MatSelectModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   imports: [
@@ -44,6 +47,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatExpansionModule,
     MatSelectModule,
     MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   declarations: [
     InstanceComponent,

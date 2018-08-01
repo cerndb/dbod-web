@@ -40,7 +40,6 @@ function myProxy(acl, apiOptions) {
             var auth = {};
             auth.owner = req.session.user.username;
             auth.admin = req.session.isAdmin || false ;
-            // auth.admin = true;
             auth.groups = req.session.groups || {} ;
             apiopts['headers']['auth'] = JSON.stringify(auth);
             console.log("apiopts: " + JSON.stringify(apiopts));
