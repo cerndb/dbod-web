@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
+import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
+import { SocketLogsStatistics } from '../../sockets.module';
 import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 import {NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
@@ -8,7 +8,7 @@ import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
   selector: 'instance-logs-statistics',
   templateUrl: './instance-logs-statistics.component.html',
   styleUrls: ['./instance-logs-statistics.component.scss'],
-  providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
+  providers: [SocketLogsStatistics, {provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
 })
 export class InstanceLogsStatisticsComponent implements OnInit {
 
@@ -58,11 +58,13 @@ export class InstanceLogsStatisticsComponent implements OnInit {
 
   public barChartData:any[] = [{data: []}];
    
-  constructor(private socket: Socket) {
+  constructor(@Inject(SocketLogsStatistics) private socket) {
   
   }
 
   ngOnInit() {
+    this.socket.connect();
+
     this.tmin = new Date(0);
     this.tmax = new Date();
     this.tmin_day = new Date(0);
@@ -111,16 +113,16 @@ export class InstanceLogsStatisticsComponent implements OnInit {
         case 'InfluxDB': this.logType = 'inflog'; break;
         case 'PG': this.logType = 'pglog'; break;
       }
-      this.socket.emit('logs_statistics_getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+      this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
     }
   }
 
   changeTimeBase() {
     this.n = Math.round(Math.pow(10,this.logn));
     if(this.tmin_seconds != null && this.tmax_seconds != null && typeof this.tmin != 'string' && typeof this.tmax != 'string') {
-      this.tmin = new Date(this.tmin_day.getFullYear(),this.tmin_day.getMonth(),this.tmin_day.getDay(),this.tmin_seconds.hour,this.tmin_seconds.minute,this.tmin_seconds.second);
-      this.tmax = new Date(this.tmax_day.getFullYear(),this.tmax_day.getMonth(),this.tmax_day.getDay(),this.tmax_seconds.hour,this.tmax_seconds.minute,this.tmax_seconds.second);
-      this.socket.emit('logs_statistics_getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+      this.tmin = new Date(this.tmin_day.getFullYear(),this.tmin_day.getMonth(),this.tmin_day.getDay()+1,this.tmin_seconds.hour,this.tmin_seconds.minute,this.tmin_seconds.second); // NO IDEA WHY getDay()+1 IS NEEDED
+      this.tmax = new Date(this.tmax_day.getFullYear(),this.tmax_day.getMonth(),this.tmax_day.getDay()+1,this.tmax_seconds.hour,this.tmax_seconds.minute,this.tmax_seconds.second);
+      this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
     }
   }
 
@@ -131,10 +133,10 @@ export class InstanceLogsStatisticsComponent implements OnInit {
     this.tmax = this.source.newestTimestamp;
     this.tmax_day = this.tmax;
     this.tmax_seconds = {hour: this.tmax.getHours(), minute: this.tmax.getMinutes(), second: this.tmax.getSeconds()}
-    this.socket.emit('logs_statistics_getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+    this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
   }
 
   ngOnDestroy() {
-    this.socket.emit('close_logs_statistics_getter');
+    this.socket.disconnect();
   }
 }

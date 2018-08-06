@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ChangeDetectorRef, Inject } from '@angular/core';
+import { SocketLogs } from '../sockets.module';
 
 @Component({
   selector: 'instance-logs',
   templateUrl: './instance-logs.component.html',
   styleUrls: ['./instance-logs.component.scss'],
+  providers: [SocketLogs],
 })
 
 export class InstanceLogsComponent implements OnInit {
@@ -21,31 +22,13 @@ export class InstanceLogsComponent implements OnInit {
 
   public statisticsCollapsed = true;
 
-  constructor(private socket: Socket) {
+  constructor(@Inject(SocketLogs) private socket) {
   
   }
 
-  pageChanged(page) {
-    if(!isNaN(page)) {
-      this.socket.emit('logs_getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
-    }
-  }
-
-  changeItemsPerPage(e) {
-    this.pageLength = e.value;
-    this.socket.emit('logs_getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
-  }
-
-  panelOpened() {
-    this.opened = true;
-  }
-
-  panelClosed() {
-    this.opened = false;
-    this.socket.emit('logs_getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
-  }
-
   ngOnInit() {
+    this.socket.connect();
+
     this.opened = false;
     this.page = 1;
     this.pageLength = 10;
@@ -62,6 +45,27 @@ export class InstanceLogsComponent implements OnInit {
     });
   }
 
+  pageChanged(page) {
+    this.opened = false;
+    if(!isNaN(page)) {
+      this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
+    }
+  }
+
+  changeItemsPerPage(e) {
+    this.opened = false;
+    this.pageLength = e.value;
+    this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
+  }
+
+  panelOpened() {
+    this.opened = true;
+  }
+
+  panelClosed() {
+    this.opened = false;
+  }
+
   ngOnChanges() {
     this.page = 1;
     this.pageLength = 10;
@@ -72,11 +76,11 @@ export class InstanceLogsComponent implements OnInit {
         case 'InfluxDB': this.logType = 'inflog'; break;
         case 'PG': this.logType = 'pglog'; break;
       }
-      this.socket.emit('logs_getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
+      this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
     }
   }
 
   ngOnDestroy() {
-    this.socket.emit('close_logs_getter');
+    this.socket.disconnect();
   }
 }
