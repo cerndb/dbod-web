@@ -17,9 +17,10 @@ export class InstanceLogsComponent implements OnInit {
   pageLength: number;
   dbName: string;
   logType: string;
-  page :number;
-  opened: boolean;
+  page: number;
+  filters: string = '*';
 
+  opened: boolean;
   public statisticsCollapsed = true;
 
   constructor(@Inject(SocketLogs) private socket) {
@@ -40,7 +41,7 @@ export class InstanceLogsComponent implements OnInit {
     this.socket.on('logs', (data) => {
       if(!this.opened) {
         this.source = JSON.parse(data);
-        // console.log('receive');
+        console.log('receive');
       }
     });
   }
@@ -48,14 +49,14 @@ export class InstanceLogsComponent implements OnInit {
   pageChanged(page) {
     this.opened = false;
     if(!isNaN(page)) {
-      this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
+      this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
     }
   }
 
   changeItemsPerPage(e) {
     this.opened = false;
     this.pageLength = e.value;
-    this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
+    this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
   }
 
   panelOpened() {
@@ -76,8 +77,18 @@ export class InstanceLogsComponent implements OnInit {
         case 'InfluxDB': this.logType = 'inflog'; break;
         case 'PG': this.logType = 'pglog'; break;
       }
-      this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength});
+      this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
     }
+  }
+
+  changeFilters(value) {
+    if(value.length!=0) {
+      this.filters = value;
+    }
+    else {
+      this.filters = '*';
+    }
+    this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
   }
 
   ngOnDestroy() {

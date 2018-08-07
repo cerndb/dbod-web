@@ -11,13 +11,18 @@ exports = module.exports = function(io,config,client){
         index: config.elasticsearch.indexNames[dataLogs.logType],
         body: {
           query: {
-            term: { instance: dataLogs.name }
+            bool: {
+              must: [ 
+                { term: { instance: dataLogs.name }},
+                { query_string: { query: dataLogs.filters}},
+              ]
+            }
           },
           "from": dataLogs.from,
           "size": dataLogs.size,
           "sort": [
-          { "@timestamp": { "order": "desc" } },
-          { "offset": { "order": "desc" } }
+            { "@timestamp": { "order": "desc" } },
+            { "offset": { "order": "desc" } }
           ]
         }
       }).then(function (resp) {
@@ -30,8 +35,13 @@ exports = module.exports = function(io,config,client){
             index: config.elasticsearch.indexNames[dataLogs.logType],
             body: {
               query: {
-                term: { instance: dataLogs.name }
-              }
+                bool: {
+                  must: [ 
+                    { term: { instance: dataLogs.name }},
+                    { query_string: { query: dataLogs.filters}},
+                  ]
+                }
+              },
             }
           }).then(function (resp) {
             //console.log(jsonHits);

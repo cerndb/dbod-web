@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InstanceService } from '../../services/instance';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {FormControl, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 import { InstanceDialogComponent } from './instance-dialog/instance-dialog.component';
 import {MatCheckbox} from '@angular/material';
