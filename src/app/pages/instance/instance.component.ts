@@ -2,9 +2,11 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InstanceService } from '../../services/instance';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient } from '@angular/common/http';
 import {FormControl, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material';
+import {MatDialog} from '@angular/material';
+import { InstanceDialogComponent } from './instance-dialog/instance-dialog.component';
+import {MatCheckbox} from '@angular/material';
+import {MatSlideToggle} from '@angular/material';
 
 @Component({
   selector: 'instance',
@@ -18,7 +20,6 @@ export class InstanceComponent implements OnInit {
   instanceClassEditable: number;
   instanceDbtypeEditable: number;
   instanceStateEditable: number;
-  fieldsErrorStates = {};
 
    editableSelectOpts = {
       instanceClass: {
@@ -61,7 +62,9 @@ export class InstanceComponent implements OnInit {
       ],
   };
 
-  constructor( private route: ActivatedRoute, private router: Router, private instanceService: InstanceService, private http: HttpClient) {}
+  isAdmin = false;
+
+  constructor( private route: ActivatedRoute, private router: Router, private instanceService: InstanceService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.data = {};
@@ -77,21 +80,14 @@ export class InstanceComponent implements OnInit {
     });
   }
 
-  customErrorStateMatcher: ErrorStateMatcher = {
-    isErrorState: (control: FormControl | null) => {
-      console.log('mouais');
-      return true;
-    }
-  };
-
-  changeField(e) {
-    var req = {};
-    req[e.target.name] = e.target.value;
-    console.log(req);
-    // this.fieldsErrorStates[e.target.name] = true;
-    // console.log(this.fieldsErrorStates);
-    this.http.put('./api/v1/instance/'+this.data.id,req).subscribe( (res) => {
-      console.log(res);
+  changeField(name,value) {
+    const dialogRef = this.dialog.open(InstanceDialogComponent, {
+      data: {
+        id: this.data.id,
+        fieldName: name,
+        precContent: this.data[name],
+        newContent: value,
+      }
     });
   }
 }

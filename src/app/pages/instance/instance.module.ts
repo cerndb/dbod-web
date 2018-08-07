@@ -29,6 +29,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDialogModule} from '@angular/material';
+import { InstanceDialogComponent } from './instance-dialog/instance-dialog.component';
+import { MatProgressSpinnerModule } from '@angular/material';
+import { MatBadgeModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -50,9 +56,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatBadgeModule,
+    MatCheckboxModule,
+    MatSlideToggleModule,
   ],
   declarations: [
     InstanceComponent,
+    InstanceDialogComponent,
     FileEditorComponent,
     MetadataEditorComponent,
     InstanceRecoverComponent,
@@ -60,6 +72,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     InstanceBackupsComponent,
     InstanceLogsComponent,
     InstanceLogsStatisticsComponent,
+  ],
+  entryComponents: [
+    InstanceDialogComponent,
   ],
   providers: [
     InstanceService,

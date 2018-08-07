@@ -1,17 +1,56 @@
 <mat-card *ngIf="data.hasOwnProperty('user')">
   <mat-card-header>
+    <div mat-card-avatar><mat-slide-toggle [color]="primary" style="margin-top:10px;"></mat-slide-toggle></div>
     <mat-card-title>{{ data.name }}</mat-card-title>
     <mat-card-subtitle>{{ data.user.department }}-{{ data.user.group }} {{ data.user.first_name }} {{ data.user.last_name }}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content>
-    <mat-form-field>
-      <input matInput placeholder="Version" name="version" value="{{data.version}}" [errorStateMatcher]="customErrorStateMatcher" (blur)="changeField($event)">
-      <mat-error>Error occured while processing request</mat-error>
-    </mat-form-field>
+  <mat-card-content style="display:flex; justify-content: center;">
+    <div>
+      <mat-form-field style="width: 400px; float:left; margin-right: 50px;">
+        <textarea matInput placeholder="Description" rows="5" name="description" value="{{data.description}}" (blur)="changeField($event.target.name,$event.target.value)"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <div class="flex-container">
+        <mat-form-field class="field">
+          <input matInput placeholder="Owner" name="owner" value="{{data.owner}}" [disabled]="!isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
+        </mat-form-field>
+        <mat-form-field class="field">
+          <input matInput placeholder="Egroup" name="egroup" value="{{data.egroup}}" [disabled]="!isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
+        </mat-form-field>
+        <mat-form-field class="field">
+          <input matInput placeholder="Project" name="project" value="{{data.project}}" (blur)="changeField($event.target.name,$event.target.value)">
+        </mat-form-field>
+        <mat-form-field class="field">
+          <input matInput placeholder="Creation date" name="creation_date" value="{{data.creation_date}}" disabled (blur)="changeField($event.target.name,$event.target.value)">
+        </mat-form-field>
+        <mat-form-field class="field">
+          <input matInput placeholder="Expiry date" name="expiry_date" value="{{data.expiry_date}}" [disabled]="!isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
+        </mat-form-field>
+      </div>
+      <br/>
+      <div class="flex-container">
+        <mat-form-field class="field">
+          <input matInput placeholder="Type" name="type" value="{{data.type}}" disabled (blur)="changeField($event.target.name,$event.target.value)">
+        </mat-form-field>
+        <mat-form-field class="field">
+          <input matInput placeholder="Version" name="version" value="{{data.version}}" [disabled]="!isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
+        </mat-form-field>
+        <mat-form-field class="field">
+          <mat-select matInput placeholder="Category" name="category" value="{{data.category}}" [disabled]="!isAdmin" (selectionChange)="changeField('category',$event.value)">
+            <mat-option value="REF">REF</mat-option>
+            <mat-option value="TEST">TEST</mat-option>
+            <mat-option value="PROD">PROD</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-checkbox name="attribute/
+        notifications" value="{{data.attributes.notifications}}" [disabled]="!isAdmin" (change)="changeField($event.name,$event.checked)">Notifications</mat-checkbox>
+      </div>
+    </div>
   </mat-card-content>
 </mat-card>
 
-
+<!--
 <nb-card *ngIf="data">
   <nb-card-header>
     <h2>{{ data.name }} Information</h2>
@@ -59,8 +98,9 @@
     </table>
   </nb-card-body>
 </nb-card>
+-->
 
-<nb-card>
+<mat-card style="margin-top: 15px;">
   <ngb-tabset>
     <ngb-tab title="Logs">
       <ng-template ngbTabContent>
@@ -93,4 +133,4 @@
       </ng-template>
     </ngb-tab>
   </ngb-tabset>
-</nb-card>
+</mat-card>

@@ -10,7 +10,7 @@ exports = module.exports = function(io,config,client){
 				var tmin = new Date(dataLogsStatistics.tmin);
 				var tmax = new Date(dataLogsStatistics.tmax);
 				var tminSlice = new Date(tmin.getTime()+data.i/dataLogsStatistics.n*(tmax.getTime()-tmin.getTime()));
-    			var tmaxSlice = new Date(tmin.getTime()+(data.i+1)/dataLogsStatistics.n*(tmax.getTime()-tmin.getTime()));
+    		var tmaxSlice = new Date(tmin.getTime()+(data.i+1)/dataLogsStatistics.n*(tmax.getTime()-tmin.getTime()));
 	    	client.count({
           index: config.elasticsearch.indexNames[dataLogsStatistics.logType],
           body: {
@@ -77,9 +77,8 @@ exports = module.exports = function(io,config,client){
 	        var hits = resp.hits.hits.map(res => res._source);
         	var newestTimestamp = hits[0]['@timestamp'];
 	        // Counting in each interval of time
-	        // dataLogsStatistics.tmin = oldestTimestamp; // TO REMOVE
 
-	        var histogram = []; 
+	        var histogram = [];
 	        var buildHistogramPromise = Promise.resolve({'histogram': histogram, 'i': 0});
 	        for(var i=0; i<dataLogsStatistics.n; i++) {
 	        	buildHistogramPromise = buildHistogramPromise.then(buildHistogram);
@@ -103,7 +102,7 @@ exports = module.exports = function(io,config,client){
 
     socket.on('getter', (data) => {
       dataLogsStatistics = data;
-      jsonHitsPrec = '';
+      statsPrec = '';
       clearTimeout(monitoringTimeout);
       monitor();
     });

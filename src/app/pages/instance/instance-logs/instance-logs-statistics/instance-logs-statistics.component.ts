@@ -74,21 +74,18 @@ export class InstanceLogsStatisticsComponent implements OnInit {
 
     this.socket.on('logs_statistics', (data) => {
       this.source = JSON.parse(data);
+      var labelsTemp:string[] = [];
+      var dataTemp:any[] = [{data: []}];
       for(var i=0; i<this.source.histogram.length; i++) {
         this.source.histogram[i].tminSlice = new Date(this.source.histogram[i].tminSlice);
         this.source.histogram[i].tmaxSlice = new Date(this.source.histogram[i].tmaxSlice);
+        labelsTemp.push(this.source.histogram[i].tminSlice);
+        dataTemp[0].data.push(this.source.histogram[i].numberOfLogs);
       }
       this.source.oldestTimestamp = new Date(this.source.oldestTimestamp);
       this.source.newestTimestamp = new Date(this.source.newestTimestamp);
       // console.log(this.source);
-      // console.log('receive');
-
-      var labelsTemp:string[] = [];
-      var dataTemp:any[] = [{data: []}];
-      for(var i=0; i<this.source.histogram.length; i++) {
-        labelsTemp.push(this.source.histogram[i].tminSlice);
-        dataTemp[0].data.push(this.source.histogram[i].numberOfLogs);
-      }
+      // console.log('receive');      
 
       var optionsTemp  = this.barChartOptions;
       optionsTemp.scales.xAxes[0].time.min = this.tmin;

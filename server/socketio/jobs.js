@@ -37,6 +37,7 @@ exports = module.exports = function(io,config,client){
     socket.on('getter', (data) => {
       dataJobs = data;
       strJobsPrec = '';
+      clearTimeout(monitoringTimeout);
       monitor();
     });
 
