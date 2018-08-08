@@ -24,8 +24,8 @@ function validate(req, filter) {
     console.log("Headers: " + JSON.stringify(req.headers, null, 2));
     console.log("Params: " + JSON.stringify(req.params, null, 2));
     console.log("Body: " + JSON.stringify(req.body, null, 2));
-    console.log("Session: " + JSON.stringify(req.session, null, 2)); 
-    // TODO: Implement ACL validation 
+    console.log("Session: " + JSON.stringify(req.session, null, 2));
+    // TODO: Implement ACL validation
     if (req.session.isAuthenticated) return true;
     else return false;
 }
@@ -40,7 +40,7 @@ function myProxy(acl, apiOptions) {
             var auth = {};
             auth.owner = req.session.user.username;
             auth.admin = req.session.isAdmin || false ;
-            auth.groups = req.session.groups || {} ;
+            auth.groups = req.session.groups || {}
             apiopts['headers']['auth'] = JSON.stringify(auth);
             console.log("apiopts: " + JSON.stringify(apiopts));
             requestProxy(apiopts)(req, res, next)
@@ -55,10 +55,32 @@ function myProxy(acl, apiOptions) {
 router.all('/*', myProxy(ACL, apiOptions));
 
 function getToken(username, groups) {
-    const jwt = require('jsonwebtoken')
-    var jtoken = jwt.sign("test", config.secretKey)
-    return jtoken
+  
+  const request = require('request');
+  var url = config.apiato.url + "/auth/resources";
+  var bod = {"username": username, "admin": false, "groups": groups};
+  var options = {
+    uri : url,
+    body : bod,
+  }
+
+  return new Promise((resolve, reject) => {
+    request(url, { json: true, body:bod }, (err, res, body) => {
+      if (err) { return console.log(err);
+        console.log(err);
+        console.log(body.url);
+        console.log(body.explanation);
+      }
+      const jwt = require('jsonwebtoken')
+      var jtoken = jwt.sign(body, config.secretKey)
+      resolve(jtoken);
+    });
+
+  });
+
 }
+
+
 
 module.exports = {
     router: router,

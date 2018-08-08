@@ -15,7 +15,7 @@ apiato.ACL = {}
 config.apiato = apiato;
 
 var oauth = {}
-  
+
 oauth.client_id= process.env.OAUTH_CLIENT_ID || 'client_id'
 oauth.secret = process.env.OAUTH_SECRET || 'secret'
 oauth.tokenHost= process.env.OAUTH_TOKEN_HOST || 'https://oauth.host.dom'

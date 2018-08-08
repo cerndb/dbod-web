@@ -27,7 +27,7 @@ const authorizationUri = oauth2.authorizationCode.authorizeURL({
 });
 
 function genApiatoToken(session, token, res) {
-	
+
     var https = require('https');
 	console.log('access_token: ', token.token.access_token)
 
@@ -52,7 +52,6 @@ function genApiatoToken(session, token, res) {
               session.isAdmin = true
             }
 
-            session.token = api.getToken('username', groups)
             // Fetch User info
             console.log('Accesing User Info');
             options.path = config.oauth.resourcePathUser
@@ -62,11 +61,13 @@ function genApiatoToken(session, token, res) {
                 response.on('data', function (chunk) {
                   str += chunk;
                 });
-                response.on('end', function () {
+                response.on('end', async function () {
                     console.log('User Info: ' + str);
                     session.user = JSON.parse(str)
                     session.isAuthenticated = true
+                    session.token = await api.getToken(session.user.username, groups);
 	    		    res.redirect('/')
+
                 })
             }).end();
 		  });
@@ -99,4 +100,3 @@ module.exports = {
     authUri: authorizationUri,
     callback: callback
 }
-
