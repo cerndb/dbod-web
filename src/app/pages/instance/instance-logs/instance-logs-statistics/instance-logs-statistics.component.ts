@@ -118,6 +118,7 @@ export class InstanceLogsStatisticsComponent implements OnInit {
         this.firstLoadFlag = false;
         this.autoResize();
       }
+      this.barChartOptions.animation = false;
     });
   }
 
@@ -168,11 +169,11 @@ export class InstanceLogsStatisticsComponent implements OnInit {
   }
 
   monitor() {
+    this.monitoringFlag = true;
+    delete this.barChartOptions.animation;
     this.tmax = new Date();
     this.timeBinding();
     this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
-    this.monitoringFlag = true;
-    this.barChartOptions.animation = false;
     this.delay(1000).then(() => {this.augmentOneSecond();});
   }
 
