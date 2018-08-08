@@ -55,52 +55,28 @@ function myProxy(acl, apiOptions) {
 router.all('/*', myProxy(ACL, apiOptions));
 
 function getToken(username, groups) {
+  
+  const request = require('request');
+  var url = config.apiato.url + "/auth/resources";
+  var bod = {"username": username, "admin": false, "groups": groups};
+  var options = {
+    uri : url,
+    body : bod,
+  }
 
-  var options = config.apiato.urlResources;
-  var https = require('https');
+  return new Promise((resolve, reject) => {
+    request(url, { json: true, body:bod }, (err, res, body) => {
+      if (err) { return console.log(err);
+        console.log(err);
+        console.log(body.url);
+        console.log(body.explanation);
+      }
+      const jwt = require('jsonwebtoken')
+      var jtoken = jwt.sign(body, config.secretKey)
+      resolve(jtoken);
+    });
 
-  https.request(options, (response) => {
-		  //var str = ''
-      var str = [
-        {  "owner" : "owner1",
-            "admin" : true,
-            "groups" : [
-              "group1",
-              "group2"
-            ]
-        },
-
-        {
-          "owner" : "owner2",
-          "admin" : false,
-          "groups" : [
-            "group3",
-            "group4",
-            "group5"
-          ]
-        },
-
-        {
-          "owner" : "owner3",
-          "admin" : true,
-          "groups" : [
-            "group6",
-            "group7",
-            "group8"
-          ]
-        }
-      ]
-  response.on('data', function (chunk) {
-    str += chunk;
-    console.log("STRING---------------------------" + str);
   });
-
-  response.on('end', function () {
-      //var groups = JSON.parse(str)
-      console.log("String/////////////////////////////////////////" + str);
-      //console.log("GROUPS////////////////////////" + groups);
-  })
-}).end();
 
 }
 
