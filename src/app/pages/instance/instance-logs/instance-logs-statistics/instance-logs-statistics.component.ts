@@ -30,6 +30,9 @@ export class InstanceLogsStatisticsComponent implements OnInit {
   public barChartOptions:any = {
     scaleShowVerticalLines: false,
     responsive: true,
+    tooltips: {
+      enabled: false,
+    },
     scales: {
       xAxes: [{
         type: 'time',
@@ -41,7 +44,7 @@ export class InstanceLogsStatisticsComponent implements OnInit {
           }
         }
       }]
-    }
+    },
   };
 
   public barChartColors:Array<any> = [
@@ -57,9 +60,19 @@ export class InstanceLogsStatisticsComponent implements OnInit {
   public barChartLegend:boolean = false;
 
   public barChartData:any[] = [{data: []}];
+
+  firstLoadFlag = true;
+  monitoringFlag = false;
    
   constructor(@Inject(SocketLogsStatistics) private socket) {
   
+  }
+
+  timeBinding() {
+    this.tmin_day = this.tmin;
+    this.tmin_seconds = {hour: this.tmin.getHours(), minute: this.tmin.getMinutes(), second: this.tmin.getSeconds()}
+    this.tmax_day = this.tmax;
+    this.tmax_seconds = {hour: this.tmax.getHours(), minute: this.tmax.getMinutes(), second: this.tmax.getSeconds()}
   }
 
   ngOnInit() {
@@ -67,8 +80,8 @@ export class InstanceLogsStatisticsComponent implements OnInit {
 
     this.tmin = new Date(0);
     this.tmax = new Date();
-    this.tmin_day = new Date(0);
-    this.tmax_day = new Date();
+    this.timeBinding();
+
     this.logn = 1;
     this.n = 10;
 
@@ -96,13 +109,14 @@ export class InstanceLogsStatisticsComponent implements OnInit {
       this.barChartData = dataTemp;
       this.barChartOptions = optionsTemp;
       this.chart.chart = this.chart.getChartBuilder(this.chart.ctx); // QUICKFIX : https://github.com/valor-software/ng2-charts/issues/806
+      if(this.firstLoadFlag) {
+        this.firstLoadFlag = false;
+        this.autoResize();
+      }
     });
   }
 
   ngOnChanges() {
-    // this.tmin = new Date(0);
-    // this.tmax = new Date();
-    // this.n = 10;
     if(this.data.hasOwnProperty('type')) {
       this.dbName = this.data.name;
       switch(this.data.type) {
@@ -115,22 +129,46 @@ export class InstanceLogsStatisticsComponent implements OnInit {
   }
 
   changeTimeBase() {
+    this.monitoringFlag = false;
+    delete this.barChartOptions.animation;
     this.n = Math.round(Math.pow(10,this.logn));
     if(this.tmin_seconds != null && this.tmax_seconds != null && typeof this.tmin != 'string' && typeof this.tmax != 'string') {
-      this.tmin = new Date(this.tmin_day.getFullYear(),this.tmin_day.getMonth(),this.tmin_day.getDay()+1,this.tmin_seconds.hour,this.tmin_seconds.minute,this.tmin_seconds.second); // NO IDEA WHY getDay()+1 IS NEEDED
-      this.tmax = new Date(this.tmax_day.getFullYear(),this.tmax_day.getMonth(),this.tmax_day.getDay()+1,this.tmax_seconds.hour,this.tmax_seconds.minute,this.tmax_seconds.second);
+      this.tmin = new Date(this.tmin_day.getFullYear(),this.tmin_day.getMonth(),this.tmin_day.getDate(),this.tmin_seconds.hour,this.tmin_seconds.minute,this.tmin_seconds.second);
+      this.tmax = new Date(this.tmax_day.getFullYear(),this.tmax_day.getMonth(),this.tmax_day.getDate(),this.tmax_seconds.hour,this.tmax_seconds.minute,this.tmax_seconds.second);
       this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
     }
   }
 
   autoResize() {
+    this.monitoringFlag = false;
+    delete this.barChartOptions.animation;
     this.tmin = this.source.oldestTimestamp;
-    this.tmin_day = this.tmin;
-    this.tmin_seconds = {hour: this.tmin.getHours(), minute: this.tmin.getMinutes(), second: this.tmin.getSeconds()}
     this.tmax = this.source.newestTimestamp;
-    this.tmax_day = this.tmax;
-    this.tmax_seconds = {hour: this.tmax.getHours(), minute: this.tmax.getMinutes(), second: this.tmax.getSeconds()}
+    this.timeBinding();
     this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+  }
+
+  async delay(ms: number) {
+    await new Promise(resolve => setTimeout(()=>resolve(), 1000));
+  }
+
+  augmentOneSecond() {
+    if(this.monitoringFlag) {
+      this.tmin.setSeconds(this.tmin.getSeconds() + 1);
+      this.tmax.setSeconds(this.tmax.getSeconds() + 1);
+      this.timeBinding();
+      this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+      this.delay(1000).then(() => {this.augmentOneSecond();});
+    }    
+  }
+
+  monitor() {
+    this.tmax = new Date();
+    this.timeBinding();
+    this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+    this.monitoringFlag = true;
+    this.barChartOptions.animation = false;
+    this.delay(1000).then(() => {this.augmentOneSecond();});
   }
 
   ngOnDestroy() {

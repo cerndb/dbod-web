@@ -24,7 +24,7 @@
 		  </div>
 		</form>
 
-		<ngb-timepicker name="dtmin_seconds" [(ngModel)]="tmin_seconds" (ngModelChange)="changeTimeBase()" style="margin-left: 10px"></ngb-timepicker>
+		<ngb-timepicker name="dtmin_seconds" [(ngModel)]="tmin_seconds" [seconds]="true" (ngModelChange)="changeTimeBase()" style="margin-left: 10px"></ngb-timepicker>
 
 		<mat-slider
 	      [disabled]="false"
@@ -37,7 +37,7 @@
 	      [(ngModel)]="logn"
 	      (ngModelChange)="changeTimeBase()"
 	      [vertical]="false"
-	      style="width: 100%; margin-left: 10px">
+	      style="width: 60%; margin-left: 10px">
 	  	</mat-slider>
 
 	  	<form class="form-inline">
@@ -54,8 +54,9 @@
 		  </div>
 		</form>
 
-		<ngb-timepicker name="dtmax_seconds" [(ngModel)]="tmax_seconds" (ngModelChange)="changeTimeBase()" style="margin-left: 10px"></ngb-timepicker>
+		<ngb-timepicker name="dtmax_seconds" [(ngModel)]="tmax_seconds" [seconds]="true" (ngModelChange)="changeTimeBase()" style="margin-left: 10px"></ngb-timepicker>
 
 		<button mat-raised-button color="primary" (click)="autoResize()" style="margin-left: 30px; margin-right: 20px">Resize</button>
+		<button mat-raised-button color="accent" (click)="monitor()" style="margin-right: 20px">Monitor</button>
 	</div>	
 </div>
