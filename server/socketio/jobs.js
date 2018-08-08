@@ -3,13 +3,12 @@ exports = module.exports = function(io,config,client){
 
   io.of('/jobs').on('connection', function(socket) {
     // console.log('socket.io connection made');
-    var dataJobs;
     var strJobsPrec = '';
     var monitoringTimeout=0;
 
     var usernamePassword = config.apiato.user + ":" + config.apiato.password;
 
-    var monitor = function() {
+    var monitor = function(dataJobs) {
       https.get({ host: config.apiato.host, path: config.apiato.path+'/instance/'+dataJobs.id+'/job?order=creation_date.desc&size='+dataJobs.size+'&from='+dataJobs.from, port:config.apiato.port, headers: { Authorization: "Basic " + new Buffer(usernamePassword).toString('base64') } }, (resp) => {
         var strJobs = '';
         resp.on('data', function (chunk) {
@@ -31,14 +30,13 @@ exports = module.exports = function(io,config,client){
       }).on('error', (err) => {
         console.trace(err.message);
       });
-      monitoringTimeout = setTimeout(monitor, 500); // Choose the refresh time
+      monitoringTimeout = setTimeout(monitor, 500, dataJobs); // Choose the refresh time
     }
 
-    socket.on('getter', (data) => {
-      dataJobs = data;
+    socket.on('getter', (dataJobs) => {
       strJobsPrec = '';
       clearTimeout(monitoringTimeout);
-      monitor();
+      monitor(dataJobs);
     });
 
     socket.on('disconnect', (reason) => {

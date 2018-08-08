@@ -1,8 +1,8 @@
 <div class="flex-container">
 	<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" class="flex-left"></ngb-pagination>
 	<div>
-		<mat-form-field style="width: 400px;">
-			<input matInput placeholder="Filters" name="filters" (blur)="changeFilters($event.target.value)">
+		<mat-form-field matTooltip='Example : restore OR backup AND 2018-05-20, please refer to "ElasticSearch Query String Query"' matTooltipPosition='above' style="width: 400px;">
+			<input matInput placeholder="Filters" name="filters" (keyup)="changeFilters($event.target.value)">
 		</mat-form-field>
 	</div>
 	<div>

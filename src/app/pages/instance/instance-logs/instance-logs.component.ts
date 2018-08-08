@@ -41,7 +41,7 @@ export class InstanceLogsComponent implements OnInit {
     this.socket.on('logs', (data) => {
       if(!this.opened) {
         this.source = JSON.parse(data);
-        console.log('receive');
+        // console.log('receive');
       }
     });
   }

@@ -1,23 +1,23 @@
 exports = module.exports = function(io,config,client){
   io.of('/logs_statistics').on('connection', function(socket) {
     // console.log('socket.io connection made');
-    var dataLogsStatistics;
+    var dataLogsStatisticsPresent;
     var statsPrec = '';
     var monitoringTimeout=0;
 
 		var buildHistogram = (data) => {
 			return new Promise( (resolve, reject) => {
-				var tmin = new Date(dataLogsStatistics.tmin);
-				var tmax = new Date(dataLogsStatistics.tmax);
-				var tminSlice = new Date(tmin.getTime()+data.i/dataLogsStatistics.n*(tmax.getTime()-tmin.getTime()));
-    		var tmaxSlice = new Date(tmin.getTime()+(data.i+1)/dataLogsStatistics.n*(tmax.getTime()-tmin.getTime()));
+				var tmin = new Date(data.dataLogsStatistics.tmin);
+				var tmax = new Date(data.dataLogsStatistics.tmax);
+				var tminSlice = new Date(tmin.getTime()+data.i/data.dataLogsStatistics.n*(tmax.getTime()-tmin.getTime()));
+    		var tmaxSlice = new Date(tmin.getTime()+(data.i+1)/data.dataLogsStatistics.n*(tmax.getTime()-tmin.getTime()));
 	    	client.count({
-          index: config.elasticsearch.indexNames[dataLogsStatistics.logType],
+          index: config.elasticsearch.indexNames[data.dataLogsStatistics.logType],
           body: {
             query: {
             	bool: {
             		must: [ 
-					        { term: { instance: dataLogsStatistics.name }},
+					        { term: { instance: data.dataLogsStatistics.name }},
 		              { range : {
 				            "@timestamp" : {
 				              "gte" : tminSlice,
@@ -43,7 +43,7 @@ exports = module.exports = function(io,config,client){
 			});
 		};
 
-    var monitor = function() {
+    var monitor = function(dataLogsStatistics) {
 	    // console.log(dataLogsStatistics);
     	// Getting the oldest
       client.search({
@@ -79,14 +79,14 @@ exports = module.exports = function(io,config,client){
 	        // Counting in each interval of time
 
 	        var histogram = [];
-	        var buildHistogramPromise = Promise.resolve({'histogram': histogram, 'i': 0});
+	        var buildHistogramPromise = Promise.resolve({'histogram': histogram, 'i': 0, 'dataLogsStatistics': dataLogsStatistics});
 	        for(var i=0; i<dataLogsStatistics.n; i++) {
 	        	buildHistogramPromise = buildHistogramPromise.then(buildHistogram);
 	        }
 	        buildHistogramPromise.then( (data) => {
 	        	// console.log(data.histogram);
 	        	var stats = JSON.stringify({'histogram': data.histogram, 'oldestTimestamp': oldestTimestamp, 'newestTimestamp': newestTimestamp });
-	        	if(stats!=statsPrec) {
+	        	if(dataLogsStatistics==dataLogsStatisticsPresent && stats!=statsPrec) {
 	        		statsPrec = stats;
 	        		socket.emit('logs_statistics', stats);
 	        	}
@@ -97,14 +97,14 @@ exports = module.exports = function(io,config,client){
       }, function (err) {
         console.trace(err.message);
       }); 
-	    monitoringTimeout = setTimeout(monitor, 500); // Choose the refresh time
+	    monitoringTimeout = setTimeout(monitor, 500, dataLogsStatistics); // Choose the refresh time
     }
 
-    socket.on('getter', (data) => {
-      dataLogsStatistics = data;
+    socket.on('getter', (dataLogsStatistics) => {
+      dataLogsStatisticsPresent = dataLogsStatistics;
       statsPrec = '';
       clearTimeout(monitoringTimeout);
-      monitor();
+      monitor(dataLogsStatistics);
     });
 
     socket.on('disconnect', (reason) => {

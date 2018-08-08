@@ -35,6 +35,7 @@ import { MatProgressSpinnerModule } from '@angular/material';
 import { MatBadgeModule } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatBadgeModule,
     MatCheckboxModule,
     MatSlideToggleModule,
+    MatTooltipModule,
   ],
   declarations: [
     InstanceComponent,

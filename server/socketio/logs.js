@@ -1,11 +1,10 @@
 exports = module.exports = function(io,config,client){
   io.of('/logs').on('connection', function(socket) {
     // console.log('socket.io connection made');
-    var dataLogs;
     var jsonHitsPrec = '';
     var monitoringTimeout=0;
 
-    var monitor = function() {
+    var monitor = function(dataLogs) {
       //console.log(dataLogs);
       client.search({
         index: config.elasticsearch.indexNames[dataLogs.logType],
@@ -54,14 +53,13 @@ exports = module.exports = function(io,config,client){
       }, function (err) {
         console.trace(err.message);
       });
-      monitoringTimeout = setTimeout(monitor, 500); // Choose the refresh time
+      monitoringTimeout = setTimeout(monitor, 500, dataLogs); // Choose the refresh time
     }
 
-    socket.on('getter', (data) => {
-      dataLogs = data;
+    socket.on('getter', (dataLogs) => {
       jsonHitsPrec = '';
       clearTimeout(monitoringTimeout);
-      monitor();
+      monitor(dataLogs);
     });
 
     socket.on('disconnect', (reason) => {
