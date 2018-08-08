@@ -21,6 +21,7 @@ exports = module.exports = function(io,config,client){
           "size": dataLogs.size,
           "sort": [
             { "@timestamp": { "order": "desc" } },
+            { "timestamp_processed_in_logstash": { "order": "desc" } },
             { "offset": { "order": "desc" } }
           ]
         }

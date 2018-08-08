@@ -26,10 +26,10 @@
   <mat-expansion-panel *ngFor="let item of this.source" (opened)="panelOpened()" (closed)="panelClosed()">
   	<mat-expansion-panel-header>
 	    <mat-panel-title>
-	      {{ item.timestamp_processed_in_logstash | date : 'medium' }}
+	      {{ item['@timestamp'] | date : 'medium' }}
 	    </mat-panel-title>
 	    <mat-panel-description>
-	      {{ item.message }}
+	      {{ item.message | slice: 0:170}}
 	    </mat-panel-description>
 	  </mat-expansion-panel-header>
 	  <prettyjson [obj]="item"></prettyjson> 

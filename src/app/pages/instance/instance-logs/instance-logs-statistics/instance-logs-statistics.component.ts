@@ -43,6 +43,11 @@ export class InstanceLogsStatisticsComponent implements OnInit {
             hour: 'MMM D hA'
           }
         }
+      }],
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+        }
       }]
     },
   };
