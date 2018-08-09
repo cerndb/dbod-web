@@ -3,7 +3,7 @@ exports = module.exports = function(io,config,client){
     // console.log('socket.io connection made');
     var jsonHitsPrec = '';
     var monitoringTimeout=0;
-    var realtime=true;
+    var realtime=false;
 
     var monitor = function(dataLogs) {
       //console.log(dataLogs);
