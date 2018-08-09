@@ -1,5 +1,7 @@
 <div class="flex-container">
-	<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" class="flex-left"></ngb-pagination>
+	<mat-slide-toggle [color]="primary" [checked]=true (change)="realTimeHandler($event)" matTooltip='If enabled, logs are provided' matTooltipPosition='above' style="margin-top: 10px"></mat-slide-toggle>
+
+	<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" class="flex-left" style="margin-top: 10px"></ngb-pagination>
 	<div>
 		<mat-form-field matTooltip='Example : restore OR backup AND 2018-05-20, please refer to "ElasticSearch Query String Query"' matTooltipPosition='above' style="width: 400px;">
 			<input matInput placeholder="Filters" name="filters" (keyup)="changeFilters($event.target.value)">
@@ -26,10 +28,10 @@
   <mat-expansion-panel *ngFor="let item of this.source" (opened)="panelOpened()" (closed)="panelClosed()">
   	<mat-expansion-panel-header>
 	    <mat-panel-title>
-	      {{ item['@timestamp'] | date : 'medium' }}
+	      <span style="width: 180px">{{ item['@timestamp'] | date : 'medium' }}</span>
 	    </mat-panel-title>
 	    <mat-panel-description>
-	      {{ item.message | slice: 0:170}}
+	      <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ item.message }}</span> <!-- https://stackoverflow.com/questions/26019875/truncate-string-based-on-pixel-width -->
 	    </mat-panel-description>
 	  </mat-expansion-panel-header>
 	  <prettyjson [obj]="item"></prettyjson> 

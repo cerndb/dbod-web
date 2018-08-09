@@ -81,6 +81,15 @@ export class InstanceLogsComponent implements OnInit {
     }
   }
 
+  realTimeHandler(e) {
+    if(e.checked) {
+      this.socket.emit('realtime_on');
+    }
+    else {
+      this.socket.emit('realtime_off');
+    }
+  }
+
   changeFilters(value) {
     if(value.length!=0) {
       this.filters = value;

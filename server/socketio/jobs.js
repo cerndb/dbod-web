@@ -30,7 +30,7 @@ exports = module.exports = function(io,config,client){
       }).on('error', (err) => {
         console.trace(err.message);
       });
-      monitoringTimeout = setTimeout(monitor, 500, dataJobs); // Choose the refresh time
+      monitoringTimeout = setTimeout(monitor, 1000, dataJobs); // Choose the refresh time
     }
 
     socket.on('getter', (dataJobs) => {
