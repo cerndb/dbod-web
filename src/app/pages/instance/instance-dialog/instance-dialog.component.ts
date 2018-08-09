@@ -26,8 +26,8 @@ export class InstanceDialogComponent {
 		var req = {};
     req[this.data.fieldName] = this.data.newContent;
 
-		this.state = this.State['Loading'];
-		this.http.put('./api/v1/instance/'+this.data.id,req).subscribe( (res:any) => {
+	this.state = this.State['Loading'];
+	this.http.put('./api/v1/instance/'+this.data.id,req).subscribe( (res:any) => {
       this.resMessage = res.message;
       this.resStatus = res.status;
       this.state = this.State['Success'];

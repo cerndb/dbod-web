@@ -84,6 +84,8 @@ export class InstanceLogsComponent implements OnInit {
   realTimeHandler(e) {
     if(e.checked) {
       this.socket.emit('realtime_on');
+      this.opened = false;
+      this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
     }
     else {
       this.socket.emit('realtime_off');
@@ -97,6 +99,7 @@ export class InstanceLogsComponent implements OnInit {
     else {
       this.filters = '*';
     }
+    this.opened = false;
     this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
   }
 

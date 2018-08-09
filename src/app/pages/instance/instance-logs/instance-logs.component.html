@@ -1,10 +1,10 @@
 <div class="flex-container">
-	<mat-slide-toggle [color]="primary" [checked]=true (change)="realTimeHandler($event)" matTooltip='If enabled, logs are provided' matTooltipPosition='above' style="margin-top: 10px"></mat-slide-toggle>
+	<mat-slide-toggle [color]="primary" [checked]=false (change)="realTimeHandler($event)" matTooltip='If enabled, logs are provided in real time' matTooltipPosition='above' style="margin-top: 10px"></mat-slide-toggle>
 
 	<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" class="flex-left" style="margin-top: 10px"></ngb-pagination>
 	<div>
-		<mat-form-field matTooltip='Example : restore OR backup AND 2018-05-20, please refer to "ElasticSearch Query String Query"' matTooltipPosition='above' style="width: 400px;">
-			<input matInput placeholder="Filters" name="filters" (keyup)="changeFilters($event.target.value)">
+		<mat-form-field matTooltip='Example : "(restore OR backup) AND @timestamp:2018-05-20", please refer to ElasticSearch Query String' matTooltipPosition='above' style="width: 400px;">
+			<input matInput placeholder="Filters" name="filters" (blur)="changeFilters($event.target.value)" (keyup.enter)="$event.target.blur()">
 		</mat-form-field>
 	</div>
 	<div>
