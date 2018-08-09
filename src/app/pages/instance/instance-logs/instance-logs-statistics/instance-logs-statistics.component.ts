@@ -3,6 +3,7 @@ import { SocketLogsStatistics } from '../../sockets.module';
 import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 import {NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'instance-logs-statistics',
@@ -67,7 +68,8 @@ export class InstanceLogsStatisticsComponent implements OnInit {
   public barChartData:any[] = [{data: []}];
 
   firstLoadFlag = true;
-  monitoringFlag = false;
+  clock1;
+  clock10;
    
   constructor(@Inject(SocketLogsStatistics) private socket) {
   
@@ -135,7 +137,10 @@ export class InstanceLogsStatisticsComponent implements OnInit {
   }
 
   changeTimeBase() {
-    this.monitoringFlag = false;
+    if(this.clock1!=undefined) {
+      this.clock1.unsubscribe();
+      this.clock10.unsubscribe();
+    }
     delete this.barChartOptions.animation;
     this.n = Math.round(Math.pow(10,this.logn));
     if(this.tmin_seconds != null && this.tmax_seconds != null && typeof this.tmin != 'string' && typeof this.tmax != 'string') {
@@ -146,7 +151,10 @@ export class InstanceLogsStatisticsComponent implements OnInit {
   }
 
   autoResize() {
-    this.monitoringFlag = false;
+    if(this.clock1!=undefined) {
+      this.clock1.unsubscribe();
+      this.clock10.unsubscribe();
+    }
     delete this.barChartOptions.animation;
     this.tmin = this.source.oldestTimestamp;
     this.tmax = this.source.newestTimestamp;
@@ -154,27 +162,19 @@ export class InstanceLogsStatisticsComponent implements OnInit {
     this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
   }
 
-  async delay(ms: number) {
-    await new Promise(resolve => setTimeout(()=>resolve(), 1000));
-  }
-
-  augmentOneSecond() {
-    if(this.monitoringFlag) {
-      this.tmin.setSeconds(this.tmin.getSeconds() + 1);
-      this.tmax.setSeconds(this.tmax.getSeconds() + 1);
-      this.timeBinding();
-      this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
-      this.delay(1000).then(() => {this.augmentOneSecond();});
-    }    
-  }
-
   monitor() {
-    this.monitoringFlag = true;
     delete this.barChartOptions.animation;
     this.tmax = new Date();
     this.timeBinding();
     this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
-    this.delay(1000).then(() => {this.augmentOneSecond();});
+    this.clock1 = interval(1000).subscribe(n => {
+      this.tmin.setSeconds(this.tmin.getSeconds() + 1);
+      this.tmax.setSeconds(this.tmax.getSeconds() + 1);
+      this.timeBinding();
+    })
+    this.clock10 = interval(10000).subscribe(n => {
+      this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+    })
   }
 
   ngOnDestroy() {

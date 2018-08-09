@@ -3,6 +3,7 @@ exports = module.exports = function(io,config,client){
     // console.log('socket.io connection made');
     var jsonHitsPrec = '';
     var monitoringTimeout=0;
+    var realtime=true;
 
     var monitor = function(dataLogs) {
       //console.log(dataLogs);
@@ -54,13 +55,24 @@ exports = module.exports = function(io,config,client){
       }, function (err) {
         console.trace(err.message);
       });
-      monitoringTimeout = setTimeout(monitor, 500, dataLogs); // Choose the refresh time
+      if(realtime) {
+        monitoringTimeout = setTimeout(monitor, 1000, dataLogs); // Choose the refresh time
+      }
     }
 
     socket.on('getter', (dataLogs) => {
       jsonHitsPrec = '';
       clearTimeout(monitoringTimeout);
       monitor(dataLogs);
+    });
+
+    socket.on('realtime_on', () => {
+      realtime=true;
+    });
+
+    socket.on('realtime_off', () => {
+      clearTimeout(monitoringTimeout);
+      realtime=false;
     });
 
     socket.on('disconnect', (reason) => {

@@ -97,7 +97,7 @@ exports = module.exports = function(io,config,client){
       }, function (err) {
         console.trace(err.message);
       }); 
-	    monitoringTimeout = setTimeout(monitor, 500, dataLogsStatistics); // Choose the refresh time
+	    // monitoringTimeout = setTimeout(monitor, 10000, dataLogsStatistics); // Choose the refresh time
     }
 
     socket.on('getter', (dataLogsStatistics) => {
