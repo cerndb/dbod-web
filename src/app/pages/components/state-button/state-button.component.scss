@@ -1,9 +1,13 @@
-.badge-job-ok { 
+.badge{
+  color: white;
+  width: 100px;
+}
+.badge-job-ok {
     background-color: #5cb85c;
 }
-.badge-job-info { 
+.badge-job-info {
     background-color: #f0ad4e;
 }
-.badge-job-fail { 
+.badge-job-fail {
     background-color: #d9534f;
 }

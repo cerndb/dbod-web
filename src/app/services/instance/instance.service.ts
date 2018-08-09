@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http'; 
+import { Http } from '@angular/http';
 import { Response, Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -18,11 +18,23 @@ export class InstanceService {
                        .map((res:any) => res.json());
   }
 
+  getPendingInstances(): Observable<any> {
+       return this.http.get('assets/pendingInstances-info.json')
+       //return this.http.get('./api/v1/instance')
+                       .map((res:any) => res.json());
+  }
+
+  getExpiredInstances(): Observable<any> {
+       return this.http.get('assets/expiredInstances-info.json')
+       //return this.http.get('./api/v1/instance')
+                       .map((res:any) => res.json());
+  }
+
   put(instanceId,attribute,fieldName,fieldValue) {
   	return new Promise( (resolve, reject) => {
   		var url = attribute ? './api/v1/instance/'+instanceId+'/attribute/'+fieldName : './api/v1/instance/'+instanceId;
   		var req;
-  		if(attribute) { 
+  		if(attribute) {
   			req = fieldValue;
   		}
   		else {

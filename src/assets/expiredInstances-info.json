@@ -1,0 +1,26 @@
+[
+  {
+    "name": "name1",
+    "host": "host1",
+    "owner": "username1",
+    "category": "class1",
+    "type": "type1",
+    "expiryDate": "09/08/2018"
+  },
+  {
+    "name": "name2",
+    "host": "host2",
+    "owner": "username2",
+    "category": "class2",
+    "type": "type2",
+    "expiryDate": "09/08/2018"
+  },
+  {
+    "name": "name3",
+    "host": "host3",
+    "owner": "username3",
+    "category": "class3",
+    "type": "type3",
+    "expiryDate": "09/08/2018"
+  }
+]
