@@ -13,4 +13,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/overview',
     home: false,
   },
+  {
+    title: 'Admin',
+    icon: 'nb-person',
+    link: '/pages/admin-instances',
+    home: false,
+  },
 ];

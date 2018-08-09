@@ -1,0 +1,26 @@
+[
+  {
+    "name": "name",
+    "host": "host",
+    "owner": "username",
+    "category": "class",
+    "type": "type",
+    "version": "4.0"
+  },
+  {
+    "name": "name2",
+    "host": "host2",
+    "owner": "username2",
+    "category": "class2",
+    "type": "type2",
+    "version": "3.11"
+  },
+  {
+    "name": "name3",
+    "host": "host3",
+    "owner": "username3",
+    "category": "class3",
+    "type": "type3",
+    "version": "2.1.2"
+  }
+]

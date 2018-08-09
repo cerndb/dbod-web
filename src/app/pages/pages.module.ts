@@ -6,6 +6,7 @@ import { ThemeModule } from '../@theme/theme.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { OverviewModule } from './overview/overview.module';
 import { InstanceModule } from './instance/instance.module';
+import { AdminInstancesModule } from './admin-instances/admin-instances.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -18,6 +19,7 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     OverviewModule,
     InstanceModule,
+    AdminInstancesModule,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
