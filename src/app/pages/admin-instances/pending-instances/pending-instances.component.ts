@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { InstanceService } from '../../../services/instance';
 import { DbNameComponent } from '../../components/db-name/db-name.component';
-import { ValidateButtonComponent } from '../../components/validate-button/validate-button.component';
 import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
@@ -44,12 +43,12 @@ export class PendingInstancesComponent implements OnInit {
         title: 'Version',
         filter: false,
       },
-      validate: {
+      /*validate: {
         title: 'Validate',
         filter: false,
         type: 'custom',
         renderComponent: ValidateButtonComponent,
-      },
+      },*/
     },
     actions: {
       add: false,
@@ -100,10 +99,10 @@ export class PendingInstancesComponent implements OnInit {
           field: 'version',
           search: query,
         },
-        {
+        /*{
           field: 'validate',
           search: query,
-        },
+        },*/
       ], false);
       // second parameter specifying whether to perform 'AND' or 'OR' search
       // (meaning all columns should contain search query or at least one)

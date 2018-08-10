@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { InstanceService } from '../../../services/instance';
-import { DestroyButtonComponent } from '../../components/destroy-button/destroy-button.component';
-import { RescueButtonComponent } from '../../components/rescue-button/rescue-button.component';
 import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
@@ -41,18 +39,6 @@ export class ExpiredInstancesComponent implements OnInit {
       expiryDate: {
         title: 'Expiry Date',
         filter: false,
-      },
-      rescue: {
-        title: 'Rescue',
-        filter: false,
-        type: 'custom',
-        renderComponent: RescueButtonComponent,
-      },
-      destroy: {
-        title: 'Destroy',
-        filter: false,
-        type: 'custom',
-        renderComponent: DestroyButtonComponent,
       },
     },
     actions: {
@@ -102,14 +88,6 @@ export class ExpiredInstancesComponent implements OnInit {
         },
         {
           field: 'expiryDate',
-          search: query,
-        },
-        {
-          field: 'rescue',
-          search: query,
-        },
-        {
-          field: 'destroy',
           search: query,
         },
 
