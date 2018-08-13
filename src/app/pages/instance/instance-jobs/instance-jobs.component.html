@@ -15,11 +15,11 @@
   	<mat-expansion-panel-header>
 	    <mat-panel-title>
 	    	<span class="state" [ngSwitch]="item.state">
-				  <span class="badge badge-success" *ngSwitchCase="'FINISHED_OK'">Finished</span>
-				  <span class="badge badge-danger" *ngSwitchCase="'FINISHED_FAIL'">Failed</span>
-				  <span class="badge badge-warning" *ngSwitchCase="'PENDING'">Pending</span>
-				</span>
-	      <span style="margin-left: 2em">{{ item.creation_date | date : 'medium' }}</span> <span style="margin-left: 2em" *ngIf="item.state!='PENDING'">{{ item.completion_date | date : 'medium' }}</span>
+			  <span class="badge badge-success" *ngSwitchCase="'FINISHED_OK'">Finished</span>
+			  <span class="badge badge-danger" *ngSwitchCase="'FINISHED_FAIL'">Failed</span>
+			  <span class="badge badge-warning" *ngSwitchCase="'RUNNING'">Running</span>
+			</span>
+	      <span style="margin-left: 2em">{{ item.creation_date | date : 'medium' }}</span> <span style="margin-left: 2em" *ngIf="item.state!='RUNNING'">{{ item.completion_date | date : 'medium' }}</span>
 	    </mat-panel-title>
 	    <mat-panel-description>
 				{{ item.command_name }} requested by {{ item.requester }}

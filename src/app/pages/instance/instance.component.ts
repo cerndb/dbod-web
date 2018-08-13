@@ -7,6 +7,8 @@ import { InstanceDialogComponent } from './instance-dialog/instance-dialog.compo
 import {MatCheckbox} from '@angular/material';
 import {MatSlideToggle} from '@angular/material';
 
+import { AuthenticationService } from '../../services/authentication/authentication.service';
+
 @Component({
   selector: 'instance',
   styleUrls: ['./instance.scss'],
@@ -61,9 +63,7 @@ export class InstanceComponent implements OnInit {
       ],
   };
 
-  isAdmin = false;
-
-  constructor( private route: ActivatedRoute, private router: Router, private instanceService: InstanceService, public dialog: MatDialog) {}
+  constructor( private authService: AuthenticationService, private route: ActivatedRoute, private router: Router, private instanceService: InstanceService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.data = {};

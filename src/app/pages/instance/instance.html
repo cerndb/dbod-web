@@ -1,51 +1,44 @@
-<mat-card *ngIf="data.hasOwnProperty('user')">
+<mat-card *ngIf="data.hasOwnProperty('user') && this.authService.user.isAdmin!=undefined">
   <mat-card-header>
-    <div mat-card-avatar><mat-slide-toggle [color]="primary" style="margin-top:10px;"></mat-slide-toggle></div>
+    <div mat-card-avatar><mat-slide-toggle [color]="primary" matTooltip='On/Off' matTooltipPosition='above' style="margin-top: 10px;"></mat-slide-toggle></div>
     <mat-card-title>{{ data.name }}</mat-card-title>
     <mat-card-subtitle>{{ data.user.department }}-{{ data.user.group }} {{ data.user.first_name }} {{ data.user.last_name }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content style="display:flex; justify-content: center;">
-    <div>
-      <mat-form-field style="width: 400px; float:left; margin-right: 50px;">
-        <textarea matInput placeholder="Description" rows="5" name="description" value="{{data.description}}" (blur)="changeField($event.target.name,$event.target.value)"></textarea>
+    <div class="flex-container">
+      <mat-form-field class="field">
+        <input matInput placeholder="Owner" name="owner" value="{{data.owner}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
       </mat-form-field>
-    </div>
-    <div>
-      <div class="flex-container">
-        <mat-form-field class="field">
-          <input matInput placeholder="Owner" name="owner" value="{{data.owner}}" [disabled]="!isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
-        </mat-form-field>
-        <mat-form-field class="field">
-          <input matInput placeholder="Egroup" name="egroup" value="{{data.egroup}}" [disabled]="!isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
-        </mat-form-field>
-        <mat-form-field class="field">
-          <input matInput placeholder="Project" name="project" value="{{data.project}}" (blur)="changeField($event.target.name,$event.target.value)">
-        </mat-form-field>
-        <mat-form-field class="field">
-          <input matInput placeholder="Creation date" name="creation_date" value="{{data.creation_date}}" disabled (blur)="changeField($event.target.name,$event.target.value)">
-        </mat-form-field>
-        <mat-form-field class="field">
-          <input matInput placeholder="Expiry date" name="expiry_date" value="{{data.expiry_date}}" [disabled]="!isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
-        </mat-form-field>
-      </div>
-      <br/>
-      <div class="flex-container">
-        <mat-form-field class="field">
-          <input matInput placeholder="Type" name="type" value="{{data.type}}" disabled (blur)="changeField($event.target.name,$event.target.value)">
-        </mat-form-field>
-        <mat-form-field class="field">
-          <input matInput placeholder="Version" name="version" value="{{data.version}}" [disabled]="!isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
-        </mat-form-field>
-        <mat-form-field class="field">
-          <mat-select matInput placeholder="Category" name="category" value="{{data.category}}" [disabled]="!isAdmin" (selectionChange)="changeField('category',$event.value)">
-            <mat-option value="REF">REF</mat-option>
-            <mat-option value="TEST">TEST</mat-option>
-            <mat-option value="PROD">PROD</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-checkbox name="attribute/
-        notifications" value="{{data.attributes.notifications}}" [disabled]="!isAdmin" (change)="changeField($event.name,$event.checked)">Notifications</mat-checkbox>
-      </div>
+      <mat-form-field class="field">
+        <input matInput placeholder="Egroup" name="egroup" value="{{data.egroup}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
+      </mat-form-field>
+      <mat-form-field class="field">
+        <input matInput placeholder="Project" name="project" value="{{data.project}}" (blur)="changeField($event.target.name,$event.target.value)">
+      </mat-form-field>
+      <mat-form-field class="field">
+        <input matInput placeholder="Description" name="description" value="{{data.description}}" (blur)="changeField($event.target.name,$event.target.value)">
+      </mat-form-field>
+      <mat-form-field class="field">
+        <input matInput placeholder="Creation date" name="creation_date" value="{{data.creation_date}}" disabled (blur)="changeField($event.target.name,$event.target.value)">
+      </mat-form-field>
+      <mat-form-field class="field">
+        <input matInput placeholder="Expiry date" name="expiry_date" value="{{data.expiry_date}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
+      </mat-form-field>
+      <mat-form-field class="field">
+        <input matInput placeholder="Type" name="type" value="{{data.type}}" disabled (blur)="changeField($event.target.name,$event.target.value)">
+      </mat-form-field>
+      <mat-form-field class="field">
+        <input matInput placeholder="Version" name="version" value="{{data.version}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
+      </mat-form-field>
+      <mat-form-field class="field">
+        <mat-select matInput placeholder="Category" name="category" value="{{data.category}}" [disabled]="!this.authService.user.isAdmin" (selectionChange)="changeField('category',$event.value)">
+          <mat-option value="REF">REF</mat-option>
+          <mat-option value="TEST">TEST</mat-option>
+          <mat-option value="PROD">PROD</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-checkbox name="attribute/
+      notifications" value="{{data.attributes.notifications}}" [disabled]="!this.authService.user.isAdmin" (change)="changeField($event.name,$event.checked)">Notifications</mat-checkbox>
     </div>
   </mat-card-content>
 </mat-card>

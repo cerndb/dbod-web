@@ -22,19 +22,19 @@ import { InstanceLogsStatisticsComponent } from './instance-logs/instance-logs-s
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PrettyJsonModule } from 'angular2-prettyjson';
 import { ChartsModule } from 'ng2-charts';
-import {MatSliderModule} from '@angular/material';
-import {MatExpansionModule} from '@angular/material';
-import {MatSelectModule} from '@angular/material';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatInputModule} from '@angular/material';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDialogModule} from '@angular/material';
+import { MatSliderModule } from '@angular/material';
+import { MatExpansionModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material';
 import { InstanceDialogComponent } from './instance-dialog/instance-dialog.component';
 import { MatProgressSpinnerModule } from '@angular/material';
 import { MatBadgeModule } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material';
 
 @NgModule({

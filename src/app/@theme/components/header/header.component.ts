@@ -19,8 +19,9 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.authService
-        .loadUser()
-        .subscribe(data => (this.user = data), err => console.log(err));
+          .loadUser().then( () => {
+              this.user = this.authService.user;
+          });
     }
 
     toggleSidebar(): boolean {

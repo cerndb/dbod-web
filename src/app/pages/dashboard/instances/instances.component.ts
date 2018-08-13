@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { InstanceService } from '../../../services/instance';
-import { StateButtonComponent } from '../../components/state-button/state-button.component';
-import { DbNameComponent } from '../../components/db-name/db-name.component';
 import { LocalDataSource } from 'ng2-smart-table';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'instances',
@@ -11,102 +10,29 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./instances.component.scss']
 })
 export class InstancesComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'state', 'name', 'owner', 'egroup', 'project', 'type', 'category'];
+  dataSource;
 
-  source: LocalDataSource;
-  @Input() title: string;
-
-  settings = {
-    selectMode: 'multi',
-    columns: {
-      name: {
-        title: 'DB Name',
-        filter: false,
-        type: 'custom',
-        renderComponent: DbNameComponent,
-      },
-      host: {
-        title: 'Host',
-        filter: false,
-      },
-      owner: {
-        title: 'Owner',
-        filter: false,
-      },
-      category: {
-        title: 'Category',
-        filter: false,
-      },
-      type: {
-        title: 'DB Type',
-        filter: false,
-      },
-      state: {
-        title: 'State',
-        type: 'custom',
-        renderComponent: StateButtonComponent,
-        filter: false,
-      },
-    },
-    actions: {
-      add: false,
-      delete: false,
-      edit: false,
-    },
-    hideSubHeader: true,
-    noDataMessage: 'No instance found.',
-
-  };
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _instanceService: InstanceService) {
-
+    this.dataSource = new MatTableDataSource([{'id': '', 'state': '', 'name': '', 'owner': '', 'egroup': '', 'project': '', 'type': '', 'category': ''}]);
   }
 
   ngOnInit() {
     this._instanceService.getInstances().subscribe((res) => {
-      this.source = new LocalDataSource(res['response']);
+      this.dataSource = new MatTableDataSource(res['response']);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 
-  onSearch(query: string = '') {
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if(query!='') {
-      this.source.setFilter([
-        // fields we want to include in the search
-        {
-          field: 'name',
-          search: query,
-        },
-        {
-          field: 'host',
-          search: query,
-        },
-        {
-          field: 'username',
-          search: query,
-        },
-        {
-          field: 'category',
-          search: query,
-        },
-        {
-          field: 'type',
-          search: query,
-        },
-        {
-          field: 'state',
-          search: query,
-        },
-      ], false);
-      // second parameter specifying whether to perform 'AND' or 'OR' search
-      // (meaning all columns should contain search query or at least one)
-      // 'AND' by default, so changing to 'OR' by setting false here
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
-    else {
-      this.source.setFilter([]);
-    }
-    // second parameter specifying whether to perform 'AND' or 'OR' search
-    // (meaning all columns should contain search query or at least one)
-    // 'AND' by default, so changing to 'OR' by setting false here
   }
-
 }

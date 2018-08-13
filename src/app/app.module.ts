@@ -16,9 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 import { InstanceModule } from './pages/instance/instance.module';
-import { DbNameComponent } from './pages/components/db-name/db-name.component';
 import { StateButtonComponent } from './pages/components/state-button/state-button.component';
 import { OverviewModule } from './pages/overview/overview.module';
 
@@ -26,7 +24,6 @@ import { OverviewModule } from './pages/overview/overview.module';
   declarations: [
     AppComponent,
     StateButtonComponent,
-    DbNameComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +41,6 @@ import { OverviewModule } from './pages/overview/overview.module';
   bootstrap: [AppComponent],
   entryComponents: [
     StateButtonComponent,
-    DbNameComponent,
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
