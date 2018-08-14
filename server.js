@@ -28,12 +28,15 @@ app.use(session({
     })
 );
 
+// Set our API proxy
+// This needs to be the first definition to prevent this issue
+// https://github.com/dvonlehman/express-request-proxy/issues/9
+// affecting POST (and PUT) operations
+app.use('/api/v1', api.router);
+
 // Parsers for POST data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// Set our API proxy
-app.use('/api/v1', api.router);
 
 // Initial page redirecting to Oauth server
 app.get('/login', (req, res) => {
