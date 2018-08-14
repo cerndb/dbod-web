@@ -24,13 +24,20 @@ export class InstanceDialogComponent {
 
 	sendRequest() {
 		var req = {};
-    req[this.data.fieldName] = this.data.newContent;
+	    req[this.data.fieldName] = this.data.newContent;
 
-	this.state = this.State['Loading'];
-	this.http.put('./api/v1/instance/'+this.data.id,req).subscribe( (res:any) => {
-      this.resMessage = res.message;
-      this.resStatus = res.status;
-      this.state = this.State['Success'];
+		this.state = this.State['Loading'];
+		this.http.put('./api/v1/instance/'+this.data.id,req).subscribe( (res:any) => {
+			if(res!=null) {
+				this.resMessage = res.message;
+	      this.resStatus = res.status;
+	      this.state = this.State['Success'];
+			}
+			else {
+				this.resMessage = 'Change applied with success.';
+	      this.resStatus = 200;
+	      this.state = this.State['Success'];
+			}
     }, (err:any) => {
     	this.resMessage = err.message;
     	this.resStatus = err.status;

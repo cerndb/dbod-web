@@ -7,28 +7,28 @@
   <mat-card-content style="display:flex; justify-content: center;">
     <div class="flex-container">
       <mat-form-field class="field">
-        <input matInput placeholder="Owner" name="owner" value="{{data.owner}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
+        <input matInput placeholder="Owner" name="owner" value="{{data.owner}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Egroup" name="egroup" value="{{data.egroup}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
+        <input matInput placeholder="Egroup" name="egroup" value="{{data.egroup}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Project" name="project" value="{{data.project}}" (blur)="changeField($event.target.name,$event.target.value)">
+        <input matInput placeholder="Project" name="project" value="{{data.project}}" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Description" name="description" value="{{data.description}}" (blur)="changeField($event.target.name,$event.target.value)">
+        <input matInput placeholder="Description" name="description" value="{{data.description}}" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Creation date" name="creation_date" value="{{data.creation_date}}" disabled (blur)="changeField($event.target.name,$event.target.value)">
+        <input matInput placeholder="Creation date" name="creation_date" value="{{data.creation_date}}" disabled (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Expiry date" name="expiry_date" value="{{data.expiry_date}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
+        <input matInput placeholder="Expiry date" name="expiry_date" value="{{data.expiry_date}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Type" name="type" value="{{data.type}}" disabled (blur)="changeField($event.target.name,$event.target.value)">
+        <input matInput placeholder="Type" name="type" value="{{data.type}}" disabled (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Version" name="version" value="{{data.version}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)">
+        <input matInput placeholder="Version" name="version" value="{{data.version}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
         <mat-select matInput placeholder="Category" name="category" value="{{data.category}}" [disabled]="!this.authService.user.isAdmin" (selectionChange)="changeField('category',$event.value)">
