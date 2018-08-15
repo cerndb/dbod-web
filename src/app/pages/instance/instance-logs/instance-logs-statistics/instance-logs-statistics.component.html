@@ -10,53 +10,58 @@
 	</div>
 
 	<div class="flex-container-statistics">
-		<form class="form-inline">
-		  <div class="form-group">
-		    <div class="input-group">
-		      <input class="form-control" placeholder="yyyy-mm-dd"
-		             name="dtmin_day" [(ngModel)]="tmin_day" (ngModelChange)="changeTimeBase()" ngbDatepicker #dmin_day="ngbDatepicker" style="margin-left: 20px">
-		      <div class="input-group-append">
-		        <button class="btn btn-outline-secondary" (click)="dmin_day.toggle()" type="button">
-		          <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
-		        </button>
-		      </div>
-		    </div>
-		  </div>
-		</form>
+		<div class="flex-container-statistics">
+			<form class="form-inline">
+			  <div class="form-group">
+			    <div class="input-group">
+			      <input class="form-control" placeholder="yyyy-mm-dd"
+			             name="dtmin_day" [(ngModel)]="tmin_day" (ngModelChange)="changeTimeBase()" ngbDatepicker #dmin_day="ngbDatepicker" style="width: 110px; margin-left: 20px">
+			      <div class="input-group-append">
+			        <button class="btn btn-outline-secondary" (click)="dmin_day.toggle()" type="button">
+			          <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+			        </button>
+			      </div>
+			    </div>
+			  </div>
+			</form>
 
-		<ngb-timepicker name="dtmin_seconds" [(ngModel)]="tmin_seconds" [seconds]="true" (ngModelChange)="changeTimeBase()" style="margin-left: 10px"></ngb-timepicker>
+			<ngb-timepicker name="dtmin_seconds" [(ngModel)]="tmin_seconds" [seconds]="true" (ngModelChange)="changeTimeBase()" style="margin-left: 10px"></ngb-timepicker>
+		</div>
 
 		<mat-slider
-	      [disabled]="false"
-	      [invert]="false"
-	      [max]="2.7"
-	      [min]="1"
-	      [step]="0.001"
-	      [thumbLabel]="false"
-	      [tickInterval]="false"
-	      [(ngModel)]="logn"
-	      (ngModelChange)="changeTimeBase()"
-	      [vertical]="false"
-	      style="width: 60%; margin-left: 10px">
-	  	</mat-slider>
+      [disabled]="false"
+      [invert]="false"
+      [max]="2.7"
+      [min]="1"
+      [step]="0.001"
+      [thumbLabel]="false"
+      [tickInterval]="false"
+      [(ngModel)]="logn"
+      (ngModelChange)="changeTimeBase()"
+      [vertical]="false"
+      style="width: 30%; margin-left: 10px">
+  	</mat-slider>
 
+  	<div class="flex-container-statistics">
 	  	<form class="form-inline">
-		  <div class="form-group">
-		    <div class="input-group">		    
-		      <input class="form-control" placeholder="yyyy-mm-dd"
-		             name="dtmax_day" [(ngModel)]="tmax_day" (ngModelChange)="changeTimeBase()" ngbDatepicker #dmax_day="ngbDatepicker" style="margin-left: 10px">
-		      <div class="input-group-append">
-		        <button class="btn btn-outline-secondary" (click)="dmax_day.toggle()" type="button">
-		          <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
-		        </button>
-		      </div>
-		    </div>
-		  </div>
-		</form>
+		  	<div class="form-group">
+			    <div class="input-group">		    
+			      <input class="form-control" placeholder="yyyy-mm-dd"
+			             name="dtmax_day" [(ngModel)]="tmax_day" (ngModelChange)="changeTimeBase()" ngbDatepicker #dmax_day="ngbDatepicker" style="width: 110px; margin-left: 10px">
+			      <div class="input-group-append">
+			        <button class="btn btn-outline-secondary" (click)="dmax_day.toggle()" type="button">
+			          <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+			        </button>
+			      </div>
+			    </div>
+			  </div>
+			</form>
 
-		<ngb-timepicker name="dtmax_seconds" [(ngModel)]="tmax_seconds" [seconds]="true" (ngModelChange)="changeTimeBase()" style="margin-left: 10px"></ngb-timepicker>
-
-		<button mat-raised-button color="primary" (click)="autoResize()" style="margin-left: 30px; margin-right: 20px">Resize</button>
-		<button mat-raised-button color="accent" (click)="monitor()" style="margin-right: 20px">Monitor</button>
+			<ngb-timepicker name="dtmax_seconds" [(ngModel)]="tmax_seconds" [seconds]="true" (ngModelChange)="changeTimeBase()" style="margin-left: 10px"></ngb-timepicker>
+		</div>
+		<div>
+			<button mat-raised-button color="primary" (click)="autoResize()" style="margin-left: 30px; margin-right: 20px">Resize</button>
+			<button mat-raised-button color="accent" (click)="monitor()" style="margin-right: 20px">Monitor</button>
+		</div>
 	</div>	
 </div>

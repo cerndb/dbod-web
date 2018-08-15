@@ -1,0 +1,58 @@
+<div [ngSwitch]="state">
+	<div *ngSwitchCase="State['Choose']">
+		<h2 mat-dialog-title>Snapshot settings</h2>
+		<mat-dialog-content>
+			You can rename the snapshot :<br/>
+
+			<mat-form-field>
+				<input matInput placeholder="{{ data.title }}" name="newTitle" [(ngModel)]="newTitle">
+			</mat-form-field>
+			<button mat-raised-button color="primary" (click)="sendRename()" style="margin-left: 10px">Rename</button>
+			<br/>
+			Or recover it :<br/><br/>
+			<button mat-raised-button color="accent" (click)="state=State['Confirm_recover']" style="width: 100%">Recover</button>
+		</mat-dialog-content>
+		<mat-dialog-actions align="end">
+		  <button mat-button mat-dialog-close>Cancel</button>
+		</mat-dialog-actions>
+	</div>
+
+	<div *ngSwitchCase="State['Confirm_recover']">
+		<h2 mat-dialog-title>Snapshot recovering</h2>
+		<mat-dialog-content>
+			Are you sure you want to recover this snapshot ?<br/><br/>
+
+			<h6 style="text-align: center;">Instance name : {{ data.instanceName }}</h6>
+			<h6 style="text-align: center;">Title : {{ data.title }}</h6>
+			<h6 style="text-align: center;">Date : {{ data.date }}</h6>
+		</mat-dialog-content>
+		<mat-dialog-actions align="end">
+		  <button mat-button mat-dialog-close>Cancel</button>
+		  <button mat-button color="primary" cdkFocusInitial (click)='sendRecover()'>Confirm</button>
+		</mat-dialog-actions>
+	</div>
+
+	<div *ngSwitchCase="State['Loading']">
+		<mat-spinner [color]="primary"></mat-spinner>
+	</div>
+
+	<div *ngSwitchCase="State['Success']">
+		<h2 mat-dialog-title><span matBadge="{{resStatus}}" matBadgeColor="primary" matBadgeOverlap="false">Sucess</span></h2>
+		<mat-dialog-content>
+			<h6 style="text-align: center;">{{ resMessage }}</h6>
+		</mat-dialog-content>
+		<mat-dialog-actions align="end">
+		  <button mat-button color="primary" cdkFocusInitial mat-dialog-close>Close</button>
+		</mat-dialog-actions>
+	</div>
+
+	<div *ngSwitchCase="State['Error']">
+		<h2 mat-dialog-title><span matBadge="{{resStatus}}" matBadgeColor="warn" matBadgeOverlap="false">Error</span></h2>
+		<mat-dialog-content>
+			<h6 style="text-align: center;">{{ resMessage }}</h6>
+		</mat-dialog-content>
+		<mat-dialog-actions align="end">
+		  <button mat-button color="warn" cdkFocusInitial mat-dialog-close>Close</button>
+		</mat-dialog-actions>
+	</div>
+</div>

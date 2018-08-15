@@ -12,11 +12,9 @@ import { InstanceComponent } from './instance.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { FileEditorComponent } from '../components/file-editor/file-editor.component';
 import { MetadataEditorComponent } from './metadata-editor/metadata-editor.component';
-import { InstanceRecoverComponent } from './instance-recover/instance-recover.component';
-import { FullCalendarModule } from 'ng-fullcalendar';
+import { InstanceSnapshotsComponent } from './instance-snapshots/instance-snapshots.component';
 import { InstanceJobsComponent } from './instance-jobs/instance-jobs.component';
-import { InstanceBackupsComponent } from './instance-backups/instance-backups.component';
-import { InstanceRecoverService } from '../../services/instance/instance-recover.service';
+import { RundeckService } from '../../services/rundeck/rundeck.service';
 import { InstanceLogsComponent } from './instance-logs/instance-logs.component';
 import { InstanceLogsStatisticsComponent } from './instance-logs/instance-logs-statistics/instance-logs-statistics.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -36,6 +34,10 @@ import { MatBadgeModule } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { CalendarModule } from 'angular-calendar';
+import { InstanceRecoverDialogComponent } from './instance-snapshots/instance-recover-dialog/instance-recover-dialog.component';
+import { InstanceBackupDialogComponent } from './instance-snapshots/instance-backup-dialog/instance-backup-dialog.component';
 
 @NgModule({
   imports: [
@@ -45,7 +47,6 @@ import { MatTooltipModule } from '@angular/material';
     InlineEditorModule,
     NgJsonEditorModule,
     UiSwitchModule,
-    FullCalendarModule,
     Ng2SmartTableModule,
     NgbModule.forRoot(),
     PrettyJsonModule,
@@ -63,25 +64,30 @@ import { MatTooltipModule } from '@angular/material';
     MatCheckboxModule,
     MatSlideToggleModule,
     MatTooltipModule,
+    MatButtonToggleModule,
+    CalendarModule.forRoot(),
   ],
   declarations: [
     InstanceComponent,
     InstanceDialogComponent,
     FileEditorComponent,
     MetadataEditorComponent,
-    InstanceRecoverComponent,
+    InstanceSnapshotsComponent,
     InstanceJobsComponent,
-    InstanceBackupsComponent,
     InstanceLogsComponent,
     InstanceLogsStatisticsComponent,
+    InstanceRecoverDialogComponent,
+    InstanceBackupDialogComponent,
   ],
   entryComponents: [
     InstanceDialogComponent,
+    InstanceRecoverDialogComponent,
+    InstanceBackupDialogComponent,
   ],
   providers: [
     InstanceService,
     JobService,
-    InstanceRecoverService,
+    RundeckService,
   ],
 })
 
