@@ -1,0 +1,35 @@
+<div class="flex-container">
+	<mat-button-toggle-group>
+	  <mat-button-toggle (change)="$event.source.checked=false" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">Previous</mat-button-toggle>
+	  <mat-button-toggle (change)="$event.source.checked=false" mwlCalendarToday [(viewDate)]="viewDate">Today</mat-button-toggle>
+	  <mat-button-toggle (change)="$event.source.checked=false" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">Next</mat-button-toggle>
+	</mat-button-toggle-group>
+
+	<h5>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
+
+	<mat-button-toggle-group value="month">
+	  <mat-button-toggle value="month" (click)="view = 'month'" [class.active]="view === 'month'">Month</mat-button-toggle>
+	  <mat-button-toggle value="day" (click)="view = 'day'" [class.active]="view === 'day'">Day</mat-button-toggle>
+	</mat-button-toggle-group>
+
+	<div>
+		<button mat-raised-button color="primary" (click)="backup()" style="margin-left: 30px; margin-right: 20px">Backup now</button>
+		<button mat-raised-button color="primary" (click)="scheduledBackup()" style="margin-right: 20px">Scheduled Backup</button>
+	</div>
+</div>
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view
+    *ngSwitchCase="'month'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [activeDayIsOpen]="activeDayIsOpen"
+    (dayClicked)="dayClicked($event.day)"
+    (eventClicked)="handleSnapshot($event.event)">
+  </mwl-calendar-month-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="'day'"
+    [viewDate]="viewDate"
+    [events]="events"
+    (eventClicked)="handleSnapshot($event.event)">
+  </mwl-calendar-day-view>
+</div>

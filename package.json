@@ -54,6 +54,7 @@
         "@qontu/ngx-inline-editor": "^0.2.0-alpha.12",
         "@swimlane/ngx-charts": "7.0.1",
         "ang-jsoneditor": "^1.6.0",
+        "angular-calendar": "^0.25.2",
         "angular-tree-component": "7.2.0",
         "angular2-chartjs": "0.4.1",
         "angular2-prettyjson": "^3.0.1",

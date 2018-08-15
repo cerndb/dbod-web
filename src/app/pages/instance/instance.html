@@ -55,14 +55,9 @@
         <instance-jobs [data]="data"></instance-jobs>
       </ng-template>
     </ngb-tab>
-    <ngb-tab title="Backup">
+    <ngb-tab title="Snapshots">
       <ng-template ngbTabContent>
-        <instance-backups></instance-backups>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab title="Recovery">
-      <ng-template ngbTabContent>
-        <instance-recover></instance-recover>
+        <instance-snapshots [data]="data"></instance-snapshots>
       </ng-template>
     </ngb-tab>
     <ngb-tab title="File Editor">
