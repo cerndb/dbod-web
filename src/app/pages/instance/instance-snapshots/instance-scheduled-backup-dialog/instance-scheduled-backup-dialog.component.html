@@ -1,0 +1,55 @@
+<div [ngSwitch]="state">
+	<div *ngSwitchCase="State['Choose']">
+		<h2 mat-dialog-title>Backup scheduling</h2>
+		<mat-dialog-content>
+			Here are the parameters of your backup shedule. Backup at :<br/><br/>
+
+			<div class="flex-container">
+				<ngb-timepicker name="schedule_time" [(ngModel)]="scheduleTime"></ngb-timepicker>
+				<mat-select placeholder="Day of week" [(ngModel)]="scheduleDayOfWeek" [disabled]="scheduleMode!='week'" style="margin-left: 10px; width: 100px;" >
+			    <mat-option value="1">Monday</mat-option>
+			    <mat-option value="2">Tuesday</mat-option>
+			    <mat-option value="3">Wednesday</mat-option>
+			    <mat-option value="4">Thursday</mat-option>
+			    <mat-option value="5">Friday</mat-option>
+			    <mat-option value="6">Saturday</mat-option>
+			    <mat-option value="7">Sunday</mat-option>
+			  </mat-select>
+			</div>
+			<mat-button-toggle-group [(value)]="scheduleMode">
+			  <mat-button-toggle value="disabled">Disabled</mat-button-toggle>
+			  <mat-button-toggle value="day">Each day</mat-button-toggle>
+			  <mat-button-toggle value="week">Each week</mat-button-toggle>
+			</mat-button-toggle-group>
+
+		</mat-dialog-content>
+		<mat-dialog-actions align="end">
+		  <button mat-button mat-dialog-close>Cancel</button>
+		  <button mat-button color="primary" cdkFocusInitial (click)='sendRequest()'>Confirm</button>
+		</mat-dialog-actions>
+	</div>
+
+	<div *ngSwitchCase="State['Loading']">
+		<mat-spinner [color]="primary"></mat-spinner>
+	</div>
+
+	<div *ngSwitchCase="State['Success']">
+		<h2 mat-dialog-title><span matBadge="{{resStatus}}" matBadgeColor="primary" matBadgeOverlap="false">Success</span></h2>
+		<mat-dialog-content>
+			<h6 style="text-align: center;">{{ resMessage }}</h6>
+		</mat-dialog-content>
+		<mat-dialog-actions align="end">
+		  <button mat-button color="primary" cdkFocusInitial mat-dialog-close>Close</button>
+		</mat-dialog-actions>
+	</div>
+
+	<div *ngSwitchCase="State['Error']">
+		<h2 mat-dialog-title><span matBadge="{{resStatus}}" matBadgeColor="warn" matBadgeOverlap="false">Error</span></h2>
+		<mat-dialog-content>
+			<h6 style="text-align: center;">{{ resMessage }}</h6>
+		</mat-dialog-content>
+		<mat-dialog-actions align="end">
+		  <button mat-button color="warn" cdkFocusInitial mat-dialog-close>Close</button>
+		</mat-dialog-actions>
+	</div>
+</div>

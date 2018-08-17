@@ -15,6 +15,7 @@ import {
 import {MatDialog} from '@angular/material';
 import { InstanceRecoverDialogComponent } from './instance-recover-dialog/instance-recover-dialog.component';
 import { InstanceBackupDialogComponent } from './instance-backup-dialog/instance-backup-dialog.component';
+import { InstanceScheduledBackupDialogComponent } from './instance-scheduled-backup-dialog/instance-scheduled-backup-dialog.component';
 
 @Component({
   selector: 'instance-snapshots',
@@ -89,9 +90,10 @@ export class InstanceSnapshotsComponent {
   }
 
   scheduledBackup() {
-    const dialogRef = this.dialog.open(InstanceBackupDialogComponent, {
+    const dialogRef = this.dialog.open(InstanceScheduledBackupDialogComponent, {
       data: {
-        instanceName: this.data.name,
+        instanceId: this.data.id,
+        scheduleBackupsSetting: this.data.attributes.backup,
       }
     });
   }

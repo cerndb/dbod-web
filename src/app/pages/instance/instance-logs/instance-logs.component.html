@@ -1,7 +1,22 @@
 <div class="flex-container">
-	<mat-slide-toggle [color]="primary" [checked]=false (change)="realTimeHandler($event)" matTooltip='If enabled, logs are provided in real time' matTooltipPosition='above' style="margin-top: 10px"></mat-slide-toggle>
+	<mat-slide-toggle [color]="primary" [checked]=false (change)="realTimeHandler($event)" matTooltip='If enabled, logs are provided in real time' matTooltipPosition='above' style="margin-top: 15px"></mat-slide-toggle>
 
-	<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" class="flex-left" style="margin-top: 10px"></ngb-pagination>
+	<div class="flex-container">
+		<button mat-icon-button [matMenuTriggerFor]="logFilesMenu" (click)="listLogFiles()" style="margin-top: 5px">
+	  		<mat-icon>save_alt</mat-icon>
+	  	</button>
+	  	<mat-menu #logFilesMenu="matMenu" overlapTrigger="false">
+	  		<div *ngIf="logFilesList.length!=0; else logFilesLoading">
+	  			<div *ngFor="let item of logFilesList">
+	  				<button mat-menu-item (click)="downloadLogFile(item)">{{ item.title }}</button>
+			  	</div>
+	  		</div>
+			  <ng-template #logFilesLoading>
+	  			<button mat-menu-item><span style="font-style: italic">Loading...</span></button>
+	  		</ng-template>
+			</mat-menu>
+		<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" style="margin-top: 10px"></ngb-pagination>
+	</div>
 	<div>
 		<mat-form-field matTooltip='Example : "(restore OR backup) AND @timestamp:2018-05-20", please refer to ElasticSearch Query String' matTooltipPosition='above' style="width: 400px;">
 			<input matInput placeholder="Filters" name="filters" (blur)="changeFilters($event.target.value)" (keyup.enter)="$event.target.blur()">

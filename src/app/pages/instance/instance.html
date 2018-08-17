@@ -37,8 +37,7 @@
           <mat-option value="PROD">PROD</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-checkbox name="attribute/
-      notifications" value="{{data.attributes.notifications}}" [disabled]="!this.authService.user.isAdmin" (change)="changeField($event.name,$event.checked)">Notifications</mat-checkbox>
+      <mat-checkbox name="notifications" value="{{data.attributes.notifications}}" [disabled]="!this.authService.user.isAdmin" (change)="changeAttributeField('notifications',$event.checked)">Notifications</mat-checkbox>
     </div>
   </mat-card-content>
 </mat-card>
