@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ChangeDetectorRef, Inject } from '@angular/core';
 import { SocketLogs } from '../sockets.module';
+import { RundeckService } from '../../../services/rundeck/rundeck.service';
 
 @Component({
   selector: 'instance-logs',
@@ -23,7 +24,9 @@ export class InstanceLogsComponent implements OnInit {
   opened: boolean;
   public statisticsCollapsed = true;
 
-  constructor(@Inject(SocketLogs) private socket) {
+  logFilesList = [];
+
+  constructor(@Inject(SocketLogs) private socket, private rundeckService: RundeckService) {
   
   }
 
@@ -101,6 +104,29 @@ export class InstanceLogsComponent implements OnInit {
     }
     this.opened = false;
     this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+  }
+
+  listLogFiles() {
+    if(this.logFilesList.length==0) {
+      this.rundeckService.post('job/list-log-files/'+this.data.name).then( (data: any) => {
+        data.log.substr(2).slice(0,-2).split("', '").forEach( (element) => {
+          this.logFilesList.push({
+            title: element.split("/")[4],
+            path: element,
+          });
+        });
+      }, err => console.log(err));
+    }
+  }
+
+  downloadLogFile(logFileData) {
+    console.log(logFileData);
+    this.rundeckService.post('job/serve-file/'+this.data.name, {
+      filepath: logFileData.path,
+      port: 55005,
+    }).then( (data: any) => {
+      console.log(data);
+    }, err => console.log(err));
   }
 
   ngOnDestroy() {

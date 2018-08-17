@@ -73,6 +73,7 @@ export class InstanceComponent implements OnInit {
 
     this.instanceService.getInstances().subscribe((res) => {
       this.data = res['response'].find(x => x.name === this.dbName);
+      // console.log(this.data);
       this.instanceClassEditable = this.editableSelectOpts.instanceClass[this.data['category']];
       this.instanceDbtypeEditable = this.editableSelectOpts.instanceDbtype[this.data['type']];
       this.instanceStateEditable = this.editableSelectOpts.instanceState[this.data['state']];
@@ -84,6 +85,19 @@ export class InstanceComponent implements OnInit {
       data: {
         id: this.data.id,
         fieldName: name,
+        attribute: false,
+        precContent: this.data[name],
+        newContent: value,
+      }
+    });
+  }
+
+  changeAttributeField(name,value) {
+    const dialogRef = this.dialog.open(InstanceDialogComponent, {
+      data: {
+        id: this.data.id,
+        fieldName: name,
+        attribute: true,
         precContent: this.data[name],
         newContent: value,
       }

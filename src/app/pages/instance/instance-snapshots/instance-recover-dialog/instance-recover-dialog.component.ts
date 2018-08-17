@@ -6,7 +6,7 @@ import { RundeckService } from '../../../../services/rundeck/rundeck.service';
 
 @Component({
   selector: 'instance-recover-dialog',
-  templateUrl: './instance-recover-dialog.html',
+  templateUrl: './instance-recover-dialog.component.html',
 })
 export class InstanceRecoverDialogComponent {
 	State = {

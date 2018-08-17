@@ -3,10 +3,11 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { MatSpinner } from '@angular/material';
 import { MatBadge } from '@angular/material';
+import { InstanceService } from '../../../services/instance/instance.service';
 
 @Component({
   selector: 'instance-dialog',
-  templateUrl: './instance-dialog.html',
+  templateUrl: './instance-dialog.component.html',
 })
 export class InstanceDialogComponent {
 	State = {
@@ -20,28 +21,18 @@ export class InstanceDialogComponent {
 	resMessage: string;
 	resStatus: number;
 
-	constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) { }
+	constructor(@Inject(MAT_DIALOG_DATA) public data: any, private instanceService: InstanceService) { }
 
 	sendRequest() {
-		var req = {};
-	    req[this.data.fieldName] = this.data.newContent;
-
 		this.state = this.State['Loading'];
-		this.http.put('./api/v1/instance/'+this.data.id,req).subscribe( (res:any) => {
-			if(res!=null) {
-				this.resMessage = res.message;
-	      this.resStatus = res.status;
-	      this.state = this.State['Success'];
-			}
-			else {
-				this.resMessage = 'Change applied with success.';
-	      this.resStatus = 200;
-	      this.state = this.State['Success'];
-			}
-    }, (err:any) => {
-    	this.resMessage = err.message;
-    	this.resStatus = err.status;
-      this.state = this.State['Error'];
-    });
+		this.instanceService.put(this.data.id,this.data.attribute,this.data.fieldName,this.data.newContent).then( (data: any) => {
+			this.resStatus = data.status;
+	    	this.resMessage = data.message;
+			this.state = this.State['Success'];
+	    }, (err) => {
+	    	this.resStatus = err.status;
+	    	this.resMessage = err.message;
+	    	this.state = this.State['Error'];
+	    });
 	}
 }

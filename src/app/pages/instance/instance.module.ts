@@ -35,9 +35,12 @@ import { MatCheckboxModule } from '@angular/material';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { CalendarModule } from 'angular-calendar';
 import { InstanceRecoverDialogComponent } from './instance-snapshots/instance-recover-dialog/instance-recover-dialog.component';
 import { InstanceBackupDialogComponent } from './instance-snapshots/instance-backup-dialog/instance-backup-dialog.component';
+import { InstanceScheduledBackupDialogComponent } from './instance-snapshots/instance-scheduled-backup-dialog/instance-scheduled-backup-dialog.component';
 
 @NgModule({
   imports: [
@@ -65,6 +68,8 @@ import { InstanceBackupDialogComponent } from './instance-snapshots/instance-bac
     MatSlideToggleModule,
     MatTooltipModule,
     MatButtonToggleModule,
+    MatIconModule,
+    MatMenuModule,
     CalendarModule.forRoot(),
   ],
   declarations: [
@@ -78,11 +83,13 @@ import { InstanceBackupDialogComponent } from './instance-snapshots/instance-bac
     InstanceLogsStatisticsComponent,
     InstanceRecoverDialogComponent,
     InstanceBackupDialogComponent,
+    InstanceScheduledBackupDialogComponent,
   ],
   entryComponents: [
     InstanceDialogComponent,
     InstanceRecoverDialogComponent,
     InstanceBackupDialogComponent,
+    InstanceScheduledBackupDialogComponent,
   ],
   providers: [
     InstanceService,
