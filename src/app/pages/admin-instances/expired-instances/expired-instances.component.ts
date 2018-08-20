@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { InstanceService } from '../../../services/instance';
 import { LocalDataSource } from 'ng2-smart-table';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'expired-instances',
@@ -10,98 +11,29 @@ import { LocalDataSource } from 'ng2-smart-table';
 })
 export class ExpiredInstancesComponent implements OnInit {
 
-  source: LocalDataSource;
-  @Input() title: string;
+  displayedColumns: string[] = ['id', 'name', 'owner', 'egroup', 'project', 'type', 'category', 'date', 'rescue', 'destroy'];
+  dataSource;
 
-  settings = {
-    selectMode: 'multi',
-    columns: {
-      name: {
-        title: 'DB Name',
-        filter: false,
-      },
-      host: {
-        title: 'Host',
-        filter: false,
-      },
-      owner: {
-        title: 'Owner',
-        filter: false,
-      },
-      category: {
-        title: 'Category',
-        filter: false,
-      },
-      type: {
-        title: 'DB Type',
-        filter: false,
-      },
-      expiryDate: {
-        title: 'Expiry Date',
-        filter: false,
-      },
-    },
-    actions: {
-      add: false,
-      delete: false,
-      edit: false,
-    },
-    hideSubHeader: true,
-    noDataMessage: 'No instance found.',
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  };
-
-  constructor(private _instanceService: InstanceService) {
-
+  constructor(private _InstanceService: InstanceService) {
+    this.dataSource = new MatTableDataSource([{'id': '', 'name': '', 'owner': '', 'egroup': '', 'project': '', 'type': '', 'category': '', 'date': ''}]);
   }
 
   ngOnInit() {
-    this._instanceService.getExpiredInstances().subscribe((res) => {
-       this.source = new LocalDataSource(res);
+    this._InstanceService.getExpiredInstances().subscribe((res) => {
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 
-  onSearch(query: string = '') {
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if(query!='') {
-      this.source.setFilter([
-        // fields we want to include in the search
-        {
-          field: 'name',
-          search: query,
-        },
-        {
-          field: 'host',
-          search: query,
-        },
-        {
-          field: 'username',
-          search: query,
-        },
-        {
-          field: 'category',
-          search: query,
-        },
-        {
-          field: 'type',
-          search: query,
-        },
-        {
-          field: 'expiryDate',
-          search: query,
-        },
-
-      ], false);
-      // second parameter specifying whether to perform 'AND' or 'OR' search
-      // (meaning all columns should contain search query or at least one)
-      // 'AND' by default, so changing to 'OR' by setting false here
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
-    else {
-      this.source.setFilter([]);
-    }
-    // second parameter specifying whether to perform 'AND' or 'OR' search
-    // (meaning all columns should contain search query or at least one)
-    // 'AND' by default, so changing to 'OR' by setting false here
   }
-
-}
+  }

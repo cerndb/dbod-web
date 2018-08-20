@@ -13,20 +13,17 @@ export class InstanceService {
   }
 
   getInstances(): Observable<any> {
-    //return this.http.get('assets/instance-info.json')
     return this.http.get('./api/v1/instance')
                        .map((res:any) => res.json());
   }
 
   getPendingInstances(): Observable<any> {
        return this.http.get('assets/pendingInstances-info.json')
-       //return this.http.get('./api/v1/instance')
                        .map((res:any) => res.json());
   }
 
   getExpiredInstances(): Observable<any> {
        return this.http.get('assets/expiredInstances-info.json')
-       //return this.http.get('./api/v1/instance')
                        .map((res:any) => res.json());
   }
 
