@@ -41,6 +41,7 @@ import { CalendarModule } from 'angular-calendar';
 import { InstanceRecoverDialogComponent } from './instance-snapshots/instance-recover-dialog/instance-recover-dialog.component';
 import { InstanceBackupDialogComponent } from './instance-snapshots/instance-backup-dialog/instance-backup-dialog.component';
 import { InstanceScheduledBackupDialogComponent } from './instance-snapshots/instance-scheduled-backup-dialog/instance-scheduled-backup-dialog.component';
+import { InstanceStartStopDialogComponent } from './instance-start-stop-dialog/instance-start-stop-dialog.component';
 
 @NgModule({
   imports: [
@@ -84,12 +85,14 @@ import { InstanceScheduledBackupDialogComponent } from './instance-snapshots/ins
     InstanceRecoverDialogComponent,
     InstanceBackupDialogComponent,
     InstanceScheduledBackupDialogComponent,
+    InstanceStartStopDialogComponent,
   ],
   entryComponents: [
     InstanceDialogComponent,
     InstanceRecoverDialogComponent,
     InstanceBackupDialogComponent,
     InstanceScheduledBackupDialogComponent,
+    InstanceStartStopDialogComponent,
   ],
   providers: [
     InstanceService,

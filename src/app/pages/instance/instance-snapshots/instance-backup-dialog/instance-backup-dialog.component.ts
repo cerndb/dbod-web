@@ -24,12 +24,8 @@ export class InstanceBackupDialogComponent {
 	constructor(@Inject(MAT_DIALOG_DATA) public data: any, private rundeckService: RundeckService) { }
 
 	sendRequest() {
-		var req = {
-			id: 0, // TO EDIT
-		};
-
 		this.state = this.State['Loading'];
-		this.rundeckService.post('job/backup/'+this.data.instanceName).then( (res:any) => { // TO EDIT
+		this.rundeckService.post('job/backup/'+this.data.instanceName).then( (res:any) => {
 	      this.resMessage = res.message;
 	      this.resStatus = res.status;
 	      this.state = this.State['Success'];

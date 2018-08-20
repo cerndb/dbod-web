@@ -35,8 +35,6 @@ export class InstanceService {
   			status: 0,
   		};
 
-  		console.log(req);
-
   		this.http.put(url,req).subscribe( (res:any) => {
 				if(!res.ok) {
 					toReturn.message = res.message;

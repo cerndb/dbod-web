@@ -106,6 +106,7 @@ var client = new elasticsearch.Client({
 var io = require('socket.io');
 io = io(server);
 
+var instance_module = require('./server/socketio/instance')(io,config,client);
 var logs_module = require('./server/socketio/logs')(io,config,client);
-var jobs_module = require('./server/socketio/logs_statistics')(io,config,client);
+var logs_statistics_module = require('./server/socketio/logs_statistics')(io,config,client);
 var jobs_module = require('./server/socketio/jobs')(io,config,client);
