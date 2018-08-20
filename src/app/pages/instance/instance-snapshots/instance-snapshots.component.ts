@@ -46,7 +46,9 @@ export class InstanceSnapshotsComponent {
         var minutes = element.split('_')[2].substring(2,4);
         var seconds = element.split('_')[2].substring(4,6);
         var milliseconds = element.split('_')[3];
-        var date = new Date(year, month, day, hours, minutes, seconds, milliseconds);
+        
+        // Month ordinals start from 0, so we need to substract one
+        var date = new Date(year, month -1, day, hours, minutes, seconds, milliseconds);
 
         calendarData.push({
           title: date.toString(),
