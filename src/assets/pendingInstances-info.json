@@ -1,26 +1,47 @@
 [
   {
-    "name": "name",
-    "host": "host",
-    "owner": "username",
-    "category": "class",
-    "type": "type",
-    "version": "4.0"
+    "id": 1,
+    "name": "name1",
+    "owner": "username1",
+    "egroup": "eg1",
+    "project": "p1",
+    "type": "type1",
+    "category": "class1"
   },
   {
+    "id": 2,
     "name": "name2",
-    "host": "host2",
     "owner": "username2",
-    "category": "class2",
+    "egroup": "eg2",
+    "project": "p2",
     "type": "type2",
-    "version": "3.11"
+    "category": "class2"
   },
   {
+    "id": 3,
     "name": "name3",
-    "host": "host3",
     "owner": "username3",
-    "category": "class3",
+    "egroup": "eg3",
+    "project": "p3",
     "type": "type3",
-    "version": "2.1.2"
+    "category": "class3"
+  },
+  {
+    "id": 4,
+    "name": "name4",
+    "owner": "username4",
+    "egroup": "eg4",
+    "project": "p4",
+    "type": "type4",
+    "category": "class4"
+  },
+  {
+    "id": 5,
+    "name": "name5",
+    "owner": "username5",
+    "egroup": "eg5",
+    "project": "p5",
+    "type": "type5",
+    "category": "class5"
   }
 ]

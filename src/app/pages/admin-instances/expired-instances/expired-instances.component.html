@@ -1,15 +1,64 @@
-<div>
-    <nb-card>
-        <nb-card-header>
-            <h2>Expired Instances</h2>
-        </nb-card-header>
-        <nb-card-body>
-            <form>
-                <div class="form-group">
-                    <input #search type="text" class="form-control form-control-rounded" placeholder="Search..." (input)="onSearch(search.value)">
-                </div>
-            </form>
-          <ng2-smart-table *ngIf="source" [settings]="settings" [source]="source"></ng2-smart-table>
-        </nb-card-body>
-    </nb-card>
+<div class="instance-list">
+  <mat-card>
+    <mat-card-header>
+      Expired Instances
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field style="margin-top: 15px;">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+      <div>
+        <table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let row"><a href="./#/pages/instance/{{row.name}}">{{row.name}}</a></td>
+          </ng-container>
+          <ng-container matColumnDef="owner">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Owner</th>
+            <td mat-cell *matCellDef="let row"> {{row.owner}} </td>
+          </ng-container>
+          <ng-container matColumnDef="egroup">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Egroup</th>
+            <td mat-cell *matCellDef="let row"> {{row.egroup}} </td>
+          </ng-container>
+          <ng-container matColumnDef="project">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Project</th>
+            <td mat-cell *matCellDef="let row"> {{row.project}} </td>
+          </ng-container>
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+            <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+          </ng-container>
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+            <td mat-cell *matCellDef="let row"> {{row.category}} </td>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Expiry Date</th>
+            <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+          </ng-container>
+          <ng-container matColumnDef="rescue">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Rescue</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-raised-button style="color: white; background-color: #006bd4">Rescue</button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="destroy">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Destroy</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-raised-button color="warn">Destroy</button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"></mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

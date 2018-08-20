@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { InstanceService } from '../../../services/instance';
-import { DbNameComponent } from '../../components/db-name/db-name.component';
 import { LocalDataSource } from 'ng2-smart-table';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'pending-instances',
@@ -11,109 +11,29 @@ import { LocalDataSource } from 'ng2-smart-table';
 })
 export class PendingInstancesComponent implements OnInit {
 
-  source: LocalDataSource;
-  @Input() title: string;
+  displayedColumns: string[] = ['id', 'name', 'owner', 'egroup', 'project', 'type', 'category', 'validate'];
+  dataSource;
 
-  settings = {
-    selectMode: 'multi',
-    columns: {
-      name: {
-        title: 'DB Name',
-        filter: false,
-        type: 'custom',
-        renderComponent: DbNameComponent,
-      },
-      host: {
-        title: 'Host',
-        filter: false,
-      },
-      owner: {
-        title: 'Owner',
-        filter: false,
-      },
-      category: {
-        title: 'Category',
-        filter: false,
-      },
-      type: {
-        title: 'DB Type',
-        filter: false,
-      },
-      version: {
-        title: 'Version',
-        filter: false,
-      },
-      /*validate: {
-        title: 'Validate',
-        filter: false,
-        type: 'custom',
-        renderComponent: ValidateButtonComponent,
-      },*/
-    },
-    actions: {
-      add: false,
-      delete: false,
-      edit: false,
-    },
-    hideSubHeader: true,
-    noDataMessage: 'No instance found.',
-
-  };
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _instanceService: InstanceService) {
-
+    this.dataSource = new MatTableDataSource([{'id': '', 'name': '', 'owner': '', 'egroup': '', 'project': '', 'type': '', 'category': ''}]);
   }
 
   ngOnInit() {
     this._instanceService.getPendingInstances().subscribe((res) => {
-       this.source = new LocalDataSource(res);
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 
-  onSearch(query: string = '') {
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if(query!='') {
-      this.source.setFilter([
-        // fields we want to include in the search
-        {
-          field: 'name',
-          search: query,
-        },
-        {
-          field: 'host',
-          search: query,
-        },
-        {
-          field: 'username',
-          search: query,
-        },
-        {
-          field: 'category',
-          search: query,
-        },
-        {
-          field: 'type',
-          search: query,
-        },
-        {
-          field: 'version',
-          search: query,
-        },
-        /*{
-          field: 'validate',
-          search: query,
-        },*/
-      ], false);
-      // second parameter specifying whether to perform 'AND' or 'OR' search
-      // (meaning all columns should contain search query or at least one)
-      // 'AND' by default, so changing to 'OR' by setting false here
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
-    else {
-      this.source.setFilter([]);
-    }
-    // second parameter specifying whether to perform 'AND' or 'OR' search
-    // (meaning all columns should contain search query or at least one)
-    // 'AND' by default, so changing to 'OR' by setting false here
   }
-
-}
+  }
