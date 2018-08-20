@@ -1,6 +1,18 @@
-<mat-card *ngIf="data.hasOwnProperty('user') && this.authService.user.isAdmin!=undefined">
+<mat-card *ngIf="data.hasOwnProperty('user') && data.user!=null && this.authService.user.isAdmin!=undefined">
   <mat-card-header>
-    <div mat-card-avatar><mat-slide-toggle [color]="primary" matTooltip='On/Off' matTooltipPosition='above' style="margin-top: 10px;"></mat-slide-toggle></div>
+    <div mat-card-avatar>
+      <button mat-icon-button matTooltip="{{ this.data['state'] }}" matTooltipPosition='above' [matMenuTriggerFor]="startStopMenu" [ngSwitch]="instanceStateEditable">
+        <mat-icon *ngSwitchCase="0" style="color:green;">power_settings_new</mat-icon>
+        <mat-icon *ngSwitchCase="1" style="color:red;">power_settings_new</mat-icon>
+        <mat-icon *ngSwitchCase="2" style="color:blue;">power_settings_new</mat-icon>
+        <mat-icon *ngSwitchCase="3" style="color:orange;">power_settings_new</mat-icon>
+        <mat-icon *ngSwitchCase="4" style="color:cyan;">power_settings_new</mat-icon>
+      </button>
+      <mat-menu #startStopMenu="matMenu" overlapTrigger="false">
+        <button mat-menu-item (click)="startStopInstance(true)"><mat-icon style="color:green;">play_arrow</mat-icon><span style="color:green;">Start</span></button>
+        <button mat-menu-item (click)="startStopInstance(false)"><mat-icon style="color:red;">stop</mat-icon><span style="color:red;">Stop</span></button>
+      </mat-menu>
+    </div>
     <mat-card-title>{{ data.name }}</mat-card-title>
     <mat-card-subtitle>{{ data.user.department }}-{{ data.user.group }} {{ data.user.first_name }} {{ data.user.last_name }}</mat-card-subtitle>
   </mat-card-header>

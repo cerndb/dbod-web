@@ -24,7 +24,7 @@ exports = module.exports = function(io,config,client){
               socket.emit('jobs', JSON.stringify(jobs.response));
             }
           } catch(err) {
-              console.log(err); // error in the above string (in this case, yes)!
+              console.log(err);
           }
         });
       }).on('error', (err) => {

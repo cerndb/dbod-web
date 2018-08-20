@@ -24,6 +24,13 @@ export class SocketJobs extends Socket {
     }
 }
 
+@Injectable()
+export class SocketInstance extends Socket {
+    constructor() {
+        super({ url: environment.socketio_url+'/instance', options: {autoConnect:false} });
+    }
+}
+
 @NgModule({
   imports: [
     SocketIoModule,
@@ -32,6 +39,7 @@ export class SocketJobs extends Socket {
     SocketLogs,
     SocketLogsStatistics,
     SocketJobs,
+    SocketInstance,
   ],
 })
 

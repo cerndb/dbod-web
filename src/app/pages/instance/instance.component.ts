@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { InstanceService } from '../../services/instance';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatDialog} from '@angular/material';
 import { InstanceDialogComponent } from './instance-dialog/instance-dialog.component';
 import {MatCheckbox} from '@angular/material';
 import {MatSlideToggle} from '@angular/material';
+import { InstanceStartStopDialogComponent } from './instance-start-stop-dialog/instance-start-stop-dialog.component';
+import { SocketInstance } from './sockets.module';
 
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 
@@ -14,6 +15,7 @@ import { AuthenticationService } from '../../services/authentication/authenticat
   styleUrls: ['./instance.scss'],
   templateUrl: './instance.html',
   encapsulation: ViewEncapsulation.None,
+  providers: [SocketInstance],
 })
 export class InstanceComponent implements OnInit {
   dbName: String;
@@ -63,20 +65,26 @@ export class InstanceComponent implements OnInit {
       ],
   };
 
-  constructor( private authService: AuthenticationService, private route: ActivatedRoute, private router: Router, private instanceService: InstanceService, public dialog: MatDialog) {}
+  constructor( private authService: AuthenticationService, private route: ActivatedRoute, private router: Router, @Inject(SocketInstance) private socket, public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.data = {};
-    this.route.params.subscribe(params => {
-        this.dbName = params['id'];
-    });
+    this.socket.connect();
 
-    this.instanceService.getInstances().subscribe((res) => {
-      this.data = res['response'].find(x => x.name === this.dbName);
+    this.data = {};
+
+    this.socket.on('instance', (data) => {
+      this.data = JSON.parse(data);
+      // console.log('receive');
       // console.log(this.data);
       this.instanceClassEditable = this.editableSelectOpts.instanceClass[this.data['category']];
       this.instanceDbtypeEditable = this.editableSelectOpts.instanceDbtype[this.data['type']];
       this.instanceStateEditable = this.editableSelectOpts.instanceState[this.data['state']];
+    });
+
+    
+    this.route.params.subscribe(params => {
+        this.dbName = params['id'];
+        this.socket.emit('getter', {name: this.dbName});
     });
   }
 
@@ -100,6 +108,15 @@ export class InstanceComponent implements OnInit {
         attribute: true,
         precContent: this.data[name],
         newContent: value,
+      }
+    });
+  }
+
+  startStopInstance(value) {
+    const dialogRef = this.dialog.open(InstanceStartStopDialogComponent, {
+      data: {
+        instanceName: this.data.name,
+        startStopFlag: value,
       }
     });
   }
