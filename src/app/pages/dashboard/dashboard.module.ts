@@ -8,6 +8,7 @@ import { JobService } from '../../services/job';
 import { InstancesComponent } from './instances/instances.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { PrettyJsonModule } from 'angular2-prettyjson';
 
 import { MatSliderModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material';
@@ -48,6 +49,7 @@ import { MatSortModule } from '@angular/material';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    PrettyJsonModule,
   ],
   declarations: [
     DashboardComponent,

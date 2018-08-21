@@ -96,6 +96,7 @@ export class InstanceLogsComponent implements OnInit {
   }
 
   changeFilters(value) {
+    this.page = 1;
     if(value.length!=0) {
       this.filters = value;
     }

@@ -1,0 +1,19 @@
+$default-text: #e9ebec;
+
+.flex-container{
+  display: flex;
+  justify-content:: space-evenly;
+  margin-top:2px;
+  margin-bottom:10px;
+}
+
+.itemsPerPage {
+  // color: #5dcfe3;
+}
+
+pre span {white-space: normal;}
+   .string { color: green; }
+   .number { color: darkorange; }
+   .boolean { color: blue; }
+   .null { color: magenta; }
+   .key { color: red; }

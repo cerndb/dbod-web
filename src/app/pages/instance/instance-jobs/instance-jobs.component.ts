@@ -19,6 +19,8 @@ export class InstanceJobsComponent implements OnInit {
   page :number;
   opened: boolean;
 
+  filters: string = '';
+
   constructor(@Inject(SocketJobs) private socket) {
   
   }
@@ -45,14 +47,14 @@ export class InstanceJobsComponent implements OnInit {
   pageChanged(page) {
     this.opened = false;
     if(!isNaN(page)) {
-      this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength});
+      this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
     }
   }
 
   changeItemsPerPage(e) {
     this.opened = false;
     this.pageLength = e.value;
-    this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength});
+    this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
   }
 
   panelOpened() {
@@ -68,8 +70,20 @@ export class InstanceJobsComponent implements OnInit {
     this.pageLength = 10;
     if(this.data.hasOwnProperty('id')) {
       this.id = this.data.id;
-      this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength});
+      this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
     }
+  }
+
+  changeFilters(value) {
+    this.page = 1;
+    if(value.length!=0) {
+      this.filters = value;
+    }
+    else {
+      this.filters = '';
+    }
+    this.opened = false;
+    this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
   }
 
   ngOnDestroy() {

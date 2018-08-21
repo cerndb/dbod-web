@@ -1,13 +1,47 @@
-<nb-card>
-    <nb-card-header>
-        <h2>Jobs</h2>
-    </nb-card-header>
-    <nb-card-body>
-        <form>
-            <div class="form-group">
-                <input #search type="text" class="form-control form-control-rounded" placeholder="Search..." (input)="onSearch(search.value)">
-            </div>
-        </form>
-        <ng2-smart-table *ngIf="source" [settings]="settings" [source]="source"></ng2-smart-table>
-    </nb-card-body>
-</nb-card>
+<mat-card style="margin-top: 15px;">
+  <mat-card-header>
+    Jobs Overview
+  </mat-card-header>
+  <mat-card-content>
+    <div class="flex-container">
+      <ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" style="margin-top: 8px"></ngb-pagination>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Filters" (selectionChange)="changeFilters($event.value)">
+            <mat-option [value]="''">All</mat-option>
+            <mat-option [value]="'state=eq.FINISHED_OK'"><span class="badge badge-success">Finished</span></mat-option>
+            <mat-option [value]="'state=eq.FINISHED_FAIL'"><span class="badge badge-danger">Failed</span></mat-option>
+            <mat-option [value]="'state=eq.RUNNING'"><span class="badge badge-warning">Running</span></mat-option>
+          </mat-select>
+        </mat-form-field>
+          <mat-form-field style="margin-left: 20px">
+          <mat-select placeholder="Items per page" (selectionChange)="changeItemsPerPage($event)">
+            <mat-option [value]="10">10</mat-option>
+            <mat-option [value]="20">20</mat-option>
+            <mat-option [value]="50">50</mat-option>
+            <mat-option [value]="100">100</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let item of this.source" (opened)="panelOpened()" (closed)="panelClosed()">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <span class="state" [ngSwitch]="item.state">
+                  <span class="badge badge-success" *ngSwitchCase="'FINISHED_OK'">Finished</span>
+                  <span class="badge badge-danger" *ngSwitchCase="'FINISHED_FAIL'">Failed</span>
+                  <span class="badge badge-warning" *ngSwitchCase="'RUNNING'">Running</span>
+                </span>
+              <span style="margin-left: 2em">{{ item.creation_date | date : 'medium' }}</span> <span style="margin-left: 2em" *ngIf="item.state!='RUNNING'">{{ item.completion_date | date : 'medium' }}</span>
+            </mat-panel-title>
+            <mat-panel-description>
+                    {{ item.command_name }} requested by {{ item.requester }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <prettyjson [obj]="item"></prettyjson> 
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+</mat-card>

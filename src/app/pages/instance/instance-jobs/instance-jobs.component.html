@@ -1,13 +1,23 @@
 <div class="flex-container">
-	<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" class="flex-left"></ngb-pagination>
-	<mat-form-field>
-    <mat-select placeholder="Items per page" (selectionChange)="changeItemsPerPage($event)">
-      <mat-option [value]="10">10</mat-option>
-      <mat-option [value]="20">20</mat-option>
-      <mat-option [value]="50">50</mat-option>
-      <mat-option [value]="100">100</mat-option>
-    </mat-select>
-  </mat-form-field>
+	<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" style="margin-top: 8px"></ngb-pagination>
+	<div>
+		<mat-form-field>
+	    <mat-select placeholder="Filters" (selectionChange)="changeFilters($event.value)">
+	      <mat-option [value]="''">All</mat-option>
+	      <mat-option [value]="'state=eq.FINISHED_OK'"><span class="badge badge-success">Finished</span></mat-option>
+	      <mat-option [value]="'state=eq.FINISHED_FAIL'"><span class="badge badge-danger">Failed</span></mat-option>
+	      <mat-option [value]="'state=eq.RUNNING'"><span class="badge badge-warning">Running</span></mat-option>
+	    </mat-select>
+	  </mat-form-field>
+		<mat-form-field style="margin-left: 20px">
+	    <mat-select placeholder="Items per page" (selectionChange)="changeItemsPerPage($event)">
+	      <mat-option [value]="10">10</mat-option>
+	      <mat-option [value]="20">20</mat-option>
+	      <mat-option [value]="50">50</mat-option>
+	      <mat-option [value]="100">100</mat-option>
+	    </mat-select>
+	  </mat-form-field>
+	</div>
 </div>
 
 <mat-accordion>
