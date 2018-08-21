@@ -1,0 +1,37 @@
+<div [ngSwitch]="state">
+	<div *ngSwitchCase="State['Deposit']">
+		<h2 mat-dialog-title>Load configuration file</h2>
+		<mat-dialog-content>
+			Please deposit your file here :<br/><br/>
+			 <input type="file" id="file" (change)="handleFileInput($event.target.files)">
+		</mat-dialog-content>
+		<mat-dialog-actions align="end">
+		  <button mat-button mat-dialog-close>Cancel</button>
+		  <button mat-button color="primary" cdkFocusInitial (click)='sendRequest()'>Confirm</button>
+		</mat-dialog-actions>
+	</div>
+
+	<div *ngSwitchCase="State['Loading']">
+		<mat-spinner [color]="primary"></mat-spinner>
+	</div>
+
+	<div *ngSwitchCase="State['Success']">
+		<h2 mat-dialog-title>Success</h2>
+		<mat-dialog-content>
+			<h6 style="text-align: center;">{{ resMessage }}</h6>
+		</mat-dialog-content>
+		<mat-dialog-actions align="end">
+		  <button mat-button color="primary" cdkFocusInitial [mat-dialog-close]="{'title':fileToUpload.name, 'textContent':textContent}">Close</button>
+		</mat-dialog-actions>
+	</div>
+
+	<div *ngSwitchCase="State['Error']">
+		<h2 mat-dialog-title>Error</h2>
+		<mat-dialog-content>
+			<h6 style="text-align: center;">{{ resMessage }}</h6>
+		</mat-dialog-content>
+		<mat-dialog-actions align="end">
+		  <button mat-button color="warn" cdkFocusInitial mat-dialog-close>Close</button>
+		</mat-dialog-actions>
+	</div>
+</div>

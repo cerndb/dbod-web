@@ -1,0 +1,28 @@
+<div class="flex-container">
+    <mat-form-field>
+        <mat-select placeholder="File" [value]="selectedConfigFile.title">
+            <div *ngIf="configFilesList.length!=0; else configFilesLoading">
+                <div *ngFor="let item of configFilesList">
+                    <mat-option [value]="item.title" (click)="selectConfigFile(item)">{{ item.title }}</mat-option>
+                </div>
+            </div>
+            <ng-template #configFilesLoading>
+                <mat-option><span style="font-style: italic">Loading...</span></mat-option>
+            </ng-template>
+        </mat-select>
+    </mat-form-field>
+    <div>
+        <button mat-icon-button (click)="downloadConfigFile()" style="margin-top: 5px">
+            <mat-icon style="color: grey;">file_download</mat-icon>
+        </button>
+        <button mat-icon-button (click)="loadConfigFile()" style="margin-top: 5px">
+            <mat-icon style="color: grey;">publish</mat-icon>
+        </button>
+    </div>
+    <button mat-raised-button color="primary" (click)="submitChanges()" style="margin-left: 10px">Submit changes</button>
+</div>
+<div class="flex-container">
+    <mat-form-field style="width: 100%;">
+        <textarea matInput placeholder="Content" [(ngModel)]="displayedContent" matTextareaAutosize></textarea>
+    </mat-form-field>
+</div>

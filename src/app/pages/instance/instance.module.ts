@@ -10,7 +10,7 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { InstanceComponent } from './instance.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { FileEditorComponent } from '../components/file-editor/file-editor.component';
+import { InstanceFileEditorComponent } from './instance-file-editor/instance-file-editor.component';
 import { MetadataEditorComponent } from './metadata-editor/metadata-editor.component';
 import { InstanceSnapshotsComponent } from './instance-snapshots/instance-snapshots.component';
 import { InstanceJobsComponent } from './instance-jobs/instance-jobs.component';
@@ -42,6 +42,8 @@ import { InstanceRecoverDialogComponent } from './instance-snapshots/instance-re
 import { InstanceBackupDialogComponent } from './instance-snapshots/instance-backup-dialog/instance-backup-dialog.component';
 import { InstanceScheduledBackupDialogComponent } from './instance-snapshots/instance-scheduled-backup-dialog/instance-scheduled-backup-dialog.component';
 import { InstanceStartStopDialogComponent } from './instance-start-stop-dialog/instance-start-stop-dialog.component';
+import { InstanceLoadFileDialogComponent } from './instance-file-editor/instance-load-file-dialog/instance-load-file-dialog.component';
+import { InstanceUploadFileDialogComponent } from './instance-file-editor/instance-upload-file-dialog/instance-upload-file-dialog.component';
 
 @NgModule({
   imports: [
@@ -76,7 +78,7 @@ import { InstanceStartStopDialogComponent } from './instance-start-stop-dialog/i
   declarations: [
     InstanceComponent,
     InstanceDialogComponent,
-    FileEditorComponent,
+    InstanceFileEditorComponent,
     MetadataEditorComponent,
     InstanceSnapshotsComponent,
     InstanceJobsComponent,
@@ -86,6 +88,8 @@ import { InstanceStartStopDialogComponent } from './instance-start-stop-dialog/i
     InstanceBackupDialogComponent,
     InstanceScheduledBackupDialogComponent,
     InstanceStartStopDialogComponent,
+    InstanceLoadFileDialogComponent,
+    InstanceUploadFileDialogComponent,
   ],
   entryComponents: [
     InstanceDialogComponent,
@@ -93,6 +97,8 @@ import { InstanceStartStopDialogComponent } from './instance-start-stop-dialog/i
     InstanceBackupDialogComponent,
     InstanceScheduledBackupDialogComponent,
     InstanceStartStopDialogComponent,
+    InstanceLoadFileDialogComponent,
+    InstanceUploadFileDialogComponent,
   ],
   providers: [
     InstanceService,

@@ -112,8 +112,8 @@ export class InstanceLogsComponent implements OnInit {
       this.rundeckService.post('job/list-log-files/'+this.data.name).then( (data: any) => {
         data.log.substr(2).slice(0,-2).split("', '").forEach( (element) => {
           this.logFilesList.push({
-            title: element.split("/")[4],
-            path: element,
+            title: element.split("/").slice(-1)[0],
+            filepath: element,
           });
         });
       }, err => console.log(err));
@@ -121,9 +121,8 @@ export class InstanceLogsComponent implements OnInit {
   }
 
   downloadLogFile(logFileData) {
-    console.log(logFileData);
     this.rundeckService.post('job/serve-file/'+this.data.name, {
-      filepath: logFileData.path,
+      filepath: logFileData.filepath,
       port: 55005,
     }).then( (data: any) => {
       console.log(data);
