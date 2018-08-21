@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { InstanceService } from '../../../services/instance';
-import { LocalDataSource } from 'ng2-smart-table';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
