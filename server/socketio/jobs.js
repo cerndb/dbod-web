@@ -10,7 +10,7 @@ exports = module.exports = function(io,config,client){
 
     var monitor = function(dataJobs) {
       var path = dataJobs.hasOwnProperty('id') ? config.apiato.path+'/instance/'+dataJobs.id+'/job?order=creation_date.desc&size='+dataJobs.size+'&from='+dataJobs.from+'&'+dataJobs.filters : config.apiato.path+'/job?order=creation_date.desc&size='+dataJobs.size+'&from='+dataJobs.from+'&'+dataJobs.filters;
-      https.get({ host: config.apiato.host, path: path, port:config.apiato.port, headers: { Authorization: "Basic " + new Buffer(usernamePassword).toString('base64') } }, (resp) => {
+      https.get({ host: 'localhost', path: path, port:config.port }, (resp) => {
         var strJobs = '';
         resp.on('data', function (chunk) {
           strJobs += chunk;
