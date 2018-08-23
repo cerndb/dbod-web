@@ -19,14 +19,15 @@ const app = express();
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 
-app.use(session({
-    store: new FileStore,
-    resave: false,
-    secret: 'sessionsecret',
-    saveUninitialized: false,
-    unset: 'destroy'
-    })
-);
+session = session({
+  store: new FileStore,
+  resave: false,
+  secret: 'sessionsecret',
+  saveUninitialized: false,
+  unset: 'destroy'
+});
+
+app.use(session);
 
 // Set our API proxy
 // This needs to be the first definition to prevent this issue
@@ -105,6 +106,10 @@ var client = new elasticsearch.Client({
 
 var io = require('socket.io');
 io = io(server);
+
+io.use(function(socket, next) {
+    session(socket.request, socket.request.res, next);
+});
 
 var instance_module = require('./server/socketio/instance')(io,config,client);
 var logs_module = require('./server/socketio/logs')(io,config,client);

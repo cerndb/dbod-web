@@ -1,5 +1,5 @@
 exports = module.exports = function(io,config,client){
-  const https = require('https');
+  const http = require('http');
 
   io.of('/jobs').on('connection', function(socket) {
     // console.log('socket.io connection made');
@@ -9,8 +9,11 @@ exports = module.exports = function(io,config,client){
     var usernamePassword = config.apiato.user + ":" + config.apiato.password;
 
     var monitor = function(dataJobs) {
+      console.log('socket.request.session');
+      console.log(socket.request.session);
+      
       var path = dataJobs.hasOwnProperty('id') ? config.apiato.path+'/instance/'+dataJobs.id+'/job?order=creation_date.desc&size='+dataJobs.size+'&from='+dataJobs.from+'&'+dataJobs.filters : config.apiato.path+'/job?order=creation_date.desc&size='+dataJobs.size+'&from='+dataJobs.from+'&'+dataJobs.filters;
-      https.get({ host: 'localhost', path: path, port:config.port }, (resp) => {
+      http.get({ host: 'localhost', path: path, port:config.port }, (resp) => {
         var strJobs = '';
         resp.on('data', function (chunk) {
           strJobs += chunk;
