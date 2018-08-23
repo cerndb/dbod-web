@@ -9,12 +9,16 @@ exports = module.exports = function(io,config,client){
     var usernamePassword = config.apiato.user + ":" + config.apiato.password;
 
     var monitor = function(dataJobs) {
-      console.log('socket.request.session');
-      console.log(socket.request.session);
+      //console.log('socket.request.res');
+      //console.log(socket.request.res);
       
       var path = dataJobs.hasOwnProperty('id') ? config.apiato.path+'/instance/'+dataJobs.id+'/job?order=creation_date.desc&size='+dataJobs.size+'&from='+dataJobs.from+'&'+dataJobs.filters : config.apiato.path+'/job?order=creation_date.desc&size='+dataJobs.size+'&from='+dataJobs.from+'&'+dataJobs.filters;
-      http.get({ host: 'localhost', path: path, port:config.port }, (resp) => {
+      http.get({ host: 'localhost', path: path+'sid='+socket.request.session.id, port:config.port, headers : {
+          "cookie": "connect.sid="+socket.request.session.id,
+          'Session-Id': socket.request.session.id,
+      } }, (resp) => {
         var strJobs = '';
+        console.log(resp);
         resp.on('data', function (chunk) {
           strJobs += chunk;
         });
