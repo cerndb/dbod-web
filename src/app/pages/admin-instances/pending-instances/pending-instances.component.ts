@@ -2,6 +2,8 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { InstanceService } from '../../../services/instance';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
+import { AuthenticationService } from '../../../services/authentication/authentication.service';
+
 @Component({
   selector: 'pending-instances',
   providers: [InstanceService],
@@ -16,7 +18,7 @@ export class PendingInstancesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _instanceService: InstanceService) {
+  constructor(private authService: AuthenticationService, private _instanceService: InstanceService) {
     this.dataSource = new MatTableDataSource([{'id': '', 'name': '', 'owner': '', 'egroup': '', 'project': '', 'type': '', 'category': ''}]);
   }
 

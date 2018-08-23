@@ -2,6 +2,8 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { InstanceService } from '../../../services/instance';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
+import { AuthenticationService } from '../../../services/authentication/authentication.service';
+
 @Component({
   selector: 'expired-instances',
   providers: [InstanceService],
@@ -16,7 +18,7 @@ export class ExpiredInstancesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private _InstanceService: InstanceService) {
+  constructor(private authService: AuthenticationService, private _InstanceService: InstanceService) {
     this.dataSource = new MatTableDataSource([{'id': '', 'name': '', 'owner': '', 'egroup': '', 'project': '', 'type': '', 'category': '', 'date': ''}]);
   }
 
