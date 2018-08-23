@@ -52,7 +52,7 @@
           <mat-option value="PROD">PROD</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-checkbox name="notifications" [checked]="editedData.attributes.notifications=='true'" [disabled]="!this.authService.user.isAdmin" (change)="changeAttributeField('notifications',$event.checked)">Notifications</mat-checkbox>
+      <mat-checkbox *ngIf="this.authService.user.isAdmin" name="notifications" [checked]="editedData.attributes.notifications=='true'" [disabled]="!this.authService.user.isAdmin" (change)="changeAttributeField('notifications',$event.checked)">Notifications</mat-checkbox>
     </div>
   </mat-card-content>
 </mat-card>

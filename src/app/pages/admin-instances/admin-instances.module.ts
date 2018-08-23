@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AdminInstancesComponent } from './admin-instances.component';
 import { PendingInstancesComponent } from './pending-instances/pending-instances.component';
 import { ExpiredInstancesComponent } from './expired-instances/expired-instances.component'
@@ -23,6 +24,7 @@ import { MatSortModule } from '@angular/material';
 
 @NgModule({
   imports: [
+    CommonModule,
     MatSliderModule,
     MatExpansionModule,
     MatSelectModule,

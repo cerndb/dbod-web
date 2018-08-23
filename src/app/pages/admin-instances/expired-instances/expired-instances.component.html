@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="this.authService.user.isAdmin">
   <mat-card-header>
     Expired Instances
   </mat-card-header>
