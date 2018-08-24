@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { StateButtonComponent } from '../../components/state-button/state-button.component';
 import { SocketJobs } from '../sockets.module';
+import { AuthenticationService } from '../../../services/authentication/authentication.service';
 
 @Component({
   selector: 'jobs',
@@ -19,7 +20,7 @@ export class JobsComponent implements OnInit {
 
   filters: string = '';
 
-  constructor(@Inject(SocketJobs) private socket) {
+  constructor(@Inject(SocketJobs) private socket, private authService: AuthenticationService) {
   
   }
 
@@ -41,7 +42,9 @@ export class JobsComponent implements OnInit {
       }
     });
 
-    this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    this.authService.loadUser().then( () => {
+      this.socket.emit('getter', {jwt: this.authService.user.jwt, id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    })
   }
 
   pageChanged(page) {

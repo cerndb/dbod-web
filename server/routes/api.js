@@ -7,6 +7,8 @@ const router = express.Router();
 
 var requestProxy = require('express-request-proxy');
 
+var jwt = require('jsonwebtoken');
+
 var usernamePassword = config.apiato.user + ":" + config.apiato.password;
 
 const apiOptions = {
@@ -26,9 +28,16 @@ function validate(req, filter) {
     console.log("Body: " + JSON.stringify(req.body, null, 2));
     console.log("SessionID: " + JSON.stringify(req.session.id, null, 2));
     console.log("Session: " + JSON.stringify(req.session, null, 2));
-    // TODO: Implement ACL validation
-    if (req.session.isAuthenticated) return true;
-    else return false;
+    
+    try {
+      var decoded = jwt.verify(req.headers['jwt-session'], 'sessionsecret');
+      console.log(decoded);
+      // TODO: Implement ACL validation
+      return true;
+    } catch(err) {
+      console.log(err);
+      return false
+    }
 }
 
 // TODO: Proper error handling
