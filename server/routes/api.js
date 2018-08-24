@@ -30,32 +30,30 @@ function validate(req, filter) {
     console.log("Session: " + JSON.stringify(req.session, null, 2));
     
     try {
-      var decoded = jwt.verify(req.headers['jwt-session'], 'sessionsecret');
-      console.log(decoded);
-      // TODO: Implement ACL validation
-      return true;
+      return jwt.verify(req.headers['jwt-session'], config.secretKey);
+      // TODO: Implement further ACL validation (url/objects)
     } catch(err) {
-      console.log(err);
-      return false
+        console.log(err);
+        throw "JWT Verify error!";
     }
 }
 
-// TODO: Proper error handling
-
 function myProxy(acl, apiOptions) {
     return function(req, res, next) {
-        if (validate(req, acl) == true) {
+        try {
+            auth = validate(req, acl)
+            // To be checked against
+            delete auth.iat
+            // Not supported yet
+            delete auth.clusters
             console.log('ACL: valid');
+            console.log('Auth ', JSON.stringify(auth));
             apiopts = apiOptions;
-            var auth = {};
-            auth.owner = req.session.user.username;
-            auth.admin = req.session.isAdmin || false ;
-            auth.groups = req.session.groups || {}
             apiopts['headers']['auth'] = JSON.stringify(auth);
             console.log("apiopts: " + JSON.stringify(apiopts));
             requestProxy(apiopts)(req, res, next)
-        } else {
-            console.log('ACL: invalid');
+        } catch(err) {
+            console.log('ACL: invalid ', err);
             res.statusCode = 403; // Forbidden access
             res.end();
         }
@@ -82,6 +80,9 @@ function getToken(username, groups) {
         console.log(body.explanation);
       }
       const jwt = require('jsonwebtoken')
+      console.log('>>>> Signing BODY', body)
+      delete body.instances
+      body.owner = username
       var jtoken = jwt.sign(body, config.secretKey)
       resolve(jtoken);
     });
@@ -89,8 +90,6 @@ function getToken(username, groups) {
   });
 
 }
-
-
 
 module.exports = {
     router: router,
