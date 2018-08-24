@@ -55,6 +55,7 @@ app.get('/auth', (req, res) => {
     response.username = req.session.user.username
     response.fullname = req.session.user.name
     response.federation = req.session.user.federation
+    response.jwt = req.session.token
     res.send(response)
 });
 
