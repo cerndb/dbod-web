@@ -21,7 +21,7 @@ export class InstancesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._instanceService.getInstances().subscribe((res) => {
+    this._instanceService.getInstances().then((res) => {
       this.dataSource = new MatTableDataSource(res['response']);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

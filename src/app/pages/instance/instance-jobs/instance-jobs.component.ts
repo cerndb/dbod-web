@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { StateButtonComponent } from '../../components/state-button/state-button.component';
 import { SocketJobs } from '../sockets.module';
+import { AuthenticationService } from '../../../services/authentication/authentication.service';
 
 @Component({
   selector: 'instance-jobs',
@@ -21,7 +22,7 @@ export class InstanceJobsComponent implements OnInit {
 
   filters: string = '';
 
-  constructor(@Inject(SocketJobs) private socket) {
+  constructor(private authService: AuthenticationService, @Inject(SocketJobs) private socket) {
   
   }
 
@@ -47,14 +48,18 @@ export class InstanceJobsComponent implements OnInit {
   pageChanged(page) {
     this.opened = false;
     if(!isNaN(page)) {
-      this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      this.authService.loadUser().then( () => {
+        this.socket.emit('getter', {jwt: this.authService.user.jwt, id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      });
     }
   }
 
   changeItemsPerPage(e) {
     this.opened = false;
     this.pageLength = e.value;
-    this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    this.authService.loadUser().then( () => {
+      this.socket.emit('getter', {jwt: this.authService.user.jwt, id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    });
   }
 
   panelOpened() {
@@ -70,7 +75,9 @@ export class InstanceJobsComponent implements OnInit {
     this.pageLength = 10;
     if(this.data.hasOwnProperty('id')) {
       this.id = this.data.id;
-      this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      this.authService.loadUser().then( () => {
+        this.socket.emit('getter', {jwt: this.authService.user.jwt, id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      });
     }
   }
 
@@ -83,7 +90,9 @@ export class InstanceJobsComponent implements OnInit {
       this.filters = '';
     }
     this.opened = false;
-    this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    this.authService.loadUser().then( () => {
+      this.socket.emit('getter', {jwt: this.authService.user.jwt, id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    });
   }
 
   ngOnDestroy() {

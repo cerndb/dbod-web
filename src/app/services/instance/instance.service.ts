@@ -5,16 +5,20 @@ import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import { AuthenticationService } from '../../services/authentication/authentication.service';
+
 @Injectable()
 export class InstanceService {
-  constructor(private http: Http) {
-    var obj;
-    this.getInstances().subscribe(data => obj=data, error => console.log(error));
-  }
+  constructor(private http: Http, private authService: AuthenticationService) { }
 
-  getInstances(): Observable<any> {
-    return this.http.get('./api/v1/instance')
-                       .map((res:any) => res.json());
+  getInstances() {
+    return new Promise( (resolve, reject) => {
+      this.authService.loadUser().then( () => {
+        this.http.get('./api/v1/instance', { headers: new Headers({ 'jwt-session': this.authService.user.jwt }) })
+                       .map((res:any) => res.json())
+                       .subscribe( (res) => resolve(res));
+      });
+    })
   }
 
   getPendingInstances(): Observable<any> {
@@ -44,7 +48,7 @@ export class InstanceService {
   			status: 0,
   		};
 
-  		this.http.put(url,req).subscribe( (res:any) => {
+  		this.http.put(url,req, { headers: new Headers({ 'jwt-session': this.authService.user.jwt }) }).subscribe( (res:any) => {
 				if(!res.ok) {
 					toReturn.message = res.message;
 		      toReturn.status = res.status;

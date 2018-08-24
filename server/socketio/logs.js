@@ -7,6 +7,7 @@ exports = module.exports = function(io,config,client){
 
     var monitor = function(dataLogs) {
       //console.log(dataLogs);
+      // TODO : implement restricted access (dataLogs.jwt should be exposed)
       client.search({
         index: config.elasticsearch.indexNames[dataLogs.logType],
         body: {
@@ -56,7 +57,7 @@ exports = module.exports = function(io,config,client){
         console.trace(err.message);
       });
       if(realtime) {
-        monitoringTimeout = setTimeout(monitor, 1000, dataLogs); // Choose the refresh time
+        monitoringTimeout = setTimeout(monitor, 2000, dataLogs); // Choose the refresh time
       }
     }
 

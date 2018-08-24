@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ChangeDetectorRef, Inject } from '@angular/core';
 import { SocketLogs } from '../sockets.module';
 import { RundeckService } from '../../../services/rundeck/rundeck.service';
+import { AuthenticationService } from '../../../services/authentication/authentication.service';
 
 @Component({
   selector: 'instance-logs',
@@ -26,7 +27,7 @@ export class InstanceLogsComponent implements OnInit {
 
   logFilesList = [];
 
-  constructor(@Inject(SocketLogs) private socket, private rundeckService: RundeckService) {
+  constructor(private authService: AuthenticationService, @Inject(SocketLogs) private socket, private rundeckService: RundeckService) {
   
   }
 
@@ -52,14 +53,18 @@ export class InstanceLogsComponent implements OnInit {
   pageChanged(page) {
     this.opened = false;
     if(!isNaN(page)) {
-      this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      this.authService.loadUser().then( () => {
+        this.socket.emit('getter', {jwt: this.authService.user.jwt, name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      });
     }
   }
 
   changeItemsPerPage(e) {
     this.opened = false;
     this.pageLength = e.value;
-    this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    this.authService.loadUser().then( () => {
+      this.socket.emit('getter', {jwt: this.authService.user.jwt, name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    });
   }
 
   panelOpened() {
@@ -80,7 +85,9 @@ export class InstanceLogsComponent implements OnInit {
         case 'InfluxDB': this.logType = 'inflog'; break;
         case 'PG': this.logType = 'pglog'; break;
       }
-      this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      this.authService.loadUser().then( () => {
+        this.socket.emit('getter', {jwt: this.authService.user.jwt, name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      });
     }
   }
 
@@ -88,7 +95,9 @@ export class InstanceLogsComponent implements OnInit {
     if(e.checked) {
       this.socket.emit('realtime_on');
       this.opened = false;
-      this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      this.authService.loadUser().then( () => {
+        this.socket.emit('getter', {jwt: this.authService.user.jwt, name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      });
     }
     else {
       this.socket.emit('realtime_off');
@@ -104,7 +113,9 @@ export class InstanceLogsComponent implements OnInit {
       this.filters = '*';
     }
     this.opened = false;
-    this.socket.emit('getter', {name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    this.authService.loadUser().then( () => {
+      this.socket.emit('getter', {jwt: this.authService.user.jwt, name: this.dbName, logType: this.logType, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    });
   }
 
   listLogFiles() {

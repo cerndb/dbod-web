@@ -1,5 +1,5 @@
 exports = module.exports = function(io,config,client){
-  const https = require('https');
+  const http = require('http');
 
   io.of('/instance').on('connection', function(socket) {
     // console.log('socket.io connection made');
@@ -9,7 +9,7 @@ exports = module.exports = function(io,config,client){
     var usernamePassword = config.apiato.user + ":" + config.apiato.password;
 
     var monitor = function(dataInstance) {
-      https.get({ host: config.apiato.host, path: config.apiato.path+'/instance/'+dataInstance.name, port:config.apiato.port, headers: { Authorization: "Basic " + new Buffer(usernamePassword).toString('base64') } }, (resp) => {
+      http.get({ host: 'localhost', path: config.apiato.path+'/instance/'+dataInstance.name, port:config.port, headers : {"jwt-session": dataInstance.hasOwnProperty('jwt') ? dataInstance.jwt : null} }, (resp) => {
         var strInstance = '';
         resp.on('data', function (chunk) {
           strInstance += chunk;
@@ -29,7 +29,7 @@ exports = module.exports = function(io,config,client){
       }).on('error', (err) => {
         console.trace(err.message);
       });
-      monitoringTimeout = setTimeout(monitor, 1000, dataInstance); // Choose the refresh time
+      monitoringTimeout = setTimeout(monitor, 10000, dataInstance); // Choose the refresh time
     }
 
     socket.on('getter', (dataInstance) => {

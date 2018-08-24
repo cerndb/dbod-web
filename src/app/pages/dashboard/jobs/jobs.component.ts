@@ -44,20 +44,24 @@ export class JobsComponent implements OnInit {
 
     this.authService.loadUser().then( () => {
       this.socket.emit('getter', {jwt: this.authService.user.jwt, id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
-    })
+    });
   }
 
   pageChanged(page) {
     this.opened = false;
     if(!isNaN(page)) {
-      this.socket.emit('getter', {size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      this.authService.loadUser().then( () => {
+        this.socket.emit('getter', {jwt: this.authService.user.jwt, id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      });
     }
   }
 
   changeItemsPerPage(e) {
     this.opened = false;
     this.pageLength = e.value;
-    this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    this.authService.loadUser().then( () => {
+      this.socket.emit('getter', {jwt: this.authService.user.jwt, id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    });
   }
 
   panelOpened() {
@@ -77,7 +81,9 @@ export class JobsComponent implements OnInit {
       this.filters = '';
     }
     this.opened = false;
-    this.socket.emit('getter', {id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    this.authService.loadUser().then( () => {
+      this.socket.emit('getter', {jwt: this.authService.user.jwt, id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+    });
   }
 
   ngOnDestroy() {

@@ -65,7 +65,7 @@ export class InstanceComponent implements OnInit {
       ],
   };
 
-  constructor( private authService: AuthenticationService, private route: ActivatedRoute, private router: Router, @Inject(SocketInstance) private socket, public dialog: MatDialog) {}
+  constructor(private authService: AuthenticationService, private route: ActivatedRoute, private router: Router, @Inject(SocketInstance) private socket, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.socket.connect();
@@ -84,7 +84,9 @@ export class InstanceComponent implements OnInit {
     
     this.route.params.subscribe(params => {
         this.dbName = params['id'];
-        this.socket.emit('getter', {name: this.dbName});
+        this.authService.loadUser().then( () => {
+          this.socket.emit('getter', {jwt: this.authService.user.jwt, name: this.dbName});
+        });
     });
   }
 

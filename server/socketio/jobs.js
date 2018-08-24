@@ -10,7 +10,7 @@ exports = module.exports = function(io,config,client){
 
     var monitor = function(dataJobs) {
       var path = dataJobs.hasOwnProperty('id') ? config.apiato.path+'/instance/'+dataJobs.id+'/job?order=creation_date.desc&size='+dataJobs.size+'&from='+dataJobs.from+'&'+dataJobs.filters : config.apiato.path+'/job?order=creation_date.desc&size='+dataJobs.size+'&from='+dataJobs.from+'&'+dataJobs.filters;
-      http.get({ host: 'localhost', path: path, port:config.port, headers : {"jwt-session": dataJobs.jwt} }, (resp) => {
+      http.get({ host: 'localhost', path: path, port:config.port, headers : {"jwt-session": dataJobs.hasOwnProperty('jwt') ? dataJobs.jwt : null} }, (resp) => {
         var strJobs = '';
         resp.on('data', function (chunk) {
           strJobs += chunk;
@@ -32,7 +32,7 @@ exports = module.exports = function(io,config,client){
       }).on('error', (err) => {
         console.trace(err.message);
       });
-      monitoringTimeout = setTimeout(monitor, 1000, dataJobs); // Choose the refresh time
+      monitoringTimeout = setTimeout(monitor, 60000, dataJobs); // Choose the refresh time
     }
 
     socket.on('getter', (dataJobs) => {
