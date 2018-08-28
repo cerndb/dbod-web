@@ -77,7 +77,7 @@ app.get('/logout', (req, res) => {
         console.log(error)}
         }
     );
-    res.send("Bye!");
+    res.redirect('https://login.cern.ch/adfs/ls/?wa=wsignout1.0');
 });
 
 app.set('port', config.port);
