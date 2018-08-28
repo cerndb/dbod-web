@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PendingInstancesComponent } from './pending-instances.component';
+import { ExpiredPendingComponent } from './expired-pending.component';
 
-describe('PendingInstancesComponent', () => {
-  let component: PendingInstancesComponent;
-  let fixture: ComponentFixture<PendingInstancesComponent>;
+describe('ExpiredPendingComponent', () => {
+  let component: ExpiredPendingComponent;
+  let fixture: ComponentFixture<ExpiredPendingComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PendingInstancesComponent ]
+      declarations: [ ExpiredPendingComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PendingInstancesComponent);
+    fixture = TestBed.createComponent(ExpiredPendingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

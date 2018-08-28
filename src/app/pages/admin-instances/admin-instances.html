@@ -1,6 +1,4 @@
-<mat-card *ngIf="this.authService.user.isAdmin">
-<div>
-    <pending-instances [title]="pendingInstancesTitle"></pending-instances>
-    <expired-instances [title]="expiredInstancesTitle"></expired-instances>
+<div *ngIf="this.authService.user.isAdmin">
+    <expired-pending [title]="expiredPendingTitle"></expired-pending>
+    <upgrades [title]="upgradesTitle"></upgrades>
 </div>
-</mat-card>

@@ -5,25 +5,25 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 
 @Component({
-  selector: 'pending-instances',
+  selector: 'upgrades',
   providers: [InstanceService],
-  templateUrl: './pending-instances.component.html',
-  styleUrls: ['./pending-instances.component.scss']
+  templateUrl: './upgrades.component.html',
+  styleUrls: ['./upgrades.component.scss']
 })
-export class PendingInstancesComponent implements OnInit {
+export class UpgradesComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'owner', 'egroup', 'project', 'type', 'category', 'validate'];
+  displayedColumns: string[] = ['type', 'category', 'version_from', 'version_to', 'destroy'];
   dataSource;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private authService: AuthenticationService, private _instanceService: InstanceService) {
-    this.dataSource = new MatTableDataSource([{'id': '', 'name': '', 'owner': '', 'egroup': '', 'project': '', 'type': '', 'category': ''}]);
+    this.dataSource = new MatTableDataSource([{'type': '', 'category': '', 'version_from': '', 'version_to': ''}]);
   }
 
   ngOnInit() {
-    this._instanceService.getPendingInstances().subscribe((res) => {
+    this._instanceService.getUpgrades().subscribe((res) => {
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

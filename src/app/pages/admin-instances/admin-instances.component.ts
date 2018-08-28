@@ -9,8 +9,8 @@ import { AuthenticationService } from '../../services/authentication/authenticat
 })
 export class AdminInstancesComponent {
 
-  pendingInstancesTitle: string = 'Pending Instances';
-  expiredInstancesTitle: string = 'Expired Instances';
+  expiredPendingTitle: string = 'Pending and Expired Instances';
+  upgradesTitle: string = 'Upgrades';
 
   constructor(private authService: AuthenticationService) { }
 

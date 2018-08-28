@@ -5,25 +5,25 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 
 @Component({
-  selector: 'expired-instances',
+  selector: 'expired-pending',
   providers: [InstanceService],
-  templateUrl: './expired-instances.component.html',
-  styleUrls: ['./expired-instances.component.scss']
+  templateUrl: './expired-pending.component.html',
+  styleUrls: ['./expired-pending.component.scss']
 })
-export class ExpiredInstancesComponent implements OnInit {
+export class ExpiredPendingComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'owner', 'egroup', 'project', 'type', 'category', 'date', 'rescue', 'destroy'];
+  displayedColumns: string[] = ['name', 'owner', 'egroup', 'project', 'type', 'category', 'expiry_date', 'validate', 'rescue', 'destroy'];
   dataSource;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private authService: AuthenticationService, private _InstanceService: InstanceService) {
-    this.dataSource = new MatTableDataSource([{'id': '', 'name': '', 'owner': '', 'egroup': '', 'project': '', 'type': '', 'category': '', 'date': ''}]);
+    this.dataSource = new MatTableDataSource([{'name': '', 'owner': '', 'egroup': '', 'project': '', 'type': '', 'category': '', 'expiry_date': ''}]);
   }
 
   ngOnInit() {
-    this._InstanceService.getExpiredInstances().subscribe((res) => {
+    this._InstanceService.getExpiredPending().subscribe((res) => {
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

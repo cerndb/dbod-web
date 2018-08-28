@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminInstancesComponent } from './admin-instances.component';
-import { PendingInstancesComponent } from './pending-instances/pending-instances.component';
-import { ExpiredInstancesComponent } from './expired-instances/expired-instances.component'
+import { ExpiredPendingComponent } from './expired-pending/expired-pending.component';
+import { UpgradesComponent } from './upgrades/upgrades.component'
 import { InstanceService } from '../../services/instance';
 
 import { MatSliderModule } from '@angular/material';
@@ -21,6 +21,7 @@ import { MatTooltipModule } from '@angular/material';
 import { MatTableModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -41,11 +42,12 @@ import { MatSortModule } from '@angular/material';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatIconModule,
   ],
   declarations: [
     AdminInstancesComponent,
-    PendingInstancesComponent,
-    ExpiredInstancesComponent,
+    ExpiredPendingComponent,
+    UpgradesComponent,
   ],
   providers: [
     InstanceService,
