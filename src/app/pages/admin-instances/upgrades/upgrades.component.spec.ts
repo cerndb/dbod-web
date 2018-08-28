@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExpiredInstancesComponent } from './expired-instances.component';
+import { UpgradesComponent } from './upgrades.component';
 
-describe('ExpiredInstancesComponent', () => {
-  let component: ExpiredInstancesComponent;
-  let fixture: ComponentFixture<ExpiredInstancesComponent>;
+describe('UpgradesComponent', () => {
+  let component: UpgradesComponent;
+  let fixture: ComponentFixture<UpgradesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExpiredInstancesComponent ]
+      declarations: [ UpgradesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExpiredInstancesComponent);
+    fixture = TestBed.createComponent(UpgradesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -21,13 +21,13 @@ export class InstanceService {
     })
   }
 
-  getPendingInstances(): Observable<any> {
-       return this.http.get('assets/pendingInstances-info.json')
+  getExpiredPending(): Observable<any> {
+       return this.http.get('assets/expiredPending-info.json')
                        .map((res:any) => res.json());
   }
 
-  getExpiredInstances(): Observable<any> {
-       return this.http.get('assets/expiredInstances-info.json')
+  getUpgrades(): Observable<any> {
+       return this.http.get('assets/upgrades-info.json')
                        .map((res:any) => res.json());
   }
 

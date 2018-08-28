@@ -1,0 +1,38 @@
+[
+  {
+    "type": "InfluxDB",
+    "category": "Test",
+    "version_from": 1,
+    "version_to": 1.2
+  },
+  {
+    "type": "Oracle 11g",
+    "category": "",
+    "version_from": 2,
+    "version_to": 2.2
+  },
+  {
+    "type": "MySQL",
+    "category": "",
+    "version_from": 1,
+    "version_to": 1.2
+  },
+  {
+    "type": "MySQL",
+    "category": "Test",
+    "version_from": 1.4,
+    "version_to": 2
+  },
+  {
+    "type": "PostgreSQL",
+    "category": "Test",
+    "version_from": 1,
+    "version_to": 1.2
+  },
+  {
+    "type": "PostgreSQL",
+    "category": "",
+    "version_from": 9.1,
+    "version_to": 9.2
+  }
+]
