@@ -46,6 +46,7 @@ function myProxy(acl, apiOptions) {
             delete auth.iat
             // Not supported yet
             delete auth.clusters
+            delete auth.instances
             console.log('ACL: valid');
             console.log('Auth ', JSON.stringify(auth));
             apiopts = apiOptions;
@@ -80,9 +81,12 @@ function getToken(username, groups) {
         console.log(body.explanation);
       }
       const jwt = require('jsonwebtoken')
-      console.log('>>>> Signing BODY', body)
-      delete body.instances
+      
       body.owner = username
+      if(body.admin) {
+        delete body.instances;
+      }
+      console.log('>>>> Signing BODY', body)
       var jtoken = jwt.sign(body, config.secretKey)
       resolve(jtoken);
     });
