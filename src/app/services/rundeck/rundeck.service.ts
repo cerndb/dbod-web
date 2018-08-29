@@ -15,7 +15,7 @@ export class RundeckService {
 	    	this.http.post('./api/v1/rundeck/'+path, params, { headers: new Headers({ 'jwt-session': this.authService.user.jwt }) })
 	    	.map((res:any) => res.json())
 	    	.subscribe( (data: any) => {
-	    		console.log(data);
+	    		// console.log(data);
 	    		resolve(data.response.entries[0]);
 	    	}, (err) => reject(err));
 	    });

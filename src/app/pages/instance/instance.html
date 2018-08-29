@@ -1,12 +1,12 @@
-<mat-card *ngIf="data.hasOwnProperty('user') && data.user!=null && this.authService.user.isAdmin!=undefined">
+<mat-card *ngIf="data.hasOwnProperty('user') && this.authService.user.isAdmin!=undefined">
   <mat-card-header>
     <div mat-card-avatar>
-      <button mat-icon-button matTooltip="{{ this.data['state'] }}" matTooltipPosition='above' [matMenuTriggerFor]="startStopMenu" [ngSwitch]="instanceStateEditable">
-        <mat-icon *ngSwitchCase="0" style="color:green;">power_settings_new</mat-icon>
-        <mat-icon *ngSwitchCase="1" style="color:red;">power_settings_new</mat-icon>
-        <mat-icon *ngSwitchCase="2" style="color:blue;">power_settings_new</mat-icon>
-        <mat-icon *ngSwitchCase="3" style="color:orange;">power_settings_new</mat-icon>
-        <mat-icon *ngSwitchCase="4" style="color:cyan;">power_settings_new</mat-icon>
+      <button mat-icon-button name="state" matTooltip="{{ this.data['state'] }}" matTooltipPosition='above' [matMenuTriggerFor]="startStopMenu" [ngSwitch]="editedData.state">
+        <mat-icon *ngSwitchCase="'RUNNING'" style="color:green;">power_settings_new</mat-icon>
+        <mat-icon *ngSwitchCase="'STOPPED'" style="color:red;">power_settings_new</mat-icon>
+        <mat-icon *ngSwitchCase="'MAINTENANCE'" style="color:blue;">power_settings_new</mat-icon>
+        <mat-icon *ngSwitchCase="'BUSY'" style="color:orange;">power_settings_new</mat-icon>
+        <mat-icon *ngSwitchCase="'AWAITING_APPROVAL'" style="color:cyan;">power_settings_new</mat-icon>
       </button>
       <mat-menu #startStopMenu="matMenu" overlapTrigger="false">
         <button mat-menu-item (click)="startStopInstance(true)"><mat-icon style="color:green;">play_arrow</mat-icon><span style="color:green;">Start</span></button>
@@ -14,42 +14,45 @@
       </mat-menu>
     </div>
     <mat-card-title>{{ data.name }}</mat-card-title>
-    <mat-card-subtitle>{{ data.user.department }}-{{ data.user.group }} {{ data.user.first_name }} {{ data.user.last_name }}</mat-card-subtitle>
+    <mat-card-subtitle>
+      <span *ngIf="data.user!=null; else userMissing">{{ data.user.department }}-{{ data.user.group }} {{ data.user.first_name }} {{ data.user.last_name }}</span>
+      <ng-template #userMissing><b>User informations are missing</b></ng-template>
+    </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content style="display:flex; justify-content: center;">
     <div class="flex-container">
       <mat-form-field class="field">
-        <input matInput placeholder="Owner" name="owner" value="{{data.owner}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
+        <input matInput placeholder="Owner" name="owner" [(ngModel)]="editedData.owner" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Egroup" name="egroup" value="{{data.egroup}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
+        <input matInput placeholder="Egroup" name="egroup" [(ngModel)]="editedData.egroup" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Project" name="project" value="{{data.project}}" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
+        <input matInput placeholder="Project" name="project" [(ngModel)]="editedData.project" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Description" name="description" value="{{data.description}}" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
+        <input matInput placeholder="Description" name="description" [(ngModel)]="editedData.description" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Creation date" name="creation_date" value="{{data.creation_date}}" disabled (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
+        <input matInput placeholder="Creation date" name="creation_date" [(ngModel)]="editedData.creation_date" disabled (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Expiry date" name="expiry_date" value="{{data.expiry_date}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
+        <input matInput placeholder="Expiry date" name="expiry_date" [(ngModel)]="editedData.expiry_date" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Type" name="type" value="{{data.type}}" disabled (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
+        <input matInput placeholder="Type" name="type" [(ngModel)]="editedData.type" disabled (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <input matInput placeholder="Version" name="version" value="{{data.version}}" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
+        <input matInput placeholder="Version" name="version" [(ngModel)]="editedData.version" [disabled]="!this.authService.user.isAdmin" (blur)="changeField($event.target.name,$event.target.value)" (keyup.enter)="$event.target.blur()">
       </mat-form-field>
       <mat-form-field class="field">
-        <mat-select matInput placeholder="Category" name="category" value="{{data.category}}" [disabled]="!this.authService.user.isAdmin" (selectionChange)="changeField('category',$event.value)">
+        <mat-select matInput placeholder="Category" name="category" [(ngModel)]="editedData.category" [disabled]="!this.authService.user.isAdmin" (selectionChange)="changeField('category',$event.value)">
           <mat-option value="REF">REF</mat-option>
           <mat-option value="TEST">TEST</mat-option>
           <mat-option value="PROD">PROD</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-checkbox name="notifications" value="{{data.attributes.notifications}}" [disabled]="!this.authService.user.isAdmin" (change)="changeAttributeField('notifications',$event.checked)">Notifications</mat-checkbox>
+      <mat-checkbox name="notifications" [checked]="editedData.attributes.notifications=='true'" [disabled]="!this.authService.user.isAdmin" (change)="changeAttributeField('notifications',$event.checked)">Notifications</mat-checkbox>
     </div>
   </mat-card-content>
 </mat-card>
@@ -68,7 +71,7 @@
     </ngb-tab>
     <ngb-tab title="Snapshots">
       <ng-template ngbTabContent>
-        <instance-snapshots [data]="data"></instance-snapshots>
+        <instance-snapshots [data]="data" (instanceScheduledBackupSettingsChange)="loadData()"></instance-snapshots>
       </ng-template>
     </ngb-tab>
     <ngb-tab title="File Editor">
@@ -76,7 +79,7 @@
         <instance-file-editor [data]="data"></instance-file-editor>
       </ng-template>
     </ngb-tab>
-    <ngb-tab title="Metadata Editor">
+    <ngb-tab title="Metadata Editor" *ngIf="data.hasOwnProperty('user') && this.authService.user.isAdmin!=undefined && this.authService.user.isAdmin">
       <ng-template ngbTabContent>
         <metadata-editor [data]="data"></metadata-editor>
       </ng-template>

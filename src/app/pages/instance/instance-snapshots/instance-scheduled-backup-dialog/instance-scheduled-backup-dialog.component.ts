@@ -64,14 +64,38 @@ export class InstanceScheduledBackupDialogComponent {
 		}
 
 		this.state = this.State['Loading'];
-		this.instanceService.put(this.data.instanceId,true,'backup',newScheduleBackupsSetting).then( (data: any) => {
-			this.resStatus = data.status;
-	    	this.resMessage = data.message;
-			this.state = this.State['Success'];
-	    }, (err) => {
-	    	this.resStatus = err.status;
-	    	this.resMessage = err.message;
-	    	this.state = this.State['Error'];
-	    });
+		if(this.data.scheduleBackupsSetting==undefined && newScheduleBackupsSetting!=undefined) {
+			this.instanceService.post(this.data.instanceId,true,'backup',newScheduleBackupsSetting).then( (data: any) => {
+				this.resStatus = data.status;
+		    	this.resMessage = data.message;
+				this.state = this.State['Success'];
+		    }, (err) => {
+		    	this.resStatus = err.status;
+		    	this.resMessage = err.message;
+		    	this.state = this.State['Error'];
+		    });
+		}
+		else if(this.data.scheduleBackupsSetting!=undefined && newScheduleBackupsSetting==undefined) {
+			this.instanceService.delete(this.data.instanceId,true,'backup').then( (data: any) => {
+				this.resStatus = data.status;
+		    	this.resMessage = data.message;
+				this.state = this.State['Success'];
+		    }, (err) => {
+		    	this.resStatus = err.status;
+		    	this.resMessage = err.message;
+		    	this.state = this.State['Error'];
+		    });
+		}
+		else {
+			this.instanceService.put(this.data.instanceId,true,'backup',newScheduleBackupsSetting).then( (data: any) => {
+				this.resStatus = data.status;
+		    	this.resMessage = data.message;
+				this.state = this.State['Success'];
+		    }, (err) => {
+		    	this.resStatus = err.status;
+		    	this.resMessage = err.message;
+		    	this.state = this.State['Error'];
+		    });
+		}
 	}
 }

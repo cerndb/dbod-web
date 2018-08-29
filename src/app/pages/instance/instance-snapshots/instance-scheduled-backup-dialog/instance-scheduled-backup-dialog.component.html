@@ -6,7 +6,7 @@
 
 			<div class="flex-container">
 				<ngb-timepicker name="schedule_time" [(ngModel)]="scheduleTime"></ngb-timepicker>
-				<mat-select placeholder="Day of week" [(ngModel)]="scheduleDayOfWeek" [disabled]="scheduleMode!='week'" style="margin-left: 10px; width: 100px;" >
+				<!-- <mat-select placeholder="Day of week" [(ngModel)]="scheduleDayOfWeek" [disabled]="scheduleMode!='week'" style="margin-left: 10px; width: 100px;" >
 			    <mat-option value="1">Monday</mat-option>
 			    <mat-option value="2">Tuesday</mat-option>
 			    <mat-option value="3">Wednesday</mat-option>
@@ -14,13 +14,15 @@
 			    <mat-option value="5">Friday</mat-option>
 			    <mat-option value="6">Saturday</mat-option>
 			    <mat-option value="7">Sunday</mat-option>
-			  </mat-select>
+			  </mat-select> -->
 			</div>
-			<mat-button-toggle-group [(value)]="scheduleMode">
-			  <mat-button-toggle value="disabled">Disabled</mat-button-toggle>
-			  <mat-button-toggle value="day">Each day</mat-button-toggle>
-			  <mat-button-toggle value="week">Each week</mat-button-toggle>
-			</mat-button-toggle-group>
+			<div class="flex-container">
+				<mat-button-toggle-group [(value)]="scheduleMode">
+				  <mat-button-toggle value="disabled">Disabled</mat-button-toggle>
+				  <mat-button-toggle value="day">Each day</mat-button-toggle>
+				  <!-- <mat-button-toggle value="week">Each week</mat-button-toggle> -->
+				</mat-button-toggle-group>
+			</div>
 
 		</mat-dialog-content>
 		<mat-dialog-actions align="end">

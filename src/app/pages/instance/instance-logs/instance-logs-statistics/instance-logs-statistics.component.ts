@@ -4,6 +4,7 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 import {NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import { interval } from 'rxjs';
+import { AuthenticationService } from '../../../../services/authentication/authentication.service';
 
 @Component({
   selector: 'instance-logs-statistics',
@@ -71,7 +72,7 @@ export class InstanceLogsStatisticsComponent implements OnInit {
   clock1;
   clock10;
    
-  constructor(@Inject(SocketLogsStatistics) private socket) {
+  constructor(private authService: AuthenticationService, @Inject(SocketLogsStatistics) private socket) {
   
   }
 
@@ -132,7 +133,10 @@ export class InstanceLogsStatisticsComponent implements OnInit {
         case 'InfluxDB': this.logType = 'inflog'; break;
         case 'PG': this.logType = 'pglog'; break;
       }
-      this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+      this.authService.loadUser().then( () => {
+        this.socket.emit('getter', {jwt: this.authService.user.jwt, name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+      });
+      
     }
   }
 
@@ -146,7 +150,9 @@ export class InstanceLogsStatisticsComponent implements OnInit {
     if(this.tmin_seconds != null && this.tmax_seconds != null && typeof this.tmin != 'string' && typeof this.tmax != 'string') {
       this.tmin = new Date(this.tmin_day.getFullYear(),this.tmin_day.getMonth(),this.tmin_day.getDate(),this.tmin_seconds.hour,this.tmin_seconds.minute,this.tmin_seconds.second);
       this.tmax = new Date(this.tmax_day.getFullYear(),this.tmax_day.getMonth(),this.tmax_day.getDate(),this.tmax_seconds.hour,this.tmax_seconds.minute,this.tmax_seconds.second);
-      this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+      this.authService.loadUser().then( () => {
+        this.socket.emit('getter', {jwt: this.authService.user.jwt, name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+      });
     }
   }
 
@@ -159,21 +165,27 @@ export class InstanceLogsStatisticsComponent implements OnInit {
     this.tmin = this.source.oldestTimestamp;
     this.tmax = this.source.newestTimestamp;
     this.timeBinding();
-    this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+    this.authService.loadUser().then( () => {
+      this.socket.emit('getter', {jwt: this.authService.user.jwt, name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+    });
   }
 
   monitor() {
     delete this.barChartOptions.animation;
     this.tmax = new Date();
     this.timeBinding();
-    this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+    this.authService.loadUser().then( () => {
+      this.socket.emit('getter', {jwt: this.authService.user.jwt, name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+    });
     this.clock1 = interval(1000).subscribe(n => {
       this.tmin.setSeconds(this.tmin.getSeconds() + 1);
       this.tmax.setSeconds(this.tmax.getSeconds() + 1);
       this.timeBinding();
     })
     this.clock10 = interval(10000).subscribe(n => {
-      this.socket.emit('getter', {name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+      this.authService.loadUser().then( () => {
+        this.socket.emit('getter', {jwt: this.authService.user.jwt, name: this.dbName, logType: this.logType, tmin: this.tmin, tmax: this.tmax, n: this.n});
+      });
     })
   }
 

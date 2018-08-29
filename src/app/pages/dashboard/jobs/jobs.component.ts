@@ -43,7 +43,7 @@ export class JobsComponent implements OnInit {
     });
 
     this.authService.loadUser().then( () => {
-      this.socket.emit('getter', {jwt: this.authService.user.jwt, id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      this.socket.emit('getter', {jwt: this.authService.user.jwt, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
     });
   }
 
@@ -51,7 +51,7 @@ export class JobsComponent implements OnInit {
     this.opened = false;
     if(!isNaN(page)) {
       this.authService.loadUser().then( () => {
-        this.socket.emit('getter', {jwt: this.authService.user.jwt, id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+        this.socket.emit('getter', {jwt: this.authService.user.jwt, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
       });
     }
   }
@@ -60,7 +60,7 @@ export class JobsComponent implements OnInit {
     this.opened = false;
     this.pageLength = e.value;
     this.authService.loadUser().then( () => {
-      this.socket.emit('getter', {jwt: this.authService.user.jwt, id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      this.socket.emit('getter', {jwt: this.authService.user.jwt, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
     });
   }
 
@@ -82,7 +82,7 @@ export class JobsComponent implements OnInit {
     }
     this.opened = false;
     this.authService.loadUser().then( () => {
-      this.socket.emit('getter', {jwt: this.authService.user.jwt, id: this.id, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
+      this.socket.emit('getter', {jwt: this.authService.user.jwt, size: this.pageLength, from: (this.page-1)*this.pageLength, filters:this.filters});
     });
   }
 

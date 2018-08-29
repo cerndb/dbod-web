@@ -45,6 +45,7 @@ exports = module.exports = function(io,config,client){
 
     var monitor = function(dataLogsStatistics) {
 	    // console.log(dataLogsStatistics);
+      // TODO : implement restricted access (dataLogsStatistics.jwt should be exposed)
     	// Getting the oldest
       client.search({
         index: config.elasticsearch.indexNames[dataLogsStatistics.logType],

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation, Input } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { RundeckService } from '../../../services/rundeck/rundeck.service';
 import { CalendarEvent,  CalendarEventAction,  CalendarEventTimesChangedEvent } from 'angular-calendar';
 import { Subject } from 'rxjs';
@@ -26,6 +26,7 @@ import { InstanceScheduledBackupDialogComponent } from './instance-scheduled-bac
 export class InstanceSnapshotsComponent {
 
   @Input() data: any;
+  @Output() instanceScheduledBackupSettingsChange: EventEmitter<any> = new EventEmitter();
 
   view: string = 'month';
   viewDate: Date = new Date();
@@ -98,5 +99,8 @@ export class InstanceSnapshotsComponent {
         scheduleBackupsSetting: this.data.attributes.backup,
       }
     });
+    dialogRef.afterClosed().subscribe(() => {
+      this.instanceScheduledBackupSettingsChange.emit(null);
+    })
   }
 }
