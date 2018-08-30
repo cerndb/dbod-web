@@ -20,6 +20,21 @@ const apiOptions = {
 
 const ACL = config.apiato.ACL
 
+function routesValidate(req,auth) {
+  console.log(req.url.split('?')[0].split('/'));
+  switch(req.url.split('?')[0].split('/')[1]) {
+    case('instance') :
+      return auth.admin || req.url.split('?')[0].split('/')[2]==undefined || auth.instances.includes(req.url.split('?')[0].split('/')[2]);
+    break;
+    case('rundeck') :
+      return auth.admin || auth.instances.includes(req.url.split('?')[0].split('/')[4]);
+    break;
+    // Additionnal routes access restriction come here
+    default:
+      return true;
+  } 
+}
+
 function validate(req, filter) {
     console.log("ACL: Validating request")
     console.log("URL: " + req.url);
@@ -30,11 +45,16 @@ function validate(req, filter) {
     console.log("Session: " + JSON.stringify(req.session, null, 2));
     
     try {
-      return jwt.verify(req.headers['jwt-session'], config.secretKey);
+      var auth = jwt.verify(req.headers['jwt-session'], config.secretKey);
+      if(routesValidate(req,auth)) {
+        return auth;
+      }
+      else {
+        console.trace('Unauthorized');
+      }
       // TODO: Implement further ACL validation (url/objects)
     } catch(err) {
-        console.log(err);
-        throw "JWT Verify error!";
+        console.trace('JWT Verify error!',err);
     }
 }
 
@@ -54,7 +74,7 @@ function myProxy(acl, apiOptions) {
             console.log("apiopts: " + JSON.stringify(apiopts));
             requestProxy(apiopts)(req, res, next)
         } catch(err) {
-            console.log('ACL: invalid ', err);
+            console.log('Unauthorized ', err);
             res.statusCode = 403; // Forbidden access
             res.end();
         }
@@ -82,7 +102,7 @@ function getToken(username, groups) {
       }
       const jwt = require('jsonwebtoken')
       
-      body.owner = username
+      body.owner = username;
       if(body.admin) {
         delete body.instances;
       }
