@@ -21,12 +21,13 @@ const apiOptions = {
 const ACL = config.apiato.ACL
 
 function routesValidate(req,auth) {
-  console.log(req.url.split('?')[0].split('/'));
   switch(req.url.split('?')[0].split('/')[1]) {
     case('instance') :
-      return auth.admin || req.url.split('?')[0].split('/')[2]==undefined || auth.instances.includes(req.url.split('?')[0].split('/')[2]);
+      // If user is admin, or owns the instance and is not doing a POST or DELETE request on anything else than 'attribute/backup'
+      return auth.admin || (req.url.split('?')[0].split('/')[2]==undefined || auth.instances.includes(req.url.split('?')[0].split('/')[2])) && (req.method!='POST' && req.method!='DELETE' || req.url.split('?')[0].split('/')[3]=='attribute' && req.url.split('?')[0].split('/')[4]=='backup');
     break;
     case('rundeck') :
+      // If user is admin, or owns the instance
       return auth.admin || auth.instances.includes(req.url.split('?')[0].split('/')[4]);
     break;
     // Additionnal routes access restriction come here
@@ -74,7 +75,7 @@ function myProxy(acl, apiOptions) {
             console.log("apiopts: " + JSON.stringify(apiopts));
             requestProxy(apiopts)(req, res, next)
         } catch(err) {
-            console.log('Unauthorized ', err);
+            console.log('Proxy error', err);
             res.statusCode = 403; // Forbidden access
             res.end();
         }
