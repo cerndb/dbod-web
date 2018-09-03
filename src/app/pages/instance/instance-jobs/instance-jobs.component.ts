@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { StateButtonComponent } from '../../components/state-button/state-button.component';
 import { SocketJobs } from '../sockets.module';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 

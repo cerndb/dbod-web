@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
 import { AuthenticationService } from '../../services/authentication';
-import { JobService } from '../../services/job';
 import { InstancesComponent } from './instances/instances.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
@@ -58,7 +57,6 @@ import { MatSortModule } from '@angular/material';
   ],
   providers: [
     AuthenticationService,
-    JobService,
   ],
   entryComponents: [
   ],

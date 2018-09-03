@@ -17,13 +17,11 @@ import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { InstanceModule } from './pages/instance/instance.module';
-import { StateButtonComponent } from './pages/components/state-button/state-button.component';
 import { OverviewModule } from './pages/overview/overview.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StateButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,9 +37,6 @@ import { OverviewModule } from './pages/overview/overview.module';
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  entryComponents: [
-    StateButtonComponent,
-  ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
