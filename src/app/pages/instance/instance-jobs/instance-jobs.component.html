@@ -21,6 +21,16 @@
 </div>
 
 <mat-accordion>
+	<mat-expansion-panel disabled>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span style="margin-left: 10px">State</span> <span style="margin-left: 5em">Starting date</span> <span style="margin-left: 7em">Ending date</span>
+      </mat-panel-title>
+      <mat-panel-description>
+              <span style="margin-left: 5em">Description</span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
   <mat-expansion-panel *ngFor="let item of this.source" (opened)="panelOpened()" (closed)="panelClosed()">
   	<mat-expansion-panel-header>
 	    <mat-panel-title>

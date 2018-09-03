@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ThemeModule } from '../../@theme/theme.module';
 import { InstanceService } from '../../services/instance';
-import { JobService } from '../../services/job';
 import { InlineEditorModule } from '@qontu/ngx-inline-editor';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
@@ -102,7 +101,6 @@ import { InstanceUploadFileDialogComponent } from './instance-file-editor/instan
   ],
   providers: [
     InstanceService,
-    JobService,
     RundeckService,
   ],
 })

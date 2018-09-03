@@ -26,6 +26,16 @@
     </div>
 
     <mat-accordion>
+      <mat-expansion-panel disabled>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <span style="margin-left: 10px">State</span> <span style="margin-left: 5em">Starting date</span> <span style="margin-left: 7em">Ending date</span> <span style="margin-left: 5em">Instance</span>
+          </mat-panel-title>
+          <mat-panel-description>
+                  Description
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
       <mat-expansion-panel *ngFor="let item of this.source" (opened)="panelOpened()" (closed)="panelClosed()">
         <mat-expansion-panel-header>
             <mat-panel-title>
@@ -34,13 +44,13 @@
                   <span class="badge badge-danger" *ngSwitchCase="'FINISHED_FAIL'">Failed</span>
                   <span class="badge badge-warning" *ngSwitchCase="'RUNNING'">Running</span>
                 </span>
-              <span style="margin-left: 2em">{{ item.creation_date | date : 'medium' }}</span> <span style="margin-left: 2em" *ngIf="item.state!='RUNNING'">{{ item.completion_date | date : 'medium' }}</span>
+              <span style="margin-left: 2em">{{ item.creation_date | date : 'medium' }}</span> <span style="margin-left: 2em" *ngIf="item.state!='RUNNING'">{{ item.completion_date | date : 'medium' }}</span> <span style="margin-left: 2em"><a href="./#/pages/instance/{{item.name}}"> {{item.name}} </a></span>
             </mat-panel-title>
             <mat-panel-description>
                     {{ item.command_name }} requested by {{ item.requester }}
             </mat-panel-description>
-          </mat-expansion-panel-header>
-          <prettyjson [obj]="item"></prettyjson> 
+        </mat-expansion-panel-header>
+        <prettyjson [obj]="item"></prettyjson> 
       </mat-expansion-panel>
     </mat-accordion>
   </mat-card-content>

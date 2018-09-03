@@ -40,6 +40,16 @@
 </div>
 
 <mat-accordion>
+	<mat-expansion-panel disabled>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span style="margin-left: 4em">Date</span>
+      </mat-panel-title>
+      <mat-panel-description>
+              <span style="margin-left: 13em">Message</span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
   <mat-expansion-panel *ngFor="let item of this.source" (opened)="panelOpened()" (closed)="panelClosed()">
   	<mat-expansion-panel-header>
 	    <mat-panel-title>
