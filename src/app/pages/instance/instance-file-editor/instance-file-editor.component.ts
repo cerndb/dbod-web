@@ -3,6 +3,7 @@ import { RundeckService } from '../../../services/rundeck/rundeck.service';
 import {MatDialog} from '@angular/material';
 import { InstanceLoadFileDialogComponent } from './instance-load-file-dialog/instance-load-file-dialog.component';
 import { InstanceUploadFileDialogComponent } from './instance-upload-file-dialog/instance-upload-file-dialog.component';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'instance-file-editor',
@@ -40,21 +41,25 @@ export class InstanceFileEditorComponent implements OnInit {
 		filepath: data.filepath,
 		content: null, // TO EDIT
 	};
-	this.displayedContent = null;
+
+	this.rundeckService.post('job/serve-file/'+this.data.name, {
+      filepath: this.selectedConfigFile.filepath,
+      port: 55005,
+    }).then( (data: any) => {
+      console.log(data);
+      this.selectedConfigFile.content = null; //TO EDIT
+      this.displayedContent = this.selectedConfigFile.content;
+    }, err => console.log(err));
   }
 
   downloadConfigFile() {
-  	if(this.selectedConfigFile.filepath!=null) {
-  		this.rundeckService.post('job/serve-file/'+this.data.name, {
-	      filepath: this.selectedConfigFile.filepath,
-	      port: 55005,
-	    }).then( (data: any) => {
-	      console.log(data);
-	    }, err => console.log(err));
+  	if(this.selectedConfigFile.filepath!=null && this.displayedContent!=null) {
+  		var blob = new Blob([this.displayedContent]);
+  		FileSaver.saveAs(blob, this.selectedConfigFile.title);
   	}
   }
 
-  loadConfigFile() {
+  uploadConfigFile() {
   	if(this.configFilesList.length!=0) {
   		var filesNamesList = [];
 	  	this.configFilesList.forEach( (element) => {
@@ -77,6 +82,8 @@ export class InstanceFileEditorComponent implements OnInit {
 	    });
   	}
   }
+
+
 
   submitChanges() {
   	if(this.selectedConfigFile.title!=null && this.displayedContent!=null) {
