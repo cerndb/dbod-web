@@ -1,0 +1,31 @@
+<div [ngSwitch]="expiry">
+  <div *ngSwitchCase="ExpiryDate['LessDate']">
+    <h2 mat-dialog-title>Invalid date</h2>
+    <mat-dialog-content>
+      Expiry date cannot be in the past
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Close</button>
+    </mat-dialog-actions>
+  </div>
+
+  <div *ngSwitchCase="ExpiryDate['HigherDate']">
+    <h2 mat-dialog-title>Invalid date</h2>
+    <mat-dialog-content>
+      Expiry date cannot be further than a year
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Close</button>
+    </mat-dialog-actions>
+  </div>
+
+  <div *ngSwitchCase="ExpiryDate['InvalidChange']">
+    <h2 mat-dialog-title>Invalid change</h2>
+    <mat-dialog-content>
+      Enter a valid date
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Close</button>
+    </mat-dialog-actions>
+  </div>
+</div>

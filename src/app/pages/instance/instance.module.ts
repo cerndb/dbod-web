@@ -43,6 +43,7 @@ import { InstanceScheduledBackupDialogComponent } from './instance-snapshots/ins
 import { InstanceStartStopDialogComponent } from './instance-start-stop-dialog/instance-start-stop-dialog.component';
 import { InstanceLoadFileDialogComponent } from './instance-file-editor/instance-load-file-dialog/instance-load-file-dialog.component';
 import { InstanceUploadFileDialogComponent } from './instance-file-editor/instance-upload-file-dialog/instance-upload-file-dialog.component';
+import { InstanceExpiryDateDialogComponent } from './instance-expiry-date-dialog/instance-expiry-date-dialog.component';
 
 @NgModule({
   imports: [
@@ -89,6 +90,7 @@ import { InstanceUploadFileDialogComponent } from './instance-file-editor/instan
     InstanceStartStopDialogComponent,
     InstanceLoadFileDialogComponent,
     InstanceUploadFileDialogComponent,
+    InstanceExpiryDateDialogComponent,
   ],
   entryComponents: [
     InstanceDialogComponent,
@@ -98,6 +100,7 @@ import { InstanceUploadFileDialogComponent } from './instance-file-editor/instan
     InstanceStartStopDialogComponent,
     InstanceLoadFileDialogComponent,
     InstanceUploadFileDialogComponent,
+    InstanceExpiryDateDialogComponent,
   ],
   providers: [
     InstanceService,
