@@ -29,7 +29,7 @@ export class InstanceStartStopDialogComponent {
 	sendRequest() {
 		this.state = this.State['Loading'];
 		var pathStartStop = this.data.startStopFlag ? 'start' : 'stop';
-		this.rundeckService.post('job/'+pathStartStop+'/'+this.data.instanceName).then( (data: any) => {
+		this.rundeckService.post('job/'+pathStartStop+'/'+this.data.instanceName+'?async').then( (data: any) => {
 			this.resStatus = data.status;
 	    	this.resMessage = data.message;
 			this.state = this.State['Success'];

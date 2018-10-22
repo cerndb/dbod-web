@@ -14,6 +14,7 @@ import { MetadataEditorComponent } from './metadata-editor/metadata-editor.compo
 import { InstanceSnapshotsComponent } from './instance-snapshots/instance-snapshots.component';
 import { InstanceJobsComponent } from './instance-jobs/instance-jobs.component';
 import { RundeckService } from '../../services/rundeck/rundeck.service';
+import { FileDownloaderService } from '../../services/file-downloader/file-downloader.service';
 import { InstanceLogsComponent } from './instance-logs/instance-logs.component';
 import { InstanceLogsStatisticsComponent } from './instance-logs/instance-logs-statistics/instance-logs-statistics.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -105,6 +106,7 @@ import { InstanceExpiryDateDialogComponent } from './instance-expiry-date-dialog
   providers: [
     InstanceService,
     RundeckService,
+    FileDownloaderService,
   ],
 })
 

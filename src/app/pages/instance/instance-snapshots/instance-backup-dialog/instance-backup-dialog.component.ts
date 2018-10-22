@@ -13,7 +13,7 @@ export class InstanceBackupDialogComponent {
 		Confirm: 0,
 		Loading: 1,
 		Success: 2,
-		Error: 3,	
+		Error: 3,
 	}
 
 	newTitle: string;
@@ -25,7 +25,7 @@ export class InstanceBackupDialogComponent {
 
 	sendRequest() {
 		this.state = this.State['Loading'];
-		this.rundeckService.post('job/backup/'+this.data.instanceName).then( (res:any) => {
+		this.rundeckService.post('job/backup/'+this.data.instanceName+'?async').then( (res:any) => {
 	      this.resMessage = res.message;
 	      this.resStatus = res.status;
 	      this.state = this.State['Success'];

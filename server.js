@@ -70,6 +70,11 @@ app.get('/', (req, res) => {
    res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
+app.get('/download/:file', (req, res) => {
+  var file = __dirname + '/downloads/' + req.params.file;
+  res.download(file);
+});
+
 app.get('/logout', (req, res) => {
     console.log('Destroying session SID: ' + req.session.id);
     req.session.destroy((error) => {

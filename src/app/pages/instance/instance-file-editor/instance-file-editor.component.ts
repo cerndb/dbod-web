@@ -3,6 +3,7 @@ import { RundeckService } from '../../../services/rundeck/rundeck.service';
 import {MatDialog} from '@angular/material';
 import { InstanceLoadFileDialogComponent } from './instance-load-file-dialog/instance-load-file-dialog.component';
 import { InstanceUploadFileDialogComponent } from './instance-upload-file-dialog/instance-upload-file-dialog.component';
+import { FileDownloaderService } from '../../../services/file-downloader/file-downloader.service';
 import * as FileSaver from 'file-saver';
 
 @Component({
@@ -21,8 +22,9 @@ export class InstanceFileEditorComponent implements OnInit {
 		content: null,
 	};
 	displayedContent = null;
+  host = null;
 
-  constructor(private rundeckService: RundeckService, public dialog: MatDialog) { }
+  constructor(private rundeckService: RundeckService, private fileDownloaderService: FileDownloaderService, public dialog: MatDialog) { }
 
   ngOnInit() {
   	this.rundeckService.post('job/list-config-files/'+this.data.name).then( (data: any) => {
@@ -39,24 +41,22 @@ export class InstanceFileEditorComponent implements OnInit {
   	this.selectedConfigFile = {
 		title: data.title,
 		filepath: data.filepath,
-		content: null, // TO EDIT
+		content: null,
 	};
 
-	this.rundeckService.post('job/serve-file/'+this.data.name, {
-      filepath: this.selectedConfigFile.filepath,
-      port: 55005,
-    }).then( (data: any) => {
-      console.log(data);
-      this.selectedConfigFile.content = null; //TO EDIT
+	this.rundeckService.post('job/serve-file/'+this.data.name, {"options":{
+      "filepath": this.selectedConfigFile.filepath,
+    }}).then( async (data: any) => {
+      this.host = data.log;
+      this.selectedConfigFile.content = await this.fileDownloaderService.getFile(this.selectedConfigFile.title);
       this.displayedContent = this.selectedConfigFile.content;
     }, err => console.log(err));
   }
 
-  downloadConfigFile() {
-  	if(this.selectedConfigFile.filepath!=null && this.displayedContent!=null) {
-  		var blob = new Blob([this.displayedContent]);
-  		FileSaver.saveAs(blob, this.selectedConfigFile.title);
-  	}
+  async downloadConfigFile() {
+    var data = await this.fileDownloaderService.getFile(this.selectedConfigFile.title);
+    var blob = new Blob([data]);
+    FileSaver.saveAs(blob, this.selectedConfigFile.title);
   }
 
   uploadConfigFile() {

@@ -12,17 +12,26 @@
         </mat-select>
     </mat-form-field>
     <div>
-        <button mat-icon-button (click)="downloadConfigFile()" style="margin-top: 5px">
-            <mat-icon style="color: grey;">file_download</mat-icon>
+        <button mat-raised-button (click)="downloadConfigFile()" color="primary" style="margin: 5px">
+            <mat-icon style="color: white">file_download</mat-icon>
+            Download
         </button>
-        <button mat-icon-button (click)="uploadConfigFile()" style="margin-top: 5px">
-            <mat-icon style="color: grey;">publish</mat-icon>
+        <button mat-raised-button (click)="uploadConfigFile()" color="primary" style="margin: 5px; width:122px">
+            <mat-icon style="color: white;">publish</mat-icon>
+            Upload
         </button>
     </div>
-    <button mat-raised-button color="primary" (click)="submitChanges()" style="margin-left: 10px">Submit changes</button>
+    <div>
+      <button mat-raised-button color="primary" (click)="submitChanges()" style="margin-left: 10px">Submit changes</button>
+    </div>
 </div>
 <div class="flex-container">
     <mat-form-field style="width: 100%;">
+      <div>
         <textarea matInput placeholder="Content" [(ngModel)]="displayedContent" matTextareaAutosize></textarea>
+      </div>
+      <div *ngIf="selectedConfigFile.title!=null && displayedContent==null">
+        <i style="color: #00bcd4">Loading...</i>
+      </div>
     </mat-form-field>
 </div>
