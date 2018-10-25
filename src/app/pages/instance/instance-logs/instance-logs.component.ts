@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ChangeDetectorRef, Inject } from '@angular/core';
 import { SocketLogs } from '../sockets.module';
 import { RundeckService } from '../../../services/rundeck/rundeck.service';
+import { FileDownloaderService } from '../../../services/file-downloader/file-downloader.service';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'instance-logs',
@@ -27,8 +29,8 @@ export class InstanceLogsComponent implements OnInit {
 
   logFilesList = [];
 
-  constructor(private authService: AuthenticationService, @Inject(SocketLogs) private socket, private rundeckService: RundeckService) {
-  
+  constructor(private authService: AuthenticationService, @Inject(SocketLogs) private socket, private rundeckService: RundeckService, private fileDownloaderService: FileDownloaderService) {
+
   }
 
   ngOnInit() {
@@ -132,11 +134,13 @@ export class InstanceLogsComponent implements OnInit {
   }
 
   downloadLogFile(logFileData) {
-    this.rundeckService.post('job/serve-file/'+this.data.name, {
-      filepath: logFileData.filepath,
-      port: 55005,
-    }).then( (data: any) => {
-      console.log(data);
+    this.rundeckService.post('job/serve-file/'+this.data.name, {"options":{
+      "filepath": logFileData.filepath,
+    }}).then( async (data: any) => {
+      var host = data.log + logFileData.filepath;
+      var file = await this.fileDownloaderService.getLogFile(host);
+      var blob = new Blob([file]);
+      FileSaver.saveAs(blob, logFileData.title);
     }, err => console.log(err));
   }
 

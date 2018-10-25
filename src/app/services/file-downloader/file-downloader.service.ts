@@ -12,10 +12,20 @@ export class FileDownloaderService {
   getFile(file: string) {
     return new Promise( (resolve, reject) => {
       this.authService.loadUser().then( () => {
-        this.http.get('/download' + '/' + file)
-                       .map((res:any) => res.text())
-                       .subscribe( (res) => resolve(res));
-      });
+        this.http.get('/download/config' + '/' + file)
+        .map((res:any) => res.text())
+        .subscribe( (res) => resolve(res));
+      }, (err) => reject(err));
+    })
+  }
+
+  getLogFile(url) {
+    return new Promise( (resolve, reject) => {
+      this.authService.loadUser().then( () => {
+        this.http.get('/download/logs', {"params": {"url": url}})
+        .map((res:any) => res.text())
+        .subscribe((res) => resolve(res));
+      }, (err) => reject(err));
     })
   }
 
