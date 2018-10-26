@@ -9,24 +9,13 @@ import { AuthenticationService } from '../../services/authentication/authenticat
 export class FileDownloaderService {
   constructor(private http: Http, private authService: AuthenticationService) { }
 
-  getFile(file: string) {
+  getFile(url) {
     return new Promise( (resolve, reject) => {
       this.authService.loadUser().then( () => {
-        this.http.get('/download/config' + '/' + file)
+        this.http.get('/download', {"params": {"url": url}})
         .map((res:any) => res.text())
         .subscribe( (res) => resolve(res));
       }, (err) => reject(err));
     })
   }
-
-  getLogFile(url) {
-    return new Promise( (resolve, reject) => {
-      this.authService.loadUser().then( () => {
-        this.http.get('/download/logs', {"params": {"url": url}})
-        .map((res:any) => res.text())
-        .subscribe((res) => resolve(res));
-      }, (err) => reject(err));
-    })
-  }
-
 }

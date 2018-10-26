@@ -138,7 +138,7 @@ export class InstanceLogsComponent implements OnInit {
       "filepath": logFileData.filepath,
     }}).then( async (data: any) => {
       var host = data.log + logFileData.filepath;
-      var file = await this.fileDownloaderService.getLogFile(host);
+      var file = await this.fileDownloaderService.getFile(host);
       var blob = new Blob([file]);
       FileSaver.saveAs(blob, logFileData.title);
     }, err => console.log(err));

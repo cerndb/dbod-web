@@ -10,7 +10,6 @@ var request = require('request');
 var config = require('./server/config');
 // Get our API routes
 const api = require('./server/routes/api');
-const util = require('util');
 // Get auth methods
 const oauth = require('./server/auth');
 
@@ -71,13 +70,8 @@ app.get('/', (req, res) => {
    res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-app.get('/download/config/:file', (req, res) => {
-  var file = __dirname + '/downloads/' + req.params.file;
-  res.download(file);
-});
-
-app.get('/download/logs', (req, res) => {
-  request(req.query.url).pipe(res);
+app.get('/download', (req, res) => {
+  request(req.query.url).pipe(res)
   res.set('Content-Type', 'text/plain');
 });
 

@@ -22,7 +22,6 @@ export class InstanceFileEditorComponent implements OnInit {
 		content: null,
 	};
 	displayedContent = null;
-  host = null;
 
   constructor(private rundeckService: RundeckService, private fileDownloaderService: FileDownloaderService, public dialog: MatDialog) { }
 
@@ -47,16 +46,17 @@ export class InstanceFileEditorComponent implements OnInit {
 	this.rundeckService.post('job/serve-file/'+this.data.name, {"options":{
       "filepath": this.selectedConfigFile.filepath,
     }}).then( async (data: any) => {
-      this.host = data.log;
-      this.selectedConfigFile.content = await this.fileDownloaderService.getFile(this.selectedConfigFile.title);
+      var url = data.log + this.selectedConfigFile.filepath;
+      this.selectedConfigFile.content = await this.fileDownloaderService.getFile(url);
       this.displayedContent = this.selectedConfigFile.content;
     }, err => console.log(err));
   }
 
   async downloadConfigFile() {
-    var data = await this.fileDownloaderService.getFile(this.selectedConfigFile.title);
-    var blob = new Blob([data]);
-    FileSaver.saveAs(blob, this.selectedConfigFile.title);
+    if(this.selectedConfigFile.content!=null){
+      var blob = new Blob([this.selectedConfigFile.content]);
+      FileSaver.saveAs(blob, this.selectedConfigFile.title);
+    }
   }
 
   uploadConfigFile() {
