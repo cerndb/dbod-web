@@ -47,6 +47,7 @@ function genApiatoToken(session, token, res) {
 		  response.on('end', function () {
 			console.log(str)
             var groups = JSON.parse(str).groups
+            session.isAdmin = false
             if (groups.indexOf(config.adminGroup) >= 0) {
               // If the user is member of the admin e-group
               session.isAdmin = true
