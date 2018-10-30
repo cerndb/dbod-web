@@ -21,9 +21,14 @@ export class InstanceService {
     })
   }
 
-  getExpiredPending(): Observable<any> {
-       return this.http.get('assets/expiredPending-info.json')
-                       .map((res:any) => res.json());
+  getExpiredPending() {
+    return new Promise( (resolve, reject) => {
+      this.authService.loadUser().then( () => {
+        this.http.get('./api/v1/instance', { headers: new Headers({ 'jwt-session': this.authService.user.jwt }) })
+                       .map((res:any) => res.json())
+                       .subscribe( (res) => resolve(res));
+      });
+    })
   }
 
   getUpgrades(): Observable<any> {

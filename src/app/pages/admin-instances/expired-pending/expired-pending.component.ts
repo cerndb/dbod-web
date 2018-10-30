@@ -23,8 +23,16 @@ export class ExpiredPendingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._InstanceService.getExpiredPending().subscribe((res) => {
-      this.dataSource = new MatTableDataSource(res);
+    this._InstanceService.getExpiredPending().then((res) => {
+      var currentDate = new Date();
+      var expiredPending = [];
+      for(var i = 0; i < res['response'].length; i++){
+        var expiryDate = new Date(res['response'][i].expiry_date);
+        if((res['response'][i].state == "AWAITING_APPROVAL") || (res['response'][i].expiry_date != null && expiryDate < currentDate)){
+          expiredPending.push(res['response'][i]);
+        }
+      }
+      this.dataSource = new MatTableDataSource(expiredPending);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
