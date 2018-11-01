@@ -18,7 +18,7 @@
       <span *ngIf="data.user!=null; else userMissing">{{ data.user.department }}-{{ data.user.group }} {{ data.user.first_name }} {{ data.user.last_name }}</span>
       <ng-template #userMissing><b>User informations are missing</b></ng-template>
     </mat-card-subtitle>
-    <button mat-icon-button matTooltip="Upgrade" matTooltipPosition='above' style="margin-left:5px"><mat-icon style="color: #00bcd4; margin-left:15px;">arrow_upward</mat-icon>Upgrade</button>
+    <button mat-icon-button matTooltip="Upgrade" matTooltipPosition='above' style="margin-left:5px"><mat-icon style="color: #00bcd4; margin:10px;">arrow_upward</mat-icon>Upgrade</button>
   </mat-card-header>
   <mat-card-content style="display:flex; justify-content: center;">
     <div class="flex-container">
@@ -56,8 +56,10 @@
           <mat-option value="PROD">PROD</mat-option>
         </mat-select>
       </mat-form-field>
+      <div>
       <mat-checkbox *ngIf="this.authService.user.isAdmin" name="notifications" [checked]="editedData.attributes.notifications=='true'" [disabled]="!this.authService.user.isAdmin" (change)="changeAttributeField('notifications',$event.checked)">Notifications</mat-checkbox>
       <mat-checkbox *ngIf="this.authService.user.isAdmin" name="EOSbackup" [checked]="this.data.attributes.eos_backup=='true'" [disabled]="!this.authService.user.isAdmin" (change)="changeAttributeField('eos_backup',$event.checked)" style="margin-left: 15px;">EOS backup</mat-checkbox>
+      </div>
     </div>
   </mat-card-content>
 </mat-card>

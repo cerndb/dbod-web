@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { InstanceService } from '../../../services/instance';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-
+import {MatDialog} from '@angular/material';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
+import { ExpiredPendingDialogComponent } from './expired-pending-dialog/expired-pending-dialog.component';
 
 @Component({
   selector: 'expired-pending',
@@ -18,7 +19,7 @@ export class ExpiredPendingComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private authService: AuthenticationService, private _InstanceService: InstanceService) {
+  constructor(private authService: AuthenticationService, private _InstanceService: InstanceService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource([{'name': '', 'owner': '', 'egroup': '', 'project': '', 'type': '', 'category': '', 'expiry_date': ''}]);
   }
 
@@ -45,4 +46,13 @@ export class ExpiredPendingComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  changeInstance(value){
+    const dialogRef = this.dialog.open(ExpiredPendingDialogComponent, {
+      data: {
+        buttonAction: value,
+      }
+    });
+  }
+
   }

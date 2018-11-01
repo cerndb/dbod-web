@@ -1,5 +1,5 @@
 <div class="flex-container">
-	<mat-slide-toggle [color]="primary" [checked]=false (change)="realTimeHandler($event)" matTooltip='If enabled, logs are provided in real time' matTooltipPosition='above' style="margin-top: 15px"></mat-slide-toggle>
+	<mat-slide-toggle color="primary" [checked]=false (change)="realTimeHandler($event)" matTooltip='If enabled, logs are provided in real time' matTooltipPosition='above' style="margin-top: 15px"></mat-slide-toggle>
 
 	<div class="flex-container">
 		<button mat-icon-button [matMenuTriggerFor]="logFilesMenu" (click)="listLogFiles()" style="margin-top: 5px">

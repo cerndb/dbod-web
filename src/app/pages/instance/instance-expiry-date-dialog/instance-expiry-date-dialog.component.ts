@@ -11,7 +11,7 @@ import { InstanceService } from '../../../services/instance/instance.service';
 })
 export class InstanceExpiryDateDialogComponent {
   ExpiryDate = {
-    LessDate: 0,
+    PastDate: 0,
     HigherDate: 1,
     InvalidChange: 2
   }

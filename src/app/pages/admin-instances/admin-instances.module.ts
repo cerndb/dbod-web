@@ -22,6 +22,7 @@ import { MatTableModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
+import { ExpiredPendingDialogComponent } from './expired-pending/expired-pending-dialog/expired-pending-dialog.component';
 
 @NgModule({
   imports: [
@@ -48,11 +49,13 @@ import { MatIconModule } from '@angular/material/icon';
     AdminInstancesComponent,
     ExpiredPendingComponent,
     UpgradesComponent,
+    ExpiredPendingDialogComponent,
   ],
   providers: [
     InstanceService,
   ],
   entryComponents: [
+    ExpiredPendingDialogComponent
   ],
 })
 export class AdminInstancesModule { }
