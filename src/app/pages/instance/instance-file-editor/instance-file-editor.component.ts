@@ -22,7 +22,10 @@ export class InstanceFileEditorComponent implements OnInit {
 		content: null,
 	};
 	displayedContent = null;
-
+  oldFile = null;
+  validate: boolean = true;
+  final;
+  wrongLines = null;
   constructor(private rundeckService: RundeckService, private fileDownloaderService: FileDownloaderService, public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -47,12 +50,13 @@ export class InstanceFileEditorComponent implements OnInit {
       "filepath": this.selectedConfigFile.filepath,
     }}).then( async (data: any) => {
       var url = data.log + this.selectedConfigFile.filepath;
-      this.selectedConfigFile.content = await this.fileDownloaderService.getFile(url);
+      this.oldFile = await this.fileDownloaderService.saveFile(url, this.data.name);
+      this.selectedConfigFile.content = await this.fileDownloaderService.getConfigFile(this.oldFile);
       this.displayedContent = this.selectedConfigFile.content;
     }, err => console.log(err));
   }
 
-  async downloadConfigFile() {
+  downloadConfigFile() {
     if(this.selectedConfigFile.content!=null){
       var blob = new Blob([this.selectedConfigFile.content]);
       FileSaver.saveAs(blob, this.selectedConfigFile.title);
@@ -83,7 +87,21 @@ export class InstanceFileEditorComponent implements OnInit {
   	}
   }
 
-
+  async validateFile(){
+    if(this.displayedContent!=null){
+      var newContent = this.displayedContent;
+      var validation = await this.fileDownloaderService.getValidation(newContent);
+      this.final = validation;
+      var str = JSON.stringify(validation);
+      this.wrongLines = str;
+      console.log(this.wrongLines);
+      //this.displayedContent = validation;
+      //console.log(this.displayedContent);
+      if(validation == true){
+        this.validate = true;
+      } else this.validate = false;
+    }
+  }
 
   submitChanges() {
   	if(this.selectedConfigFile.title!=null && this.displayedContent!=null) {

@@ -4,6 +4,11 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 
+var fs = require('fs');
+// Uniqid module. Generates random id
+var uniqid = require('uniqid');
+// Download-file module
+var download = require('download-file');
 // Request method
 var request = require('request');
 // Load configuration
@@ -70,9 +75,80 @@ app.get('/', (req, res) => {
    res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
+//Files Management
+var oldFile;
+//Download config file from remote to node
 app.get('/download', (req, res) => {
+  var url = req.query.url;
+  var options = {
+    directory: "./downloads",
+    filename: uniqid(req.query.instance + '&')
+  }
+  download(url, options, function(err) {
+    if(err) throw err
+  })
+  oldFile = options.filename;
+  res.send(options.filename);
+});
+
+//Download config file from node to the frontend
+app.get('/download/:file', (req, res) => {
+  console.log("?downloads/file");
+  var path = __dirname + '/downloads/' + req.params.file;
+  res.download(path);
+});
+
+//Download log file from remote to frontend
+app.get('/download/log-file', (req, res) => {
   request(req.query.url).pipe(res)
   res.set('Content-Type', 'text/plain');
+});
+
+app.post('/validate', (req, res) => {
+  var savedFile = fs.readFileSync(__dirname + '/downloads/' + oldFile, 'utf-8');
+  var newFile = req.body.newFile;
+  savedFile = JSON.stringify(savedFile);
+  savedFile = JSON.parse(savedFile);
+
+  function convertToHash(file){
+    var hash = {};
+    var lines = file.split("\n");       //split file by lines
+    lines.forEach(function(line) {
+      if(!line.match(/^#/) && !line.match(/^\[/) && line != ''){ //Avoid lines that begin with # , [ and empty lines
+        if(line.match("#")){
+          line = line.split("#"); //splitting lines that contain #
+          line = line[0];         //getting the left string of the split
+        }
+        if(line.match(/.*=.*/)){   //pushing into the list the lines that are not empty
+          var split = line.split("=");
+          hash[split[0]] = split[1];
+        } else {
+          hash[line] = 'on';
+        }
+      }
+    });
+    return hash;
+  }
+
+  var old_config = convertToHash(savedFile);
+  var new_config = convertToHash(newFile);
+
+  function compareHash(parameters, old_config, new_config){
+    var list = [];
+    Object.keys(new_config).forEach(function(key){
+      console.log("comparing property: " + key + " new value: " + new_config[key] + " old value: " + old_config[key]);
+      if(parameters[key] && (new_config[key] != old_config[key])){
+        list.push(key + '=' + new_config[key]);
+      } //else list.push(key + '=' + new_config[key]);
+    });
+
+    console.log("LIST: " + list);
+    if(list.length == 0){
+      return true;
+    } else return list;
+  }
+  var comp = compareHash(config.parameters, old_config, new_config);
+  res.send(comp);
 });
 
 app.get('/logout', (req, res) => {
