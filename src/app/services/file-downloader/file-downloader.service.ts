@@ -39,15 +39,6 @@ export class FileDownloaderService {
     })
   }
 
-  /*getValidation(newFile, oldFile){
-    return new Promise( (resolve, reject) => {
-      this.authService.loadUser().then( () => {
-        this.http.get('/validate', {"params": {"newFile": newFile, "oldFile": oldFile}})
-        .map((res:any) => res.text())
-        .subscribe( (res) => console.log(res));
-      }, (err) => reject(err));
-    })
-  }*/
   getValidation(newFile){
     return new Promise( (resolve, reject) => {
       this.authService.loadUser().then( () => {

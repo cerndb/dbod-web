@@ -114,6 +114,7 @@ app.post('/validate', (req, res) => {
     var hash = {};
     var lines = file.split("\n");       //split file by lines
     lines.forEach(function(line) {
+      line = line.replace(/ /g,'');     //removing whitespaces
       if(!line.match(/^#/) && !line.match(/^\[/) && line != ''){ //Avoid lines that begin with # , [ and empty lines
         if(line.match("#")){
           line = line.split("#"); //splitting lines that contain #
@@ -136,17 +137,36 @@ app.post('/validate', (req, res) => {
   function compareHash(parameters, old_config, new_config){
     var list = [];
     Object.keys(new_config).forEach(function(key){
+      var properties = {
+        name: '',
+        value: ''
+      };
       console.log("comparing property: " + key + " new value: " + new_config[key] + " old value: " + old_config[key]);
+      var line = key + '=' + new_config[key];
       if(parameters[key] && (new_config[key] != old_config[key])){
-        list.push(key + '=' + new_config[key]);
-      } //else list.push(key + '=' + new_config[key]);
+        properties.name = line;
+        properties.value = false;
+        list.push(properties);
+      } else {
+        properties.name = line;
+        properties.value = true;
+        list.push(properties);
+      }
     });
-
-    console.log("LIST: " + list);
-    if(list.length == 0){
-      return true;
-    } else return list;
+    console.log(list);
+    return list;
   }
+  /*function compareHash(parameters, old_config, new_config){
+    var list = {};
+    Object.keys(new_config).forEach(function(key){
+      console.log("comparing property: " + key + " new value: " + new_config[key] + " old value: " + old_config[key]);
+      var line = key + '=' + new_config[key];
+      if(parameters[key] && (new_config[key] != old_config[key])){
+        list[line] = false;
+      } else list[line] = true;
+    });
+    return list;
+  }*/
   var comp = compareHash(config.parameters, old_config, new_config);
   res.send(comp);
 });
