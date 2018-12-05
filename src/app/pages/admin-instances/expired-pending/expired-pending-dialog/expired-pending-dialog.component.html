@@ -1,0 +1,34 @@
+<div [ngSwitch]="action">
+	<div *ngSwitchCase="Action['Validate']">
+		<h2 mat-dialog-title>Validate instance</h2>
+		<mat-dialog-content>
+			Are you sure you want to validate the instance ?
+		</mat-dialog-content>
+		<mat-dialog-actions align="end">
+		  <button mat-button mat-dialog-close>Cancel</button>
+		  <button mat-button color="primary" cdkFocusInitial (click)='sendRequest()'>Confirm</button>
+		</mat-dialog-actions>
+	</div>
+
+  	<div *ngSwitchCase="Action['Rescue']">
+  		<h2 mat-dialog-title>Rescue instance</h2>
+  		<mat-dialog-content>
+  			Are you sure you want to rescue the instance ?
+  		</mat-dialog-content>
+  		<mat-dialog-actions align="end">
+  		  <button mat-button mat-dialog-close>Cancel</button>
+  		  <button mat-button color="primary" cdkFocusInitial (click)='sendRequest()'>Confirm</button>
+  		</mat-dialog-actions>
+  	</div>
+
+	<div *ngSwitchCase="Action['Destroy']">
+		<h2 mat-dialog-title>Destroy instance</h2>
+		<mat-dialog-content>
+			Are you sure you want to destroy the instance ?
+		</mat-dialog-content>
+		<mat-dialog-actions align="end">
+		  <button mat-button mat-dialog-close>Cancel</button>
+		  <button mat-button color="primary" cdkFocusInitial (click)='sendRequest()'>Confirm</button>
+		</mat-dialog-actions>
+	</div>
+</div>

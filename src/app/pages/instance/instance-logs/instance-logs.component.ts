@@ -137,8 +137,8 @@ export class InstanceLogsComponent implements OnInit {
     this.rundeckService.post('job/serve-file/'+this.data.name, {"options":{
       "filepath": logFileData.filepath,
     }}).then( async (data: any) => {
-      var host = data.log + logFileData.filepath;
-      var file = await this.fileDownloaderService.getFile(host);
+      var url = data.log + logFileData.filepath;
+      var file = await this.fileDownloaderService.getLogFile(url);
       var blob = new Blob([file]);
       FileSaver.saveAs(blob, logFileData.title);
     }, err => console.log(err));

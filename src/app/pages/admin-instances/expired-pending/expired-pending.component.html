@@ -39,19 +39,19 @@
         <ng-container matColumnDef="validate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Validate</th>
           <td mat-cell *matCellDef="let row">
-            <button class="validate" mat-raised-button [disabled]="row.state != 'AWAITING_APPROVAL'">Validate</button>
+            <button class="validate" mat-raised-button (click)="changeInstance('0')" [disabled]="row.state != 'AWAITING_APPROVAL'">Validate</button>
           </td>
         </ng-container>
         <ng-container matColumnDef="rescue">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Rescue</th>
           <td mat-cell *matCellDef="let row">
-            <button class="rescue" mat-raised-button [disabled]="row.expiry_date > currentDate || row.expiry_date == null">Rescue</button>
+            <button class="rescue" mat-raised-button (click)="changeInstance('1')" [disabled]="row.expiry_date > currentDate || row.expiry_date == null">Rescue</button>
           </td>
         </ng-container>
         <ng-container matColumnDef="destroy">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Destroy</th>
           <td mat-cell *matCellDef="let row">
-            <button class="destroy" mat-raised-button [disabled]="!row.expiry_date">Destroy</button>
+            <button class="destroy" mat-raised-button (click)="changeInstance('2')" [disabled]="!row.expiry_date">Destroy</button>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -22,6 +22,9 @@ export class InstanceFileEditorComponent implements OnInit {
 		content: null,
 	};
 	displayedContent = null;
+  oldFile = null;
+  list = null;
+  items = [];
 
   constructor(private rundeckService: RundeckService, private fileDownloaderService: FileDownloaderService, public dialog: MatDialog) { }
 
@@ -47,12 +50,13 @@ export class InstanceFileEditorComponent implements OnInit {
       "filepath": this.selectedConfigFile.filepath,
     }}).then( async (data: any) => {
       var url = data.log + this.selectedConfigFile.filepath;
-      this.selectedConfigFile.content = await this.fileDownloaderService.getFile(url);
+      this.oldFile = await this.fileDownloaderService.saveFile(url, this.data.name);
+      this.selectedConfigFile.content = await this.fileDownloaderService.getConfigFile(this.oldFile);
       this.displayedContent = this.selectedConfigFile.content;
     }, err => console.log(err));
   }
 
-  async downloadConfigFile() {
+  downloadConfigFile() {
     if(this.selectedConfigFile.content!=null){
       var blob = new Blob([this.selectedConfigFile.content]);
       FileSaver.saveAs(blob, this.selectedConfigFile.title);
@@ -83,7 +87,40 @@ export class InstanceFileEditorComponent implements OnInit {
   	}
   }
 
+  async validateFile(){
+    if(this.displayedContent!=null){
+      var newContent = this.displayedContent;
+      var validated_contents = await this.fileDownloaderService.getValidation(newContent);
+      newContent = JSON.stringify(newContent);
+      var newe = JSON.parse(newContent);
+      console.log("NEW: " + newe);
+      console.log(validated_contents);
+      this.list = validated_contents;
+      console.log("content: " + newContent);
 
+/*
+      for(var i = 0; i < this.list.length; i++){
+        console.log(this.list[i].name);
+        console.log(this.list[i].value);
+      }
+*/
+      /*for(var i = 0; i < this.list.length; i++){
+        if(this.list[i][1] == false){
+          console.log(this.list[i][0]);
+        }
+      }*/
+      /*this.list = Object.keys(validated_contents).map(function(key) {
+        return [String(key), validated_contents[key]];
+      });
+      console.log("RES: " + this.list);
+      }*/
+    }
+  }
+
+  saveItems(item){
+    this.items.push(item);
+    console.log("adding: " + item);
+  }
 
   submitChanges() {
   	if(this.selectedConfigFile.title!=null && this.displayedContent!=null) {

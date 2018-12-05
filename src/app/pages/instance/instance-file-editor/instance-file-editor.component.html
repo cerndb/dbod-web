@@ -22,13 +22,19 @@
         </button>
     </div>
     <div>
-      <button mat-raised-button color="primary" (click)="submitChanges()">Submit changes</button>
+      <button mat-raised-button color="primary" [disabled]="!this.validate" (click)="submitChanges()">Submit changes</button>
     </div>
 </div>
 <div class="flex-container">
     <mat-form-field style="width: 100%;">
-      <div>
-        <textarea matInput placeholder="Content" [(ngModel)]="displayedContent" matTextareaAutosize></textarea>
+      <!--<div>
+        <textarea id="text" spellcheck="false" matInput placeholder="Content" [(ngModel)]="displayedContent" (ngModelChange)="validateFile()" matTextareaAutosize></textarea>
+      </div>-->
+      <div *ngIf="list==null">
+       <textarea spellcheck="false" matInput placeholder="Content" [(ngModel)]="displayedContent" (ngModelChange)="validateFile()" matTextareaAutosize></textarea>
+      </div>
+      <div *ngIf="list!=null">
+        <div *ngFor="let item of list" [ngClass]="{red: item.value==false}">{{item.name}}</div>
       </div>
       <div *ngIf="selectedConfigFile.title!=null && displayedContent==null">
         <i style="color: #00bcd4">Loading...</i>
