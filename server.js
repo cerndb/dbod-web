@@ -137,20 +137,10 @@ app.post('/validate', (req, res) => {
   function compareHash(parameters, old_config, new_config){
     var list = [];
     Object.keys(new_config).forEach(function(key){
-      var properties = {
-        name: '',
-        value: ''
-      };
       console.log("comparing property: " + key + " new value: " + new_config[key] + " old value: " + old_config[key]);
-      var line = key + '=' + new_config[key];
+      //var line = key + '=' + new_config[key];
       if(parameters[key] && (new_config[key] != old_config[key])){
-        properties.name = line;
-        properties.value = false;
-        list.push(properties);
-      } else {
-        properties.name = line;
-        properties.value = true;
-        list.push(properties);
+        list.push(key);
       }
     });
     console.log(list);

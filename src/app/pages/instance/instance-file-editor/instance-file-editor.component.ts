@@ -23,8 +23,8 @@ export class InstanceFileEditorComponent implements OnInit {
 	};
 	displayedContent = null;
   oldFile = null;
-  list = null;
-  items = [];
+  validatedContents = null;
+  valid: Boolean;
 
   constructor(private rundeckService: RundeckService, private fileDownloaderService: FileDownloaderService, public dialog: MatDialog) { }
 
@@ -90,37 +90,20 @@ export class InstanceFileEditorComponent implements OnInit {
   async validateFile(){
     if(this.displayedContent!=null){
       var newContent = this.displayedContent;
-      var validated_contents = await this.fileDownloaderService.getValidation(newContent);
-      newContent = JSON.stringify(newContent);
-      var newe = JSON.parse(newContent);
-      console.log("NEW: " + newe);
-      console.log(validated_contents);
-      this.list = validated_contents;
-      console.log("content: " + newContent);
-
-/*
-      for(var i = 0; i < this.list.length; i++){
-        console.log(this.list[i].name);
-        console.log(this.list[i].value);
-      }
-*/
-      /*for(var i = 0; i < this.list.length; i++){
-        if(this.list[i][1] == false){
-          console.log(this.list[i][0]);
-        }
-      }*/
-      /*this.list = Object.keys(validated_contents).map(function(key) {
-        return [String(key), validated_contents[key]];
-      });
-      console.log("RES: " + this.list);
-      }*/
+      this.validatedContents = await this.fileDownloaderService.getValidation(newContent);
+      console.log(this.validatedContents);
+      this.validatedContents.length==0 ? this.valid=true : this.valid=false;
     }
   }
-
-  saveItems(item){
-    this.items.push(item);
-    console.log("adding: " + item);
+  /*
+  async validateFile(content){
+    if(content!=null){
+      this.validatedContents = await this.fileDownloaderService.getValidation(content);
+      console.log(this.validatedContents);
+      this.validatedContents.length==0 ? this.valid=true : this.valid=false;
+    }
   }
+  */
 
   submitChanges() {
   	if(this.selectedConfigFile.title!=null && this.displayedContent!=null) {
