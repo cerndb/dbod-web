@@ -50,46 +50,8 @@ config.elasticsearch = elasticsearch
 var parameters = {}
 
 parameters.max_user_connections = '300'
-parameters.max_heap_table_size = '32M'
 parameters['server-id'] = '1'
-parameters['general-log-file'] = '/ORA/dbs03/PINOCHO/mysql/mysql.log'
-parameters.max_connections = '1000'
-parameters.performance_schema
-parameters.innodb_flush_method = 'O_DIRECT'
-parameters['innodb-read-io-threads'] = '4'
-parameters.innodb_flush_log_at_trx_commit = '1'
-parameters['log-slave-updates']
-parameters.binlog_format = 'MIXED'
-parameters.port = '5500'
-parameters.socket = '/var/lib/mysql/mysql.sock.pinocho.5500'
-parameters.tmp_table_size = '32M'
-parameters.innodb_io_capacity = '200'
-parameters.sync_binlog = '1'
-parameters.query_cache_size = '128M'
-parameters.expire_logs_days = '32'
-parameters.innodb_write_io_threads = '4'
-parameters.slow_query_log = '1'
-parameters.thread_cache_size = '50'
-parameters.innodb_open_files = '500'
-parameters.table_definition_cache = '1000'
-parameters.table_open_cache = '1000'
-parameters.key_buffer_size = '256M'
-parameters.innodb_file_per_table
-parameters.log_output = 'FILE'
-parameters.datadir = '/ORA/dbs03/PINOCHO/mysql'
-parameters['log-bin'] = '/ORA/dbs02/PINOCHO/mysql/binlog'
-parameters.innodb_log_file_size = '16M'
-parameters.innodb_buffer_pool_size = '1G'
-parameters.max_binlog_size = '1073741824'
-parameters.slow_query_log_file = '/ORA/dbs03/PINOCHO/mysql/slow_queries.log'
-parameters.max_allowed_packet='64M'
-parameters.innodb_checksum_algorithm='innodb'
-parameters.binlog_checksum='none'
-parameters.query_cache_type='1'
-parameters['ssl-cert']='/etc/dbod/certificates/hostcert.pem'
-parameters['ssl-ca']='/etc/dbod/certificates/ca.pem'
-parameters['ssl-key']='/etc/dbod/certificates/hostkey_mysql.pem'
-parameters['ssl-cipher']='DHE-RSA-AES256-SHA:AES128-SHA'
+parameters.performance_schema = 'on'
 
 config.parameters = parameters
 

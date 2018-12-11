@@ -53,6 +53,7 @@ export class InstanceFileEditorComponent implements OnInit {
       this.oldFile = await this.fileDownloaderService.saveFile(url, this.data.name);
       this.selectedConfigFile.content = await this.fileDownloaderService.getConfigFile(this.oldFile);
       this.displayedContent = this.selectedConfigFile.content;
+      this.validateFile(this.displayedContent);
     }, err => console.log(err));
   }
 
@@ -82,28 +83,19 @@ export class InstanceFileEditorComponent implements OnInit {
 	      		return element.title==data.title;
 	      	});
 	      	this.displayedContent = data.textContent;
+          this.selectedConfigFile.content = this.displayedContent;
+          this.validateFile(this.displayedContent);
 	      }
 	    });
   	}
   }
 
-  async validateFile(){
-    if(this.displayedContent!=null){
-      var newContent = this.displayedContent;
-      this.validatedContents = await this.fileDownloaderService.getValidation(newContent);
-      console.log(this.validatedContents);
-      this.validatedContents.length==0 ? this.valid=true : this.valid=false;
-    }
-  }
-  /*
   async validateFile(content){
     if(content!=null){
       this.validatedContents = await this.fileDownloaderService.getValidation(content);
-      console.log(this.validatedContents);
       this.validatedContents.length==0 ? this.valid=true : this.valid=false;
     }
   }
-  */
 
   submitChanges() {
   	if(this.selectedConfigFile.title!=null && this.displayedContent!=null) {

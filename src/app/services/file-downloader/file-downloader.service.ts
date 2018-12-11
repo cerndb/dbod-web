@@ -22,7 +22,7 @@ export class FileDownloaderService {
   getConfigFile(file) {
     return new Promise( (resolve, reject) => {
       this.authService.loadUser().then( () => {
-        this.http.get('/download/' + file)
+        this.http.get('/download/config-file/' + file)
         .map((res:any) => res.text())
         .subscribe( (res) => resolve(res));
       }, (err) => reject(err));

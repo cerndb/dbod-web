@@ -92,8 +92,7 @@ app.get('/download', (req, res) => {
 });
 
 //Download config file from node to the frontend
-app.get('/download/:file', (req, res) => {
-  console.log("?downloads/file");
+app.get('/download/config-file/:file', (req, res) => {
   var path = __dirname + '/downloads/' + req.params.file;
   res.download(path);
 });
@@ -104,6 +103,7 @@ app.get('/download/log-file', (req, res) => {
   res.set('Content-Type', 'text/plain');
 });
 
+// Checks if configuration file is valid
 app.post('/validate', (req, res) => {
   var savedFile = fs.readFileSync(__dirname + '/downloads/' + oldFile, 'utf-8');
   var newFile = req.body.newFile;
@@ -117,10 +117,10 @@ app.post('/validate', (req, res) => {
       line = line.replace(/ /g,'');     //removing whitespaces
       if(!line.match(/^#/) && !line.match(/^\[/) && line != ''){ //Avoid lines that begin with # , [ and empty lines
         if(line.match("#")){
-          line = line.split("#"); //splitting lines that contain #
-          line = line[0];         //getting the left string of the split
+          line = line.split("#");       //splitting lines that contain #
+          line = line[0];               //getting the left string of the split
         }
-        if(line.match(/.*=.*/)){   //pushing into the list the lines that are not empty
+        if(line.match(/.*=.*/)){        //pushing into the list the lines that are not empty
           var split = line.split("=");
           hash[split[0]] = split[1];
         } else {
@@ -136,27 +136,33 @@ app.post('/validate', (req, res) => {
 
   function compareHash(parameters, old_config, new_config){
     var list = [];
-    Object.keys(new_config).forEach(function(key){
-      console.log("comparing property: " + key + " new value: " + new_config[key] + " old value: " + old_config[key]);
-      //var line = key + '=' + new_config[key];
-      if(parameters[key] && (new_config[key] != old_config[key])){
-        list.push(key);
+    var params = Object.entries(parameters);
+    var newConf = Object.entries(new_config);
+    var oldConf = Object.entries(old_config);
+
+    for (var i = 0; i < newConf.length; i++) {
+      if(params[i] || oldConf[i]){
+        var newConfName = newConf[i][0];
+        var newConfValue = newConf[i][1];
+        var oldConfName = oldConf[i][0];
+        var oldConfValue = oldConf[i][1];
+
+        if(parameters.hasOwnProperty(newConfName)){
+          if(newConfValue != parameters[newConfName]){
+            if(parameters[newConfName] == 'on'){
+              list.push(newConfName);
+            } else list.push(newConfName + '=' + parameters[newConfName]);
+          }
+        }
+        if(parameters.hasOwnProperty(oldConfName) && !new_config.hasOwnProperty(oldConfName)){
+          if(oldConfValue == 'on'){
+            list.push(oldConfName);
+          } else list.push(oldConfName + '=' + oldConfValue);
+        }
       }
-    });
-    console.log(list);
+    }
     return list;
   }
-  /*function compareHash(parameters, old_config, new_config){
-    var list = {};
-    Object.keys(new_config).forEach(function(key){
-      console.log("comparing property: " + key + " new value: " + new_config[key] + " old value: " + old_config[key]);
-      var line = key + '=' + new_config[key];
-      if(parameters[key] && (new_config[key] != old_config[key])){
-        list[line] = false;
-      } else list[line] = true;
-    });
-    return list;
-  }*/
   var comp = compareHash(config.parameters, old_config, new_config);
   res.send(comp);
 });
