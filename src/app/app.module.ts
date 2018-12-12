@@ -17,7 +17,6 @@ import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { InstanceModule } from './pages/instance/instance.module';
-import { OverviewModule } from './pages/overview/overview.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { OverviewModule } from './pages/overview/overview.module';
     HttpModule,
     AppRoutingModule,
     InstanceModule,
-    OverviewModule,
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
