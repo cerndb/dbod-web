@@ -12,6 +12,7 @@ COPY package-server.json /opt/dbod/package.json
 COPY server/ /opt/dbod/server
 RUN tar xvzf dist.tgz
 RUN chown node:node /opt/dbod/sessions && chmod 0777 /opt/dbod/sessions
+ENV NODE_EXTRA_CA_CERTS=CERN-CA.pem 
 USER node
 EXPOSE 3000
 ENTRYPOINT ["npm", "start"]
