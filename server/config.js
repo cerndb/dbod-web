@@ -47,4 +47,12 @@ elasticsearch.indexNames = indexNames
 
 config.elasticsearch = elasticsearch
 
+var parameters = {}
+
+parameters.max_user_connections = '300'
+parameters['server-id'] = '1'
+parameters.performance_schema = 'on'
+
+config.parameters = parameters
+
 module.exports = config

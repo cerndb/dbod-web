@@ -22,7 +22,7 @@ export class PagesComponent {
       home: true,
     },
     {
-      title: 'Overview',
+      title: 'Backup and Recovery monitoring',
       icon: 'nb-grid-a',
       link: '/pages/overview',
       home: false,

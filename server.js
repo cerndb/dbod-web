@@ -4,6 +4,11 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 
+var fs = require('fs');
+// Uniqid module. Generates random id
+var uniqid = require('uniqid');
+// Download-file module
+var download = require('download-file');
 // Request method
 var request = require('request');
 // Load configuration
@@ -70,9 +75,96 @@ app.get('/', (req, res) => {
    res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
+//Files Management
+var oldFile;
+//Download config file from remote to node
 app.get('/download', (req, res) => {
+  var url = req.query.url;
+  var options = {
+    directory: "./downloads",
+    filename: uniqid(req.query.instance + '&')
+  }
+  download(url, options, function(err) {
+    if(err) throw err
+  })
+  oldFile = options.filename;
+  res.send(options.filename);
+});
+
+//Download config file from node to the frontend
+app.get('/download/config-file/:file', (req, res) => {
+  var path = __dirname + '/downloads/' + req.params.file;
+  res.download(path);
+});
+
+//Download log file from remote to frontend
+app.get('/download/log-file', (req, res) => {
   request(req.query.url).pipe(res)
   res.set('Content-Type', 'text/plain');
+});
+
+// Checks if configuration file is valid
+app.post('/validate', (req, res) => {
+  var savedFile = fs.readFileSync(__dirname + '/downloads/' + oldFile, 'utf-8');
+  var newFile = req.body.newFile;
+  savedFile = JSON.stringify(savedFile);
+  savedFile = JSON.parse(savedFile);
+
+  function convertToHash(file){
+    var hash = {};
+    var lines = file.split("\n");       //split file by lines
+    lines.forEach(function(line) {
+      line = line.replace(/ /g,'');     //removing whitespaces
+      if(!line.match(/^#/) && !line.match(/^\[/) && line != ''){ //Avoid lines that begin with # , [ and empty lines
+        if(line.match("#")){
+          line = line.split("#");       //splitting lines that contain #
+          line = line[0];               //getting the left string of the split
+        }
+        if(line.match(/.*=.*/)){        //pushing into the list the lines that are not empty
+          var split = line.split("=");
+          hash[split[0]] = split[1];
+        } else {
+          hash[line] = 'on';
+        }
+      }
+    });
+    return hash;
+  }
+
+  var old_config = convertToHash(savedFile);
+  var new_config = convertToHash(newFile);
+
+  function compareHash(parameters, old_config, new_config){
+    var list = [];
+    var params = Object.entries(parameters);
+    var newConf = Object.entries(new_config);
+    var oldConf = Object.entries(old_config);
+
+    for (var i = 0; i < newConf.length; i++) {
+      if(params[i] || oldConf[i]){
+        var newConfName = newConf[i][0];
+        var newConfValue = newConf[i][1];
+        var oldConfName = oldConf[i][0];
+        var oldConfValue = oldConf[i][1];
+
+        if(parameters.hasOwnProperty(newConfName)){
+          if(newConfValue != parameters[newConfName]){
+            if(parameters[newConfName] == 'on'){
+              list.push(newConfName);
+            } else list.push(newConfName + '=' + parameters[newConfName]);
+          }
+        }
+        if(parameters.hasOwnProperty(oldConfName) && !new_config.hasOwnProperty(oldConfName)){
+          if(oldConfValue == 'on'){
+            list.push(oldConfName);
+          } else list.push(oldConfName + '=' + oldConfValue);
+        }
+      }
+    }
+    return list;
+  }
+  var comp = compareHash(config.parameters, old_config, new_config);
+  res.send(comp);
 });
 
 app.get('/logout', (req, res) => {
@@ -92,7 +184,8 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 const server = http.createServer(app);
 
-server.listen(config.port, () => console.log(`API running on localhost:${config.port}`));
+server.listen({port: config.port});
+console.log('HTTP server listening on ',server.address());
 
 // Elasticsearch (for logs)
 
