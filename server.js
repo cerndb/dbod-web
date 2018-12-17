@@ -184,7 +184,8 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 const server = http.createServer(app);
 
-server.listen(config.port, () => console.log(`API running on localhost:${config.port}`));
+server.listen({port: config.port});
+console.log('HTTP server listening on ',server.address());
 
 // Elasticsearch (for logs)
 
