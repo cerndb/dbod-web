@@ -45,6 +45,7 @@ Thumbs.db
 # Dev env
 sessions/
 devenv.sh
+devenv.docker
 
 # package json
 package-lock.json
