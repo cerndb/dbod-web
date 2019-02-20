@@ -8,6 +8,16 @@ $default-text: #e9ebec;
   margin-bottom:10px;
 }
 
+.loading-spinner{
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+}
+
 .itemsPerPage {
 	// color: #5dcfe3;
 }

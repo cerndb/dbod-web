@@ -1,3 +1,6 @@
+<div *ngIf="loading" class="loading-spinner">
+	<mat-spinner [color]="primary"></mat-spinner>
+</div>
 <div class="flex-container">
 	<mat-slide-toggle color="primary" [checked]=false (change)="realTimeHandler($event)" matTooltip='If enabled, logs are provided in real time' matTooltipPosition='above' style="margin-top: 15px"></mat-slide-toggle>
 

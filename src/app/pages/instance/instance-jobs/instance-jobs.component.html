@@ -1,3 +1,6 @@
+<div *ngIf="loading" class="loading-spinner">
+	<mat-spinner [color]="primary"></mat-spinner>
+</div>
 <div class="flex-container">
 	<ngb-pagination [collectionSize]="this.numberOfItems/this.pageLength" [pageSize]="1" [(page)]="page" [maxSize]="10" [rotate]="true" [boundaryLinks]="true" (pageChange)="pageChanged($event)" style="margin-top: 8px"></ngb-pagination>
 	<div>

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SocketJobs } from '../sockets.module';
 import { AuthenticationService } from '../../../services/authentication/authentication.service';
 
@@ -18,11 +19,12 @@ export class InstanceJobsComponent implements OnInit {
   id: number;
   page :number;
   opened: boolean;
+  loading: boolean = true;
 
   filters: string = '';
 
   constructor(private authService: AuthenticationService, @Inject(SocketJobs) private socket) {
-  
+
   }
 
   ngOnInit() {
@@ -41,6 +43,7 @@ export class InstanceJobsComponent implements OnInit {
         this.source = JSON.parse(data);
         // console.log('receive');
       }
+      this.loading = false;
     });
   }
 

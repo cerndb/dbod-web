@@ -1,4 +1,7 @@
 <div class="flex-container">
+	<div *ngIf="loading" class="loading-spinner">
+		<mat-spinner [color]="primary"></mat-spinner>
+	</div>
 	<mat-button-toggle-group>
 	  <mat-button-toggle (change)="$event.source.checked=false" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">Previous</mat-button-toggle>
 	  <mat-button-toggle (change)="$event.source.checked=false" mwlCalendarToday [(viewDate)]="viewDate">Today</mat-button-toggle>

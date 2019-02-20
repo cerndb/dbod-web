@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ChangeDetectorRef, Inject } from '@angular/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SocketLogs } from '../sockets.module';
 import { RundeckService } from '../../../services/rundeck/rundeck.service';
 import { FileDownloaderService } from '../../../services/file-downloader/file-downloader.service';
@@ -26,6 +27,7 @@ export class InstanceLogsComponent implements OnInit {
 
   opened: boolean;
   public statisticsCollapsed = true;
+  loading: boolean = true;
 
   logFilesList = [];
 
@@ -49,6 +51,7 @@ export class InstanceLogsComponent implements OnInit {
         this.source = JSON.parse(data);
         // console.log('receive');
       }
+      this.loading = false;
     });
   }
 

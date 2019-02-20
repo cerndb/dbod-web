@@ -13,6 +13,7 @@ import {
   addHours
 } from 'date-fns';
 import {MatDialog} from '@angular/material';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { InstanceRecoverDialogComponent } from './instance-recover-dialog/instance-recover-dialog.component';
 import { InstanceBackupDialogComponent } from './instance-backup-dialog/instance-backup-dialog.component';
 import { InstanceScheduledBackupDialogComponent } from './instance-scheduled-backup-dialog/instance-scheduled-backup-dialog.component';
@@ -31,6 +32,7 @@ export class InstanceSnapshotsComponent {
   view: string = 'month';
   viewDate: Date = new Date();
   activeDayIsOpen: boolean = false;
+  loading: boolean = true;
 
   events = [];
 
@@ -38,6 +40,9 @@ export class InstanceSnapshotsComponent {
 
   ngOnInit() {
     this.rundeckService.post('job/get-snapshots/'+this.data.name).then( (data: any) => {
+      if(this.data){
+        this.loading = false;
+      }
       var calendarData = [];
       data.log.split(':').forEach( (element) => {
         var day = element.split('_')[1].substring(0,2);
@@ -47,7 +52,7 @@ export class InstanceSnapshotsComponent {
         var minutes = element.split('_')[2].substring(2,4);
         var seconds = element.split('_')[2].substring(4,6);
         var milliseconds = element.split('_')[3];
-        
+
         // Month ordinals start from 0, so we need to substract one
         var date = new Date(year, month -1, day, hours, minutes, seconds, milliseconds);
 
