@@ -57,7 +57,7 @@
         </mat-select>
       </mat-form-field>
       <div>
-      <mat-checkbox *ngIf="this.authService.user.isAdmin" name="notifications" [checked]="editedData.attributes.notifications=='true'" [disabled]="!this.authService.user.isAdmin" (change)="changeAttributeField('notifications',$event.checked)">Notifications</mat-checkbox>
+      <mat-checkbox *ngIf="this.authService.user.isAdmin" name="notifications" [checked]="editedData.attributes.notifications=='true'" [disabled]="!this.authService.user.isAdmin" (change)="changeAttributeField('notifications',$event.checked)">Monitoring alerts</mat-checkbox>
       <mat-checkbox *ngIf="this.authService.user.isAdmin" name="EOSbackup" [checked]="this.data.attributes.eos_backup=='true'" [disabled]="!this.authService.user.isAdmin" (change)="changeAttributeField('eos_backup',$event.checked)" style="margin-left: 15px;">EOS backup</mat-checkbox>
       </div>
     </div>
